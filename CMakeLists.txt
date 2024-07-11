@@ -3,7 +3,7 @@ project(modularArithmetic C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(modularArithmetic main.c
-        modularArithmetic.h
+add_executable(ModularArithmetic main.c
+        ModularArithmetic.h
         Modular_Arithmetic/Operation.c
         Modular_Arithmetic/UtilityModulo.c)

@@ -1,18 +1,7 @@
 #include <stdio.h>
+#include <assert.h>
 
-// #include "../ModularArithmetic.h"
-
-
-/**
- * Computes the modulus of 2 integers - res = n (mod m).
- *
- * @param n the dividend.
- * @param m the divisor.
- * @return the reminder of the division of n by m.
- */
-int mod(int n, int m) {
-    return n % m;
-}
+#include "../ModularArithmetic.h"
 
 
 /**
@@ -27,12 +16,25 @@ int sum(int a, int b, int m) {
     return (a + b) % m;
 }
 
-
+/**
+ * Computes the difference modulo m - res = a - b (mod m).
+ *
+ * @param a the minuendo.
+ * @param b the subtrahend.
+ * @param m the modulo value.
+ * @return the difference modulo m.
+ */
 int sub(int a, int b, int m) {
-    //TODO
-    // -b --> k (mod m)
-    // return sum(a, k, m);
-    return -1;
+    if (a < 0) {
+        a = modularReduction(a, m);
+        assert(a >= 0);
+    }
+    if (b < 0) {
+        b = modularReduction(b, m);
+        assert(b >= 0);
+    }
+
+    return sum(a, b, m);
 }
 
 /**
