@@ -4,8 +4,6 @@
 
 
     /*
-     * modulo - n mod m
-     * GCD
      * numeri primi
      * più piccolo primo dopo x
      * test di primalità
@@ -17,11 +15,6 @@
      * equazioni dioofantine
      * congruenze
      * residui di gauss
-     * somma
-     * sottrazione
-     * prodotto
-     * potenza
-     * logaritmo discreto
      * inverso
      *
      * matrici:

@@ -4,4 +4,6 @@ project(modularArithmetic C)
 set(CMAKE_C_STANDARD 11)
 
 add_executable(modularArithmetic main.c
-        modularArithmetic.h)
+        modularArithmetic.h
+        Modular_Arithmetic/Operation.c
+        Modular_Arithmetic/UtilityModulo.c)
