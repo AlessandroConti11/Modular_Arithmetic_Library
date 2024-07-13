@@ -5,7 +5,7 @@
 
 
 /**
- * Compute the Greatest Common Divisor - Euclid's Algorithm.
+ * Computes the Greatest Common Divisor - Euclid's Algorithm.
  *
  * @param n the first number.
  * @param m the second number.
@@ -31,6 +31,15 @@ int gcd(int n, int m) {
     return n;
 }
 
+/**
+ * Computes the Greatest Common Divisor - Extended Euclidean Algorithm.
+ *
+ * @param n the first number.
+ * @param m the second number.
+ * @param x the first number of Bézout's identity.
+ * @param y the second number of Bézout's identity.
+ * @return the gcd between n and m.
+ */
 int extendedGCD(int n, int m, int *x, int *y) {
     if (n == 0) {
         *x = 0;
@@ -50,8 +59,11 @@ int extendedGCD(int n, int m, int *x, int *y) {
     *x = yNEW - (m / n) * xNEW;
     *y = xNEW;
 
+    if (*x < 0) {
+        *x = modularReduction(*x, m);
+    }
+
     return gcd;
-    //TODO da controllare
 }
 
 
@@ -94,15 +106,31 @@ int modularReduction(int n, int m) {
     return n;
 }
 
+/**
+ * Computes the modular inversion - n (mod m) --> k (mod m) s.t. k == 1/n (mod m).
+ *
+ * @param n the number to be calculated the inverse.
+ * @param m the modulo value.
+ * @return the modular inverse.
+ */
 int modularInverse(int n, int m) {
     assert(gcd(n, m) == 1);
 
-    //TODO
-
-    return n;
+    //the first number of Bézout's identity - the modular inverse.
+    int x;
+    //the second number of Bézout's identity.
+    int y;
+    //the gcd between n and m.
+    int gcd = extendedGCD(n, m, &x, &y);
+    assert(gcd == 1);
+    
+    return x;
 }
 
 
 int main() {
-    printf("%d\n", areCongruent(5, 11, 3));
+    int x, y, gcd;
+
+    gcd = extendedGCD(11, 5, &x, &y);
+    printf("%d - %d\n", gcd, x);
 }

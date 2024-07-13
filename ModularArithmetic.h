@@ -38,6 +38,15 @@ int sub(int a, int b, int m);
  */
 int product(int a, int b, int m);
 
+/**
+ * Computes the division modulo m - res = a / b (mod m).
+ * @param a the dividend.
+ * @param b the divisor.
+ * @param m the modulo value.
+ * @return the quotient.
+ */
+int division(int a, int b, int m);
+
 
 //******************************************************************************************************************//
 
@@ -48,13 +57,25 @@ int product(int a, int b, int m);
 
 
 /**
- * Compute the Greatest Common Divisor - Euclid's Algorithm.
+ * Computes the Greatest Common Divisor - Euclid's Algorithm.
  *
  * @param n the first number.
  * @param m the second number.
  * @return the gcd between n and m.
  */
 int gcd(int n, int m);
+
+/**
+ * Computes the Greatest Common Divisor - Extended Euclidean Algorithm.
+ *
+ * @param n the first number.
+ * @param m the second number.
+ * @param x the first number of Bézout's identity.
+ * @param y the second number of Bézout's identity.
+ * @return the gcd between n and m.
+ */
+int extendedGCD(int n, int m, int *x, int *y);
+
 
 /**
 * Computes the modulus of 2 integers - res = n (mod m).
@@ -66,6 +87,17 @@ int gcd(int n, int m);
 int mod(int n, int m);
 
 /**
+ * Checks if 2 number are congruent modulo m - a == b (mod m).
+ *
+ * @param a the first number.
+ * @param b the second number.
+ * @param m the modulo value.
+ * @return 1 if the 2 number are congruent, 0 otherwise.
+ */
+int areCongruent(int a, int b, int m);
+
+
+/**
 * Computes the modular reduction - (-n) (mod m) --> k (mod m) s.t. -n == k (mod m).
 *
 * @param n
@@ -73,6 +105,15 @@ int mod(int n, int m);
 * @return
 */
 int modularReduction(int n, int m);
+
+/**
+ * Computes the modular inversion - n (mod m) --> k (mod m) s.t. k == 1/n (mod m).
+ *
+ * @param n the number to be calculated the inverse.
+ * @param m the modulo value.
+ * @return the modular inverse.
+ */
+int modularInverse(int n, int m);
 
 
 //******************************************************************************************************************//

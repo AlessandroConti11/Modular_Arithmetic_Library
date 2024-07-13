@@ -49,12 +49,33 @@ int product(int a, int b, int m) {
     return a * b % m;
 }
 
+/**
+ * Computes the division modulo m - res = a / b (mod m).
+ * @param a the dividend.
+ * @param b the divisor.
+ * @param m the modulo value.
+ * @return the quotient.
+ */
 int division(int a, int b, int m) {
-    //TODO
-    // 1/b --> k (mod m)
-    // product(a, k, m);
+    if (a < 0) {
+        a = modularReduction(a, m);
+        assert(a >= 0);
+    }
+    if (b < 0) {
+        b = modularReduction(b, m);
+        assert(b >= 0);
+    }
 
-    return -1;
+    //the first number of Bézout's identity - the modular inverse.
+    int x;
+    //the second number of Bézout's identity.
+    int y;
+    //the gcd between n and m.
+    int gcd = extendedGCD(b, m, &x, &y);
+    //the inverse exists iff gcd(b, m) == 1
+    assert(gcd == 1);
+
+    return product(a, x, m);
 }
 
 int power(int a, int exp, int m) {
