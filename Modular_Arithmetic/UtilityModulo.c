@@ -5,7 +5,8 @@
 
 
 /**
- * Computes the Greatest Common Divisor - Euclid's Algorithm.
+ * Computes the Greatest Common Divisor.
+ * @details Euclid's Algorithm.
  *
  * @param n the first number.
  * @param m the second number.
@@ -32,7 +33,8 @@ int gcd(int n, int m) {
 }
 
 /**
- * Computes the Greatest Common Divisor - Extended Euclidean Algorithm.
+ * Computes the Greatest Common Divisor.
+ * @details Extended Euclidean Algorithm.
  *
  * @param n the first number.
  * @param m the second number.
@@ -68,7 +70,8 @@ int extendedGCD(int n, int m, int *x, int *y) {
 
 
 /**
- * Computes the modulus of 2 integers - res = n (mod m).
+ * Computes the modulus of 2 integers.
+ * @details res = n (mod m).
  *
  * @param n the dividend.
  * @param m the divisor.
@@ -78,21 +81,10 @@ int mod(int n, int m) {
     return n % m;
 }
 
-/**
- * Checks if 2 number are congruent modulo m - a == b (mod m).
- *
- * @param a the first number.
- * @param b the second number.
- * @param m the modulo value.
- * @return 1 if the 2 number are congruent, 0 otherwise.
- */
-int areCongruent(int a, int b, int m) {
-    return (a % m == b % m) ? 1 : 0;
-}
-
 
 /**
- * Computes the modular reduction - (-n) (mod m) --> k (mod m) s.t. -n == k (mod m).
+ * Computes the modular reduction .
+ * @details (-n) (mod m) --> k (mod m) s.t. -n == k (mod m).
  *
  * @param n the number to transform.
  * @param m the modulo value.
@@ -107,14 +99,15 @@ int modularReduction(int n, int m) {
 }
 
 /**
- * Computes the modular inversion - n (mod m) --> k (mod m) s.t. k == 1/n (mod m).
+ * Computes the modular inversion.
+ * @details n (mod m) --> k (mod m) s.t. k == 1/n (mod m).
  *
  * @param n the number to be calculated the inverse.
  * @param m the modulo value.
  * @return the modular inverse.
  */
 int modularInverse(int n, int m) {
-    assert(gcd(n, m) == 1);
+    assert(areCoPrime(n, m) == 1);
 
     //the first number of Bézout's identity - the modular inverse.
     int x;
@@ -133,4 +126,7 @@ int main() {
 
     gcd = extendedGCD(11, 5, &x, &y);
     printf("%d - %d\n", gcd, x);
+
+    x = power(7, 11, 26);
+    printf("%d\n", x);
 }

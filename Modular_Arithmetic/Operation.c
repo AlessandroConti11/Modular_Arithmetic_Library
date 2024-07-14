@@ -5,7 +5,8 @@
 
 
 /**
- * Computes the sum modulo m - res = a + b (mod m).
+ * Computes the sum modulo m.
+ * @details res = a + b (mod m).
  *
  * @param a the first addend.
  * @param b the second addend.
@@ -13,11 +14,15 @@
  * @return the sum modulo m.
  */
 int sum(int a, int b, int m) {
+    a = mod(a, m);
+    b = mod(b, m);
+
     return (a + b) % m;
 }
 
 /**
- * Computes the difference modulo m - res = a - b (mod m).
+ * Computes the difference modulo m.
+ * @details res = a - b (mod m).
  *
  * @param a the minuendo.
  * @param b the subtrahend.
@@ -25,6 +30,9 @@ int sum(int a, int b, int m) {
  * @return the difference modulo m.
  */
 int sub(int a, int b, int m) {
+    a = mod(a, m);
+    b = mod(b, m);
+
     if (a < 0) {
         a = modularReduction(a, m);
         assert(a >= 0);
@@ -34,11 +42,14 @@ int sub(int a, int b, int m) {
         assert(b >= 0);
     }
 
+    b = modularReduction(-b, m);
+
     return sum(a, b, m);
 }
 
 /**
- * Computes the product modulo m - res = a * b (mod m).
+ * Computes the product modulo m.
+ * @details res = a * b (mod m).
  *
  * @param a the first factor.
  * @param b the second factor.
@@ -46,17 +57,25 @@ int sub(int a, int b, int m) {
  * @return the product modulo m.
  */
 int product(int a, int b, int m) {
+    a = mod(a, m);
+    b = mod(b, m);
+
     return a * b % m;
 }
 
 /**
- * Computes the division modulo m - res = a / b (mod m).
+ * Computes the division modulo m.
+ * @details res = a / b (mod m).
+ *
  * @param a the dividend.
  * @param b the divisor.
  * @param m the modulo value.
  * @return the quotient.
  */
 int division(int a, int b, int m) {
+    a = mod(a, m);
+    b = mod(b, m);
+
     if (a < 0) {
         a = modularReduction(a, m);
         assert(a >= 0);
@@ -66,11 +85,11 @@ int division(int a, int b, int m) {
         assert(b >= 0);
     }
 
-    //the first number of Bézout's identity - the modular inverse.
+    //The first number of Bézout's identity - the modular inverse.
     int x;
-    //the second number of Bézout's identity.
+    //The second number of Bézout's identity.
     int y;
-    //the gcd between n and m.
+    //The gcd between n and m.
     int gcd = extendedGCD(b, m, &x, &y);
     //the inverse exists iff gcd(b, m) == 1
     assert(gcd == 1);
@@ -78,10 +97,36 @@ int division(int a, int b, int m) {
     return product(a, x, m);
 }
 
+/**
+ * Computes the power elevation modulo m.
+ * @details Square and Multiply algorithm.
+ * @details res = a^exp (mod m).
+ *
+ * @param a the base.
+ * @param exp the exponent.
+ * @param m the modulo value.
+ * @return the power elevation modulo m.
+ */
 int power(int a, int exp, int m) {
-    //TODO
+    a = mod(a, m);
 
-    return -1;
+    //The result a^exp (mod m).
+    int res = 1;
+
+    while (exp > 0) {
+        //if exp bit is 1, multiplies the result by the base
+        if (exp % 2 == 1) {
+            res = product(res, a, m);
+        }
+
+        //shifted to the next bit
+        exp >>= 1;
+
+        //square of the base
+        a = product(a, a, m);
+    }
+
+    return res;
 }
 
 int discreteLogarithm(int a, int base, int m) {
