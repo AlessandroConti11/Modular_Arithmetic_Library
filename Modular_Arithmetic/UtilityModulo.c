@@ -1,7 +1,24 @@
 #include <stdio.h>
 #include <assert.h>
+#include <math.h>
+#include <stdlib.h>
 
 #include "../ModularArithmetic.h"
+
+
+/**
+ * Checks if a number is a perfect square.
+ * @details x = sqrt(n)
+ * @details if n == x * x --> n is a perfect square
+ *
+ * @param n the number.
+ * @return 1 if the number is a perfect quare, 0 otherwise.
+ */
+int isPerfectSquare(int n) {
+    int sq = (int) sqrt(n);
+
+    return sq * sq == n;
+}
 
 
 /**
@@ -121,12 +138,90 @@ int modularInverse(int n, int m) {
 }
 
 
+/**
+ * Factors a number by splitting it into 2 of its dividends.
+ * @details Fermat's factorisation method.
+ *
+ * @param n the number.
+ * @return the 2 factors that make up the number.
+ */
+int *realFermatFactorisation(int n) {
+    assert(n % 2 != 0);
+
+    //The factors
+    int *res = malloc(2 * sizeof(int));
+    int x = (int) ceil(sqrt(n));
+    int y = x * x - n;
+
+    while (!isPerfectSquare(y)) {
+        x++;
+        y = x * x - n;
+    }
+
+    y = (int) sqrt(y);
+    res[0] = x - y;
+    res[1] = x + y;
+
+    return res;
+}
+
+/**
+ * Factors a number by splitting it into all of its dividends.
+ * @details Fermat's factorization method.
+ *
+ * @param n the number.
+ * @param factors the number of factors.
+ * @return the factors that make up the number.
+ */
+int *FermatFactorisation(int n, int *factors) {
+    assert(n % 2 != 0);
+
+    //The factors
+    int *res = malloc(2 * sizeof(int));
+    //Temporal factors.
+    int *tmpRes = NULL;
+    //All factors found.
+    int end = 0;
+
+    *factors = 2;
+    tmpRes = realFermatFactorisation(n);
+
+    do {
+        res[*factors - 2] = tmpRes[0];
+        res[*factors - 1] = tmpRes[1];
+
+        if (tmpRes[0] > 1 && !isPerfectSquare(tmpRes[0])) {
+            tmpRes = realFermatFactorisation(tmpRes[0]);
+        }
+        else if (tmpRes[1] > 1 && !isPerfectSquare(tmpRes[0])) {
+            tmpRes = realFermatFactorisation(tmpRes[0]);
+        }
+        else {
+            end = 1;
+        }
+
+        if (!end) {
+            *factors += 2;
+            res = realloc(res, *factors * sizeof(int));
+        }
+
+    } while (!end);
+
+    free(tmpRes);
+    res = realloc(res, *factors * sizeof(int));
+    return res;
+}
+
+
 int main() {
-    int x, y, gcd;
+    int n, *factor = FermatFactorisation(22331, &n);
+    for (int i = 0; i < n; ++i) {
+        printf("%d ", factor[i]);
+    }
+    printf("\n");
 
-    gcd = extendedGCD(11, 5, &x, &y);
-    printf("%d - %d\n", gcd, x);
 
-    x = power(7, 11, 26);
-    printf("%d\n", x);
+
+    free(factor);
+    return 0;
 }

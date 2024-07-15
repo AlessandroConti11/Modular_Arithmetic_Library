@@ -169,12 +169,31 @@ int areCoPrime(int a, int n);
  */
 int FermatPseudoprime(int a, int n);
 
+/**
+ * Factors a number by splitting it into 2 of its dividends.
+ * @details Fermat's factorisation method.
+ *
+ * @param n the number.
+ * @return the 2 factors that make up the number.
+ */
+int *realFermatFactorisation(int n);
+
+/**
+ * Factors a number by splitting it into all of its dividends.
+ * @details Fermat's factorization method.
+ *
+ * @param n the number.
+ * @param factors the number of factors.
+ * @return the factors that make up the number.
+ */
+int *FermatFactorisation(int n, int *factors);
+
 
 /*
  * numeri primi
  * fattorizzazione
  *  fattorizzazione di Fermat
- *  algoritmo di fattorizzazione p-1
+ *  algoritmo di fattorizzazione p-1 - Pollard
  * più piccolo primo dopo x
  * funzione di eulero
  * funzione di eulero-fermat

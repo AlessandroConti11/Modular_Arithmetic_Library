@@ -13,7 +13,7 @@
  * @return 1 if the 2 number are congruent, 0 otherwise.
  */
 int areCongruent(int a, int b, int m) {
-    return a % m == b % m ? 1 : 0;
+    return a % m == b % m;
 }
 
 /**
@@ -25,7 +25,7 @@ int areCongruent(int a, int b, int m) {
  * @return 1 if the 2 number are coprime, 0 otherwise.
  */
 int areCoPrime(int a, int n) {
-    return gcd(a, n) == 1 ? 1 : 0;
+    return gcd(a, n) == 1;
 }
 
 /**
@@ -41,5 +41,5 @@ int areCoPrime(int a, int n) {
 int FermatPseudoprime(int a, int n) {
     assert(areCoPrime(a, n) == 1);
 
-    return power(a, n - 1, n) == 1 ? 1 : 0;
+    return power(a, n - 1, n) == 1;
 }
