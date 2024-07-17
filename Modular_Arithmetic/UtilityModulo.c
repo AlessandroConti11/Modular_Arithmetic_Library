@@ -180,48 +180,56 @@ int *FermatFactorisation(int n, int *factors) {
     int *res = malloc(2 * sizeof(int));
     //Temporal factors.
     int *tmpRes = NULL;
-    //All factors found.
-    int end = 0;
+    //The stack that contains all the factors not simplified yet.
+    int *stack = malloc(2 * sizeof(int));
+    //The number of element in the stack.
+    int stackSize = 2;
+    //The stack dimension.
+    int reallocSize = stackSize;
 
-    *factors = 2;
+    //initialize the stack
+    *factors = 0;
     tmpRes = realFermatFactorisation(n);
+    stack[0] = tmpRes[0];
+    stack[1] = tmpRes[1];
+
+    //compute the factorisation of the last element in the stack
+    free(tmpRes);
+    tmpRes = realFermatFactorisation(stack[1]);
+    stackSize--;
 
     do {
-        res[*factors - 2] = tmpRes[0];
-        res[*factors - 1] = tmpRes[1];
-
-        if (tmpRes[0] > 1 && !isPerfectSquare(tmpRes[0])) {
-            tmpRes = realFermatFactorisation(tmpRes[0]);
+        //the number analyzed is a prime number
+        if (tmpRes[0] == 1) {
+            if (*factors % 2 == 0 ) {
+                res = realloc(res, (*factors + 2) * sizeof(int));
+            }
+            //add it to the list of prime factors
+            res[(*factors)++] = stack[stackSize];
         }
-        else if (tmpRes[1] > 1 && !isPerfectSquare(tmpRes[0])) {
-            tmpRes = realFermatFactorisation(tmpRes[0]);
-        }
+        //the number analyzed is NOT a prime number
         else {
-            end = 1;
+            if (stackSize == (reallocSize - 1)) {
+                reallocSize += 2;
+                stack = realloc(stack, (reallocSize) * sizeof(int));
+            }
+            //add the factors to the stack
+            stack[stackSize++] = tmpRes[0];
+            stack[stackSize++] = tmpRes[1];
         }
 
-        if (!end) {
-            *factors += 2;
-            res = realloc(res, *factors * sizeof(int));
+        //select the next element in the stack
+        if (stackSize > 0) {
+            free(tmpRes);
+            tmpRes = realFermatFactorisation(stack[stackSize - 1]);
         }
+        stackSize--;
 
-    } while (!end);
+    }
+    while (stackSize != -1);
 
     free(tmpRes);
+    free(stack);
     res = realloc(res, *factors * sizeof(int));
     return res;
-}
-
-
-int main() {
-    int n, *factor = FermatFactorisation(22331, &n);
-    for (int i = 0; i < n; ++i) {
-        printf("%d ", factor[i]);
-    }
-    printf("\n");
-
-
-
-    free(factor);
-    return 0;
 }
