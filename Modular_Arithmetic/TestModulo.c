@@ -31,8 +31,8 @@ int areCoPrime(int a, int n) {
 /**
  * Checks if n is Fermat's Pseuodoprime to a.
  * @details let a ⟂ n
- * @details if a^(n - 1) (mod n) == 1 --> n is Fermat's Pseudoprime
- * @details otherwise --> n is NOT prime
+ * @if a^(n - 1) (mod n) == 1 --> n is Fermat's Pseudoprime
+ * @else n is NOT prime
  *
  * @param a the first number.
  * @param n the second number.

@@ -106,6 +106,16 @@ int extendedGCD(int n, int m, int *x, int *y);
  */
 int mod(int n, int m);
 
+/**
+ * Computes a number congruent with the one given.
+ * @details res == a (mod m).
+ *
+ * @param a the number.
+ * @param m the modulo value.
+ * @return a number congruent with the one given.
+ */
+int congruentNumber(int a, int m);
+
 
 /**
  * Computes the modular reduction .
@@ -160,8 +170,8 @@ int areCoPrime(int a, int n);
 /**
  * Checks if n is Fermat's Pseuodoprime to a.
  * @details let a ⟂ n
- * @details if a^(n - 1) (mod n) == 1 --> n is Fermat's Pseudoprime
- * @details otherwise --> n is NOT prime
+ * @if a^(n - 1) (mod n) == 1 --> n is Fermat's Pseudoprime
+ * @else n is NOT prime
  *
  * @param a the first number.
  * @param n the second number.
@@ -189,19 +199,21 @@ int *realFermatFactorisation(int n);
 int *FermatFactorisation(int n, int *factors);
 
 
+/**
+ * Computes the value of the Euler function for the given number.
+ *
+ * @param n the number.
+ * @return the value of Euler's function.
+ */
+float EulerFunction(int n);
+
+
 /*
  * numeri primi
- * fattorizzazione
- *  fattorizzazione di Fermat
- *  algoritmo di fattorizzazione p-1 - Pollard
  * più piccolo primo dopo x
- * funzione di eulero
- * funzione di eulero-fermat
- * th fermat
  * th cinese del resto
  * funzione zeta di rieman
  * equazioni dioofantine
- * congruenze
  * residui di gauss
  * radici primitive
  * residuo quadratico

@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <math.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "../ModularArithmetic.h"
 
@@ -18,6 +19,26 @@ int isPerfectSquare(int n) {
     int sq = (int) sqrt(n);
 
     return sq * sq == n;
+}
+
+/**
+ * Checks if a a number is in a list.
+ *
+ * @param list the list to check.
+ * @param listSize the list size.
+ * @param value the number to be found.
+ * @return 1 if the value was found, 0 otherwise.
+ */
+int isListed(int *list, int listSize, int value) {
+    assert(list != NULL);
+    assert(listSize >= 0);
+    
+    for (int i = 0; i < listSize; ++i) {
+        if (list[i] == value) {
+            return 1;
+        }
+    }
+    return 0;
 }
 
 
@@ -98,6 +119,19 @@ int mod(int n, int m) {
     return n % m;
 }
 
+/**
+ * Computes a number congruent with the one given.
+ * @details res == a (mod m).
+ *
+ * @param a the number.
+ * @param m the modulo value.
+ * @return a number congruent with the one given.
+ */
+int congruentNumber(int a, int m) {
+    srand(time(NULL));
+    return a + rand() * m;
+}
+
 
 /**
  * Computes the modular reduction .
@@ -147,6 +181,7 @@ int modularInverse(int n, int m) {
  */
 int *realFermatFactorisation(int n) {
     assert(n % 2 != 0);
+    n = n < 0 ? -n : n;
 
     //The factors
     int *res = malloc(2 * sizeof(int));
@@ -175,6 +210,7 @@ int *realFermatFactorisation(int n) {
  */
 int *FermatFactorisation(int n, int *factors) {
     assert(n % 2 != 0);
+    n = n < 0 ? -n : n;
 
     //The factors
     int *res = malloc(2 * sizeof(int));
@@ -205,7 +241,9 @@ int *FermatFactorisation(int n, int *factors) {
                 res = realloc(res, (*factors + 2) * sizeof(int));
             }
             //add it to the list of prime factors
-            res[(*factors)++] = stack[stackSize];
+            if (!isListed(res, *factors, stack[stackSize])) {
+                res[(*factors)++] = stack[stackSize];
+            }
         }
         //the number analyzed is NOT a prime number
         else {
@@ -231,5 +269,33 @@ int *FermatFactorisation(int n, int *factors) {
     free(tmpRes);
     free(stack);
     res = realloc(res, *factors * sizeof(int));
+    return res;
+}
+
+
+/**
+ * Computes the value of the Euler function for the given number.
+ *
+ * @param n the number.
+ * @return the value of Euler's function.
+ */
+float EulerFunction(int n) {
+    //The number of factors.
+    int factors = 0;
+    //List of factors of n.
+    int *nFactors = FermatFactorisation(n, &factors);
+    //Euler function result.
+    float res = n;
+
+    for (int i = 0; i < factors; ++i) {
+        printf("%d(%d) ", nFactors[i], i);
+    }
+    printf("\n");
+
+    for (int i = 0; i < factors; ++i) {
+        res *= (1.0 - 1.0 / ((float) nFactors[i]));
+    }
+
+    free(nFactors);
     return res;
 }
