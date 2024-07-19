@@ -81,30 +81,37 @@ int gcd(int n, int m) {
  * @return the gcd between n and m.
  */
 int extendedGCD(int n, int m, int *x, int *y) {
-    if (n == 0) {
-        *x = 0;
-        *y = 1;
-        return m;
+    //Temporal variable use for compute the first number of Bézout's identity.
+    int xTemp = 0;
+    //Temporal variable used for compute the second number of Bézout's identity.
+    int yRefactor = 1;
+    //Quotient between n and m.
+    int q;
+    //Temporal variable used in the switch procedure.
+    int temp;
+
+    *x = 1;
+    *y = 0;
+
+    while (m != 0) {
+        q = n / m;
+
+        temp = n % m;
+        n = m;
+        m = temp;
+
+        temp = (*x) - q * xTemp;
+        *x = xTemp;
+        xTemp = temp;
+
+        temp = (*y) - q * yRefactor;
+        *y = yRefactor;
+        yRefactor = temp;
     }
-    if (m == 0) {
-        *x = 0;
-        *y = 1;
-        return n;
-    }
 
-    int xNEW;
-    int yNEW;
-    int gcd = extendedGCD(m % n, n, &xNEW, &yNEW);
-
-    *x = yNEW - (m / n) * xNEW;
-    *y = xNEW;
-
-    if (*x < 0) {
-        *x = modularReduction(*x, m);
-    }
-
-    return gcd;
+    return n;
 }
+
 
 
 /**

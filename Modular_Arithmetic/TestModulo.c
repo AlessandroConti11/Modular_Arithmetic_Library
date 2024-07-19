@@ -29,6 +29,17 @@ int areCoPrime(int a, int n) {
 }
 
 /**
+ * Checks if the first number is a divisor of the second number.
+ *
+ * @param n the first number.
+ * @param m the second number.
+ * @return 1 if the first number is a divisor of the second number, 0 otherwise.
+ */
+int isDivisor(int n, int m) {
+    return (m % n == 0);
+}
+
+/**
  * Checks if n is Fermat's Pseuodoprime to a.
  * @details let a ⟂ n
  * @if a^(n - 1) (mod n) == 1 --> n is Fermat's Pseudoprime
@@ -38,7 +49,7 @@ int areCoPrime(int a, int n) {
  * @param n the second number.
  * @returns 1 if n is Fermat's Pseuodprime to a, 0 otherwise.
  */
-int FermatPseudoprime(int a, int n) {
+int isFermatPseudoprime(int a, int n) {
     assert(areCoPrime(a, n) == 1);
 
     return power(a, n - 1, n) == 1;

@@ -78,6 +78,19 @@ int power(int a, int exp, int m);
  */
 int chineseRemainderTheorem(int numberOfEquation, ...);
 
+/**
+ * Computes the linear diophantine equation.
+ * @details ax + by = c
+ * @details all value are integer.
+ *
+ * @param a the first parameter of the diophantine equation.
+ * @param x the value of the first unknown to be computed.
+ * @param b the second parameter of the diophantine equation.
+ * @param y the value of the second unknown to be calculated
+ * @param c the third parameter of the diophantine equation.
+ */
+void linearDiophantineEquation(int a, int *x, int b, int *y, int c);
+
 
 //******************************************************************************************************************//
 
@@ -182,6 +195,15 @@ int areCongruent(int a, int b, int m);
 int areCoPrime(int a, int n);
 
 /**
+ * Checks if the first number is a divisor of the second number.
+ *
+ * @param n the first number.
+ * @param m the second number.
+ * @return 1 if the first number is a divisor of the second number, 0 otherwise.
+ */
+int isDivisor(int n, int m);
+
+/**
  * Checks if n is Fermat's Pseuodoprime to a.
  * @details let a ⟂ n
  * @if a^(n - 1) (mod n) == 1 --> n is Fermat's Pseudoprime
@@ -191,7 +213,7 @@ int areCoPrime(int a, int n);
  * @param n the second number.
  * @returns 1 if n is Fermat's Pseuodprime to a, 0 otherwise.
  */
-int FermatPseudoprime(int a, int n);
+int isFermatPseudoprime(int a, int n);
 
 /**
  * Factors a number by splitting it into 2 of its dividends.
@@ -225,8 +247,9 @@ float EulerFunction(int n);
 /*
  * numeri primi
  * più piccolo primo dopo x
- * funzione zeta di rieman
- * equazioni dioofantine
+ * equazioni diofantea:
+ *  lineare ax+by=c
+ *  quadratica
  * residui di gauss
  * radici primitive
  * residuo quadratico

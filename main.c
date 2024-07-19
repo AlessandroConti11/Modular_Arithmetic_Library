@@ -5,7 +5,7 @@
 
 
 int main() {
-    int n, *factor = FermatFactorisation(99, &n);
+    int n, *factor = FermatFactorisation(99, &n), x, y, res;
     for (int i = 0; i < n; ++i) {
         printf("%d ", factor[i]);
     }
@@ -18,6 +18,13 @@ int main() {
         2,3,
         4,5));
 
+    res = extendedGCD(2, 6, &x, &y);
+    printf("gcd: %d, %d - %d\n", res, x, y);
+
+    printf("divisor %d\n", isDivisor(2,4));
+
+    linearDiophantineEquation(2, &x, 6, &y, 4);
+    printf("sol diophantine: %d, %d\n", x, y);
 
     free(factor);
     return 0;

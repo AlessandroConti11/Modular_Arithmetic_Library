@@ -131,6 +131,12 @@ int power(int a, int exp, int m) {
     return res;
 }
 
+int squareRoot(int a, int m) {
+    //TODO
+
+    return -1;
+}
+
 int discreteLogarithm(int a, int base, int m) {
     //TODO
 
@@ -198,4 +204,21 @@ int chineseRemainderTheorem(int numberOfEquation, ...) {
     free(a);
     free(m);
     return res;
+}
+
+/**
+ * Computes the linear diophantine equation.
+ * @details ax + by = c
+ * @details all value are integer.
+ *
+ * @param a the first parameter of the diophantine equation.
+ * @param x the value of the first unknown to be computed.
+ * @param b the second parameter of the diophantine equation.
+ * @param y the value of the second unknown to be calculated
+ * @param c the third parameter of the diophantine equation.
+ */
+void linearDiophantineEquation(int a, int *x, int b, int *y, int c) {
+    assert(isDivisor(gcd(a, b), c));
+
+    //TODO
 }
