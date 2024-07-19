@@ -1,7 +1,7 @@
 #To change the value of a variable: make VARIABLE="..."
 
 #Compilation flags
-CFLAGS = -Wall -Werror -std=gnu11 -O2 -lm
+CFLAGS = -Wall -Werror -std=gnu11 -O2
 ASANFLAGS = -fsanitize=address -lm
 
 
@@ -21,10 +21,10 @@ OUTPUT = output
 
 
 compile:
-	gcc ${CFLAGS} ${SOURCE} -o ${OUTPUT}
+	gcc ${CFLAGS} ${SOURCE} -o ${OUTPUT} -lm
 
 asan:
-	gcc ${ASANFLAGS} ${SOURCE} -o ${OUTPUT}
+	gcc ${ASANFLAGS} ${SOURCE} -o ${OUTPUT} -lm
 
 clean:
 	rm -ri ${OUTPUT}

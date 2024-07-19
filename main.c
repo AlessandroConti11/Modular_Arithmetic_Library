@@ -13,7 +13,7 @@ int main() {
 
     printf("euler %f\n", EulerFunction(99));
 
-    printf("Th %d\n", chineseRemainderTh(3,
+    printf("Th %d\n", chineseRemainderTheorem(3,
         3,4,
         2,3,
         4,5));

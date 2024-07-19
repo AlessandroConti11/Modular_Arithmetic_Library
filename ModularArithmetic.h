@@ -65,6 +65,20 @@ int division(int a, int b, int m);
 int power(int a, int exp, int m);
 
 
+/**
+ * Computes the solution of the system of modular linear equations.
+ * @details Chinese Reminder Theorem.
+ * @example x = a1 (mod m1)
+ * @example ...
+ * @example x = ai (mod mi)
+ *
+ * @param numberOfEquation the number of equations of the linear system.
+ * @param ... the equation values - ai, mi.
+ * @return the solution of the system of modular linear equations.
+ */
+int chineseRemainderTheorem(int numberOfEquation, ...);
+
+
 //******************************************************************************************************************//
 
 
@@ -211,7 +225,6 @@ float EulerFunction(int n);
 /*
  * numeri primi
  * più piccolo primo dopo x
- * th cinese del resto
  * funzione zeta di rieman
  * equazioni dioofantine
  * residui di gauss
