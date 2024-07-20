@@ -220,5 +220,15 @@ int chineseRemainderTheorem(int numberOfEquation, ...) {
 void linearDiophantineEquation(int a, int *x, int b, int *y, int c) {
     assert(isDivisor(gcd(a, b), c));
 
-    //TODO
+    //The gcd between a and b.
+    int gcdAB = gcd(a, b);
+
+    a = a / gcdAB;
+    b = b / gcdAB;
+    c = c / gcdAB;
+
+    extendedGCD(a, b, x, y);
+
+    *x *= c;
+    *y *= c;
 }

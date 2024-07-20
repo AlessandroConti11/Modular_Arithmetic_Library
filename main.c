@@ -23,7 +23,7 @@ int main() {
 
     printf("divisor %d\n", isDivisor(2,4));
 
-    linearDiophantineEquation(2, &x, 6, &y, 4);
+    linearDiophantineEquation(122, &x, 184, &y, 42);
     printf("sol diophantine: %d, %d\n", x, y);
 
     free(factor);

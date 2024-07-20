@@ -248,7 +248,6 @@ float EulerFunction(int n);
  * numeri primi
  * più piccolo primo dopo x
  * equazioni diofantea:
- *  lineare ax+by=c
  *  quadratica
  * residui di gauss
  * radici primitive
