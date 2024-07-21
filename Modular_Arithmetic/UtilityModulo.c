@@ -306,3 +306,67 @@ float EulerFunction(int n) {
     free(nFactors);
     return res;
 }
+
+
+/**
+ * Computes the list of prime numbers up to the n-th.
+ * @details Eratosthenes sieve.
+ *
+ * @param n the maximum number within which to search for prime numbers.
+ * @param primeSize the number of prime numbers found up to the n-th number.
+ * @return the list of prime numbers up to the n-th.
+ */
+int *EratosthenesSieve(int n, int *primeSize) {
+    //The list of all prime numbers.
+    int *primes = malloc((n + 1) * sizeof(int));
+    //The index of the last prime number found.
+    int primeIndex = 0;
+    //The list of all number until n.
+    int *numbers = malloc((n + 1) * sizeof(int));
+
+    //array initialization: assume that all numbers are primes
+    for (int i = 0; i < n + 1; ++i) {
+        numbers[i] = 1;
+    }
+    numbers[0] = 0;
+    numbers[1] = 0;
+
+    for (int i = 2; (i * i) < ((n + 1) * (n + 1)); ++i) {
+        //check if i is prime
+        if (numbers[i]) {
+            //i is a prime number
+            primes[primeIndex++] = i;
+
+            //updates all multiples of i as non-prime
+            for (int j = (i * i); j < (n + 1); j += i) {
+                numbers[j] = 0;
+            }
+        }
+    }
+
+    free(numbers);
+    primes = realloc(primes, primeIndex * sizeof(int));
+    *primeSize = primeIndex;
+    return primes;
+}
+
+/**
+ * Search for the n-th prime number.
+ * @details Eratosthenes sieve.
+ *
+ * @param n the n-th prime number to be found.
+ * @return the n-th prime number.
+ */
+int nthPrimeNumber(int n) {
+    //Upper boundary within which the n-th prime number lies.
+    int upperBound = (n + 1) * (log(n + 1) + log(log(n + 1)));
+    //The number of prime numbers found.
+    int primeIndex;
+    //The list of prime numbers up to the limit-th.
+    int *primes = EratosthenesSieve(upperBound, &primeIndex);
+    //The n-th prime number.
+    int res = primes[n - 1];
+
+    free(primes);
+    return res;
+}

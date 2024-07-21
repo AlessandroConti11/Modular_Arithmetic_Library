@@ -65,6 +65,14 @@ int division(int a, int b, int m);
 int power(int a, int exp, int m);
 
 
+//******************************************************************************************************************//
+
+
+//*******************//
+//  EQUATION MODULO  //
+//*******************//
+
+
 /**
  * Computes the solution of the system of modular linear equations.
  * @details Chinese Reminder Theorem.
@@ -89,7 +97,58 @@ int chineseRemainderTheorem(int numberOfEquation, ...);
  * @param y the value of the second unknown to be calculated
  * @param c the third parameter of the diophantine equation.
  */
-void linearDiophantineEquation(int a, int *x, int b, int *y, int c);
+void diophantineEquation(int a, int *x, int b, int *y, int c);
+
+
+//******************************************************************************************************************//
+
+
+//***************//
+//  TEST MODULO  //
+//***************//
+
+
+/**
+ * Checks if 2 number are congruent modulo m.
+ * @details a == b (mod m).
+ *
+ * @param a the first number.
+ * @param b the second number.
+ * @param m the modulo value.
+ * @return 1 if the 2 number are congruent, 0 otherwise.
+ */
+int areCongruent(int a, int b, int m);
+
+/**
+ * Checks if 2 number are coprime
+ * @details a ⟂ n iff gcd(a, n) == 1.
+ *
+ * @param a the first number.
+ * @param n the second number.
+ * @return 1 if the 2 number are coprime, 0 otherwise.
+ */
+int areCoPrime(int a, int n);
+
+/**
+ * Checks if the first number is a divisor of the second number.
+ *
+ * @param n the first number.
+ * @param m the second number.
+ * @return 1 if the first number is a divisor of the second number, 0 otherwise.
+ */
+int isDivisor(int n, int m);
+
+/**
+ * Checks if n is Fermat's Pseuodoprime to a.
+ * @details let a ⟂ n
+ * @if a^(n - 1) (mod n) == 1 --> n is Fermat's Pseudoprime
+ * @else n is NOT prime
+ *
+ * @param a the first number.
+ * @param n the second number.
+ * @returns 1 if n is Fermat's Pseuodprime to a, 0 otherwise.
+ */
+int isFermatPseudoprime(int a, int n);
 
 
 //******************************************************************************************************************//
@@ -99,6 +158,25 @@ void linearDiophantineEquation(int a, int *x, int b, int *y, int c);
 //  UTILITY FUNCTION FOR MODULAR ARITHMETIC  //
 //*******************************************//
 
+
+/**
+ * Checks if a number is a perfect square.
+ * @details x = sqrt(n)
+ * @details if n == x * x --> n is a perfect square
+ *
+ * @param n the number.
+ * @return 1 if the number is a perfect quare, 0 otherwise.
+ */
+int isPerfectSquare(int n);
+
+/**
+ * Computes the continuous funncion of the square root of a number.
+ *
+ * @param D the number of which we want to claculate the continued fraction of its square root.
+ * @param period the list of continued fraction terms.
+ * @param periodLength the number of continued fraction terms.
+ */
+void continuedFractionSqrt(int D, int *period, int *periodLength);
 
 /**
  * Computes the Greatest Common Divisor.
@@ -165,56 +243,6 @@ int modularReduction(int n, int m);
 int modularInverse(int n, int m);
 
 
-//******************************************************************************************************************//
-
-
-//***************//
-//  TEST MODULO  //
-//***************//
-
-
-/**
- * Checks if 2 number are congruent modulo m.
- * @details a == b (mod m).
- *
- * @param a the first number.
- * @param b the second number.
- * @param m the modulo value.
- * @return 1 if the 2 number are congruent, 0 otherwise.
- */
-int areCongruent(int a, int b, int m);
-
-/**
- * Checks if 2 number are coprime
- * @details a ⟂ n iff gcd(a, n) == 1.
- *
- * @param a the first number.
- * @param n the second number.
- * @return 1 if the 2 number are coprime, 0 otherwise.
- */
-int areCoPrime(int a, int n);
-
-/**
- * Checks if the first number is a divisor of the second number.
- *
- * @param n the first number.
- * @param m the second number.
- * @return 1 if the first number is a divisor of the second number, 0 otherwise.
- */
-int isDivisor(int n, int m);
-
-/**
- * Checks if n is Fermat's Pseuodoprime to a.
- * @details let a ⟂ n
- * @if a^(n - 1) (mod n) == 1 --> n is Fermat's Pseudoprime
- * @else n is NOT prime
- *
- * @param a the first number.
- * @param n the second number.
- * @returns 1 if n is Fermat's Pseuodprime to a, 0 otherwise.
- */
-int isFermatPseudoprime(int a, int n);
-
 /**
  * Factors a number by splitting it into 2 of its dividends.
  * @details Fermat's factorisation method.
@@ -244,11 +272,31 @@ int *FermatFactorisation(int n, int *factors);
 float EulerFunction(int n);
 
 
+/**
+ * Computes the list of prime numbers up to the n-th.
+ * @details Eratosthenes sieve.
+ *
+ * @param n the maximum number within which to search for prime numbers.
+ * @param primeSize the number of prime numbers found up to the n-th number.
+ * @return the list of prime numbers up to the n-th.
+ */
+int *EratosthenesSieve(int n, int *primeSize);
+
+/**
+ * Search for the n-th prime number.
+ * @details Eratosthenes sieve.
+ *
+ * @param n the n-th prime number to be found.
+ * @return the n-th prime number.
+ */
+int nthPrimeNumber(int n);
+
+
+//******************************************************************************************************************//
+
+
 /*
- * numeri primi
  * più piccolo primo dopo x
- * equazioni diofantea:
- *  quadratica
  * residui di gauss
  * radici primitive
  * residuo quadratico

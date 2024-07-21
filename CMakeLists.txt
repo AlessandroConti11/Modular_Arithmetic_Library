@@ -7,4 +7,5 @@ add_executable(ModularArithmetic main.c
         ModularArithmetic.h
         Modular_Arithmetic/OperationModulo.c
         Modular_Arithmetic/UtilityModulo.c
-        Modular_Arithmetic/TestModulo.c)
+        Modular_Arithmetic/TestModulo.c
+        Modular_Arithmetic/EquationModulo.c)

@@ -23,8 +23,18 @@ int main() {
 
     printf("divisor %d\n", isDivisor(2,4));
 
-    linearDiophantineEquation(122, &x, 184, &y, 42);
+    diophantineEquation(122, &x, 184, &y, 42);
     printf("sol diophantine: %d, %d\n", x, y);
+
+    free(factor);
+    factor = EratosthenesSieve(5000, &x);
+    printf("prime number: ");
+    for (int i = 0; i < x; ++i) {
+        printf("%d\n ", factor[i]);
+    }
+    printf("\n");
+
+    printf("the n-th prime number %d\n", nthPrimeNumber(10));
 
     free(factor);
     return 0;
