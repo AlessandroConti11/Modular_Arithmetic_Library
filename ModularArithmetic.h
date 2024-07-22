@@ -74,7 +74,7 @@ int power(int a, int exp, int m);
 
 
 /**
- * Computes the solution of the system of modular linear equations.
+ * Computes the solution of a system of modular linear equations.
  * @details Chinese Reminder Theorem.
  * @example x = a1 (mod m1)
  * @example ...
@@ -87,7 +87,7 @@ int power(int a, int exp, int m);
 int chineseRemainderTheorem(int numberOfEquation, ...);
 
 /**
- * Computes the linear diophantine equation.
+ * Computes the solution of a linear diophantine equation.
  * @details ax + by = c
  * @details all value are integer.
  *
@@ -109,7 +109,7 @@ void diophantineEquation(int a, int *x, int b, int *y, int c);
 
 
 /**
- * Checks if 2 number are congruent modulo m.
+ * Checks if two numbers are congruent modulo m.
  * @details a == b (mod m).
  *
  * @param a the first number.
@@ -120,7 +120,7 @@ void diophantineEquation(int a, int *x, int b, int *y, int c);
 int areCongruent(int a, int b, int m);
 
 /**
- * Checks if 2 number are coprime
+ * Checks if two numbers are coprime
  * @details a ⟂ n iff gcd(a, n) == 1.
  *
  * @param a the first number.
@@ -139,16 +139,25 @@ int areCoPrime(int a, int n);
 int isDivisor(int n, int m);
 
 /**
- * Checks if n is Fermat's Pseuodoprime to a.
+ * Checks if a number is Fermat's Pseuodoprime to a.
  * @details let a ⟂ n
  * @if a^(n - 1) (mod n) == 1 --> n is Fermat's Pseudoprime
  * @else n is NOT prime
  *
  * @param a the first number.
  * @param n the second number.
- * @returns 1 if n is Fermat's Pseuodprime to a, 0 otherwise.
+ * @returns 1 if the number is Fermat's Pseuodprime to a, 0 otherwise.
  */
-int isFermatPseudoprime(int a, int n);
+int isFermatPseudoPrime(int a, int n);
+
+/**
+ * Checks if a number is a prime number.
+ * @details Eratosthenes sieve.
+ *
+ * @param n the number whose primality is to be tested.
+ * @return 1 if the number is prime, 0 otherwise.
+ */
+int isPrime(int n);
 
 
 //******************************************************************************************************************//
@@ -169,14 +178,6 @@ int isFermatPseudoprime(int a, int n);
  */
 int isPerfectSquare(int n);
 
-/**
- * Computes the continuous funncion of the square root of a number.
- *
- * @param D the number of which we want to claculate the continued fraction of its square root.
- * @param period the list of continued fraction terms.
- * @param periodLength the number of continued fraction terms.
- */
-void continuedFractionSqrt(int D, int *period, int *periodLength);
 
 /**
  * Computes the Greatest Common Divisor.
@@ -202,7 +203,7 @@ int extendedGCD(int n, int m, int *x, int *y);
 
 
 /**
- * Computes the modulus of 2 integers.
+ * Computes the modulus of two integers.
  * @details res = n (mod m).
  *
  * @param n the dividend.
@@ -223,7 +224,7 @@ int congruentNumber(int a, int m);
 
 
 /**
- * Computes the modular reduction .
+ * Computes the modular reduction.
  * @details (-n) (mod m) --> k (mod m) s.t. -n == k (mod m).
  *
  * @param n the number to transform.
@@ -244,21 +245,21 @@ int modularInverse(int n, int m);
 
 
 /**
- * Factors a number by splitting it into 2 of its dividends.
+ * Factorizes a number by splitting it into two of its dividends.
  * @details Fermat's factorisation method.
  *
  * @param n the number.
- * @return the 2 factors that make up the number.
+ * @return the two factorizes that make up the number.
  */
 int *realFermatFactorisation(int n);
 
 /**
- * Factors a number by splitting it into all of its dividends.
+ * Factorizes a number by splitting it into all of its dividends.
  * @details Fermat's factorization method.
  *
  * @param n the number.
  * @param factors the number of factors.
- * @return the factors that make up the number.
+ * @return the factorizes that make up the number.
  */
 int *FermatFactorisation(int n, int *factors);
 
@@ -283,7 +284,7 @@ float EulerFunction(int n);
 int *EratosthenesSieve(int n, int *primeSize);
 
 /**
- * Search for the n-th prime number.
+ * Searches for the n-th prime number.
  * @details Eratosthenes sieve.
  *
  * @param n the n-th prime number to be found.
@@ -291,15 +292,20 @@ int *EratosthenesSieve(int n, int *primeSize);
  */
 int nthPrimeNumber(int n);
 
+/**
+ * Founds the prime number following a given number.
+ *
+ * @param n the number whose next prime number is to be found.
+ * @return the prime number following the given number.
+ */
+int nextPrimeNumber(int n);
+
 
 //******************************************************************************************************************//
 
 
 /*
- * più piccolo primo dopo x
  * residui di gauss
- * radici primitive
- * residuo quadratico
  *
  * matrici:
  *  somma

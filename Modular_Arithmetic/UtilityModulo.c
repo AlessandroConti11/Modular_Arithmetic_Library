@@ -22,7 +22,7 @@ int isPerfectSquare(int n) {
 }
 
 /**
- * Checks if a a number is in a list.
+ * Checks if a number is in a list.
  *
  * @param list the list to check.
  * @param listSize the list size.
@@ -115,7 +115,7 @@ int extendedGCD(int n, int m, int *x, int *y) {
 
 
 /**
- * Computes the modulus of 2 integers.
+ * Computes the modulus of two integers.
  * @details res = n (mod m).
  *
  * @param n the dividend.
@@ -141,7 +141,7 @@ int congruentNumber(int a, int m) {
 
 
 /**
- * Computes the modular reduction .
+ * Computes the modular reduction.
  * @details (-n) (mod m) --> k (mod m) s.t. -n == k (mod m).
  *
  * @param n the number to transform.
@@ -180,11 +180,11 @@ int modularInverse(int n, int m) {
 
 
 /**
- * Factors a number by splitting it into 2 of its dividends.
+ * Factorizes a number by splitting it into two of its dividends.
  * @details Fermat's factorisation method.
  *
  * @param n the number.
- * @return the 2 factors that make up the number.
+ * @return the two factorizes that make up the number.
  */
 int *realFermatFactorisation(int n) {
     assert(n % 2 != 0);
@@ -208,12 +208,12 @@ int *realFermatFactorisation(int n) {
 }
 
 /**
- * Factors a number by splitting it into all of its dividends.
+ * Factorizes a number by splitting it into all of its dividends.
  * @details Fermat's factorization method.
  *
  * @param n the number.
  * @param factors the number of factors.
- * @return the factors that make up the number.
+ * @return the factorizes that make up the number.
  */
 int *FermatFactorisation(int n, int *factors) {
     assert(n % 2 != 0);
@@ -351,7 +351,7 @@ int *EratosthenesSieve(int n, int *primeSize) {
 }
 
 /**
- * Search for the n-th prime number.
+ * Searches for the n-th prime number.
  * @details Eratosthenes sieve.
  *
  * @param n the n-th prime number to be found.
@@ -369,4 +369,25 @@ int nthPrimeNumber(int n) {
 
     free(primes);
     return res;
+}
+
+/**
+ * Founds the prime number following a given number.
+ *
+ * @param n the number whose next prime number is to be found.
+ * @return the prime number following the given number.
+ */
+int nextPrimeNumber(int n) {
+    do {
+        if (areCoPrime(2, n) && (isFermatPseudoPrime(2, n) && isPrime(n))) {
+            return n;
+        }
+        n++;
+    }while(1);
+}
+
+
+int *primitiveRoots(int a, int n, int *primitiveRootsSize) {
+    //TODO
+    return NULL;
 }

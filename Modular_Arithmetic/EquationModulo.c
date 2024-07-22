@@ -6,7 +6,7 @@
 
 
 /**
- * Computes the solution of the system of modular linear equations.
+ * Computes the solution of a system of modular linear equations.
  * @details Chinese Reminder Theorem.
  * @example x = a1 (mod m1)
  * @example ...
@@ -68,7 +68,7 @@ int chineseRemainderTheorem(int numberOfEquation, ...) {
 }
 
 /**
- * Computes the linear diophantine equation.
+ * Computes the solution of a linear diophantine equation.
  * @details ax + by = c
  * @details all value are integer.
  *

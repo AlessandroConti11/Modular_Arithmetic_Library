@@ -27,14 +27,16 @@ int main() {
     printf("sol diophantine: %d, %d\n", x, y);
 
     free(factor);
-    factor = EratosthenesSieve(5000, &x);
+    factor = EratosthenesSieve(10, &x);
     printf("prime number: ");
     for (int i = 0; i < x; ++i) {
-        printf("%d\n ", factor[i]);
+        printf("%d ", factor[i]);
     }
     printf("\n");
 
     printf("the n-th prime number %d\n", nthPrimeNumber(10));
+
+    printf("the next prime number %d\n", nextPrimeNumber(51));
 
     free(factor);
     return 0;
