@@ -249,7 +249,9 @@ int *FermatFactorisation(int n, int *factors) {
             }
             //add it to the list of prime factors
             if (!isListed(res, *factors, stack[stackSize])) {
-                res[(*factors)++] = stack[stackSize];
+                if (stack[stackSize] != 1) {
+                    res[(*factors)++] = stack[stackSize];
+                }
             }
         }
         //the number analyzed is NOT a prime number
@@ -279,14 +281,40 @@ int *FermatFactorisation(int n, int *factors) {
     return res;
 }
 
+/**
+ * Factorizes a number by splitting it into all of its dividends.
+ *
+ * @param n the number.
+ * @param factors the number of factors.
+ * @return the factorizes that make up the number.
+ */
+int *factorisation(int n, int *factors) {
+    int *res = NULL;
+    int isEven = 0;
+
+    while (n % 2 == 0) {
+        isEven = 1;
+        n /= 2;
+    }
+
+    res = FermatFactorisation(n, factors);
+
+    if (isEven) {
+        res[(*factors)++] = 2;
+    }
+
+    return res;
+}
+
 
 /**
  * Computes the value of the Euler function for the given number.
+ * @details φ(n).
  *
  * @param n the number.
  * @return the value of Euler's function.
  */
-float EulerFunction(int n) {
+int EulerFunction(int n) {
     //The number of factors.
     int factors = 0;
     //List of factors of n.
@@ -295,12 +323,9 @@ float EulerFunction(int n) {
     float res = n;
 
     for (int i = 0; i < factors; ++i) {
-        printf("%d(%d) ", nFactors[i], i);
-    }
-    printf("\n");
-
-    for (int i = 0; i < factors; ++i) {
-        res *= (1.0 - 1.0 / ((float) nFactors[i]));
+        if (nFactors[i] != 1) {
+            res *= (1.0 - 1.0 / ((float) nFactors[i]));
+        }
     }
 
     free(nFactors);
@@ -387,7 +412,24 @@ int nextPrimeNumber(int n) {
 }
 
 
-int *primitiveRoots(int a, int n, int *primitiveRootsSize) {
-    //TODO
-    return NULL;
+/**
+ * Computes the list of primitive roots modulo n.
+ *
+ * @param n the modulo value.
+ * @param primitiveRootsSize the number of primitive root modulo n.
+ * @return the list of primitive roots modulo n.
+ */
+int *primitiveRoots(int n, int *primitiveRootsSize) {
+    int *primitiveRoots = malloc(n * sizeof(int));
+    int primitiveRootSize = 0;
+
+    for (int i = 2; i < n; ++i) {
+        if (isPrimitiveRoot(i, n)) {
+            primitiveRoots[primitiveRootSize++] = i;
+        }
+    }
+
+    *primitiveRootsSize = primitiveRootSize;
+    realloc(primitiveRoots, (*primitiveRootsSize));
+    return primitiveRoots;
 }

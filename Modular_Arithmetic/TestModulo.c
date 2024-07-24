@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "../ModularArithmetic.h"
@@ -45,6 +46,7 @@ int isDivisor(int n, int m) {
  * @details let a ⟂ n
  * @if a^(n - 1) (mod n) == 1 --> n is Fermat's Pseudoprime
  * @else n is NOT prime
+ * @endif
  *
  * @param a the first number.
  * @param n the second number.
@@ -106,12 +108,50 @@ int isPrime(int n) {
 
 }
 
+/**
+ * Checks if a number admits the square root in modulus n.
+ * @details a is a quadratic residue modulo n
+ * @details if: exist x st x^2 = a (mod n).
+ *
+ * @param a the number whose square root we want to know if it is possible to calculate.
+ * @param n the modulo value.
+ * @return 1 if the number allows for the square root, 0 otherwise.
+ */
 int isSquareNumber(int a, int n) {
-    //TODO residuo quadratico
-    return -1;
+    a = mod(a, n);
+
+    if (isPrime(n)) {
+        return power(a, (int) ((n - 1) / 2), n) == 1 ? 1 : 0;
+    }
+
+    for (int i = 0; i < (int) ((n - 1) / 2); ++i) {
+        if ((i * i) == a) {
+            return 1;
+        }
+    }
+    return 0;
 }
 
+/**
+ * Checks is a number is a primitive root modulo n.
+ * @details an integer whose powers modulo n are congruent with numbers coprime to n.
+ *
+ * @param a the number to check if it is primitive root modulo n.
+ * @param n the modulo value.
+ * @return 1 if the number is a primitive root modulo n, 0 otherwise.
+ */
 int isPrimitiveRoot(int a, int n) {
-    //TODO radice primitiva
-    return -1;
+    int phi = EulerFunction(n);
+    int factorPhiSize = 0;
+    int *factorsPhi = factorisation(phi, &factorPhiSize);
+
+    for (int i = 0; i < factorPhiSize; ++i) {
+        if (power(a, (int) (phi / factorsPhi[i]), n) == 1) {
+            free(factorsPhi);
+            return 0;
+        }
+    }
+
+    free(factorsPhi);
+    return 1;
 }

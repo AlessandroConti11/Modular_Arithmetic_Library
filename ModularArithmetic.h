@@ -143,6 +143,7 @@ int isDivisor(int n, int m);
  * @details let a ⟂ n
  * @if a^(n - 1) (mod n) == 1 --> n is Fermat's Pseudoprime
  * @else n is NOT prime
+ * @endif
  *
  * @param a the first number.
  * @param n the second number.
@@ -158,6 +159,27 @@ int isFermatPseudoPrime(int a, int n);
  * @return 1 if the number is prime, 0 otherwise.
  */
 int isPrime(int n);
+
+/**
+ * Checks if a number admits the square root in modulus n.
+ * @details a is a quadratic residue modulo n
+ * @details if: exist x st x^2 = a (mod n).
+ *
+ * @param a the number whose square root we want to know if it is possible to calculate.
+ * @param n the modulo value.
+ * @return 1 if the number allows for the square root, 0 otherwise.
+ */
+int isSquareNumber(int a, int n);
+
+/**
+ * Checks is a number is a primitive root modulo n.
+ * @details an integer whose powers modulo n are congruent with numbers coprime to n.
+ *
+ * @param a the number to check if it is primitive root modulo n.
+ * @param n the modulo value.
+ * @return 1 if the number is a primitive root modulo n, 0 otherwise.
+ */
+int isPrimitiveRoot(int a, int n);
 
 
 //******************************************************************************************************************//
@@ -263,14 +285,24 @@ int *realFermatFactorisation(int n);
  */
 int *FermatFactorisation(int n, int *factors);
 
+/**
+ * Factorizes a number by splitting it into all of its dividends.
+ *
+ * @param n the number.
+ * @param factors the number of factors.
+ * @return the factorizes that make up the number.
+ */
+int *factorisation(int n, int *factors);
+
 
 /**
  * Computes the value of the Euler function for the given number.
+ * @details φ(n).
  *
  * @param n the number.
  * @return the value of Euler's function.
  */
-float EulerFunction(int n);
+int EulerFunction(int n);
 
 
 /**
@@ -299,6 +331,16 @@ int nthPrimeNumber(int n);
  * @return the prime number following the given number.
  */
 int nextPrimeNumber(int n);
+
+
+/**
+ * Computes the list of primitive roots modulo n.
+ *
+ * @param n the modulo value.
+ * @param primitiveRootsSize the number of primitive root modulo n.
+ * @return the list of primitive roots modulo n.
+ */
+int *primitiveRoots(int n, int *primitiveRootsSize);
 
 
 //******************************************************************************************************************//
