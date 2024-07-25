@@ -64,19 +64,22 @@ int main() {
     // x = isSquareNumber(9, 42);
     // printf("x = %d\n", x);
 
-    printf("QR: ");
-    factor = quadraticResiduals(13, &n);
-    for (int i = 0; i < n; ++i) {
-        printf("%d ", factor[i]);
-    }
-    printf("\n");
+    // printf("QR: ");
+    // factor = quadraticResiduals(13, &n);
+    // for (int i = 0; i < n; ++i) {
+    //     printf("%d ", factor[i]);
+    // }
+    // printf("\n");
+    //
+    // printf("SR: ");
+    // factor = squareRoot(9, 13, &n);
+    // for (int i = 0; i < n; ++i) {
+    //     printf("%d ", factor[i]);
+    // }
+    // printf("\n");
 
-    printf("SR: ");
-    factor = squareRoot(9, 13, &n);
-    for (int i = 0; i < n; ++i) {
-        printf("%d ", factor[i]);
-    }
-    printf("\n");
+    printf("%d\n", power(3, 5, 17));
+    printf("%d\n", discreteLogarithm(3, 5, 17));
 
     free(factor);
     return 0;

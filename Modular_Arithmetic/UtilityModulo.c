@@ -28,16 +28,24 @@ int isPerfectSquare(int n) {
  * @param list the list to check.
  * @param listSize the list size.
  * @param value the number to be found.
+ * @param position the location where the searched value is - NOT necessary.
  * @return 1 if the value was found, 0 otherwise.
  */
-int isListed(int *list, int listSize, int value) {
+int isListed(int *list, int listSize, int value, int *position) {
     assert(list != NULL);
     assert(listSize >= 0);
     
     for (int i = 0; i < listSize; ++i) {
         if (list[i] == value) {
+            if (position != NULL) {
+                *position = i;
+            }
             return 1;
         }
+    }
+
+    if (position != NULL) {
+        *position = NULL;
     }
     return 0;
 }
@@ -190,6 +198,11 @@ int modularInverse(int n, int m) {
 int *realFermatFactorisation(int n) {
     assert(n % 2 != 0);
     n = n < 0 ? -n : n;
+    if (n == 1) {
+        int *res = malloc(sizeof(int));
+        res[0] = 1;
+        return res;
+    }
 
     //The factors.
     int *res = malloc(2 * sizeof(int));
@@ -221,6 +234,11 @@ int *realFermatFactorisation(int n) {
 int *FermatFactorisation(int n, int *factors) {
     assert(n % 2 != 0);
     n = n < 0 ? -n : n;
+    if (n == 1) {
+        int *res = malloc(sizeof(int));
+        res[0] = 1;
+        return res;
+    }
 
     //The factors.
     int *res = malloc(2 * sizeof(int));
@@ -251,7 +269,7 @@ int *FermatFactorisation(int n, int *factors) {
                 res = realloc(res, (*factors + 2) * sizeof(int));
             }
             //add it to the list of prime factors
-            if (!isListed(res, *factors, stack[stackSize])) {
+            if (!isListed(res, *factors, stack[stackSize], NULL)) {
                 if (stack[stackSize] != 1) {
                     res[(*factors)++] = stack[stackSize];
                 }
@@ -293,16 +311,21 @@ int *FermatFactorisation(int n, int *factors) {
  */
 int *factorisation(int n, int *factors) {
     //The factors.
-    int *res = NULL;
+    int *res = malloc(sizeof(int));
     //Save if the number is even or odd.
     int isEven = 0;
+
+    (*factors) = 0;
 
     while (n % 2 == 0) {
         isEven = 1;
         n /= 2;
     }
 
-    res = FermatFactorisation(n, factors);
+    if (n != 1) {
+        free(res);
+        res = FermatFactorisation(n, factors);
+    }
 
     if (isEven) {
         res[(*factors)++] = 2;
@@ -334,7 +357,7 @@ int EulerFunction(int n) {
     }
 
     free(nFactors);
-    return res;
+    return (int) res;
 }
 
 

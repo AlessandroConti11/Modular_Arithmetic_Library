@@ -382,8 +382,46 @@ int *squareRoot(int a, int n, int *numberOfSquareRoots) {
     return result;
 }
 
-int discreteLogarithm(int a, int base, int m) {
-    //TODO
+/**
+ * Computes the discrete logarithm modulo n of a number.
+ * @details Baby-Step Giant-Step algorithm.
+ * @details b = a^x (mod n) where x = Log_(a) (b).
+ *
+ * @param a the logarithm base.
+ * @param b the number.
+ * @param n the modulo value.
+ * @return the discrete logarithm modulo n.
+ */
+int discreteLogarithm(int a, int b, int n) {
+    assert(isPrimitiveRoot(a, n));
 
+    //The square root of n rounded up.
+    int N = ceil(sqrt(n));
+    //The first component to check - a^j (mod n) 0<=j<N.
+    int *aj = malloc(N * sizeof(int));
+    //The value of a^(-N) (mod n).
+    int aN = 0;
+    //The second component to check - b*a^(-Nk) (mod n) 0<=k<N.
+    int baNk = b;
+    //The position in the first component.
+    int ajPos = 0;
+
+    //compute the first component
+    for (int i = 0; i < N; ++i) {
+        aj[i] = power(a, i, n);
+    }
+
+    //a^(-N) (mod n)
+    aN = modularInverse(a, n);
+    aN = power(aN, N, n);
+
+    for (int i = 0; i < N; ++i) {
+        if (isListed(aj, N, baNk, &ajPos)) {
+            return ajPos + N * i;
+        }
+        baNk = product(baNk, aN, n);
+    }
+
+    //this case cannot happen because a is a primitive root modulo n
     return -1;
 }

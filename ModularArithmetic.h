@@ -85,6 +85,18 @@ int *TonelliShanksAlgorithm(int a, int p);
  */
 int *squareRoot(int a, int n, int *numberOfSquareRoots);
 
+/**
+ * Computes the discrete logarithm modulo n of a number.
+ * @details Baby-Step Giant-Step algorithm.
+ * @details b = a^x (mod n) where x = Log_(a) (b).
+ *
+ * @param a the logarithm base.
+ * @param b the number.
+ * @param n the modulo value.
+ * @return the discrete logarithm modulo n.
+ */
+int discreteLogarithm(int a, int b, int n);
+
 
 //******************************************************************************************************************//
 
@@ -220,6 +232,17 @@ int isPrimitiveRoot(int a, int n);
  * @return 1 if the number is a perfect quare, 0 otherwise.
  */
 int isPerfectSquare(int n);
+
+/**
+ * Checks if a number is in a list.
+ *
+ * @param list the list to check.
+ * @param listSize the list size.
+ * @param value the number to be found.
+ * @param position the location where the searched value is - NOT necessary.
+ * @return 1 if the value was found, 0 otherwise.
+ */
+int isListed(int *list, int listSize, int value, int *position);
 
 
 /**
