@@ -64,6 +64,27 @@ int division(int a, int b, int m);
  */
 int power(int a, int exp, int m);
 
+/**
+ * Computes the square root modulo p of a number.
+ * @details Tonelli-Shanks algorithm
+ * @warning work iff the modulo value is a prime number.
+ *
+ * @param a the number whose square root is to be calculated.
+ * @param p the modulo value - must be a prime number.
+ * @return the square roots modulo p of the number.
+ */
+int *TonelliShanksAlgorithm(int a, int p);
+
+/**
+ * Computes the square roots modulo n of a number.
+ *
+ * @param a the number whose square root is to be calculated.
+ * @param n the modulo value.
+ * @param numberOfSquareRoots the number of square roots.
+ * @return the square roots modulo n of the number.
+ */
+int *squareRoot(int a, int n, int *numberOfSquareRoots);
+
 
 //******************************************************************************************************************//
 
@@ -271,7 +292,7 @@ int modularInverse(int n, int m);
  * @details Fermat's factorisation method.
  *
  * @param n the number.
- * @return the two factorizes that make up the number.
+ * @return the two factors that make up the number.
  */
 int *realFermatFactorisation(int n);
 
@@ -281,7 +302,7 @@ int *realFermatFactorisation(int n);
  *
  * @param n the number.
  * @param factors the number of factors.
- * @return the factorizes that make up the number.
+ * @return the factors that make up the number.
  */
 int *FermatFactorisation(int n, int *factors);
 
@@ -290,7 +311,7 @@ int *FermatFactorisation(int n, int *factors);
  *
  * @param n the number.
  * @param factors the number of factors.
- * @return the factorizes that make up the number.
+ * @return the factors that make up the number.
  */
 int *factorisation(int n, int *factors);
 
@@ -342,12 +363,28 @@ int nextPrimeNumber(int n);
  */
 int *primitiveRoots(int n, int *primitiveRootsSize);
 
+/**
+ * Computes the list of quadratic residuals modulo n.
+ *
+ * @param n the modulo value.
+ * @param quadraticResidualSize the number of quadratic residuals modulo n.
+ * @return the list of quadratic residuals modulo n.
+ */
+int *quadraticResiduals(int n, int *quadraticResidualSize);
+
 
 //******************************************************************************************************************//
 
 
 /*
  * residui di gauss
+ * simbolo di legendre a, n
+ *  0 se a|p
+ *  1 a residuo quadratico
+ *  -1 a non-residuo quadratico
+ * simbolo di Jacobi
+ *  fattori di n
+ *  productory (simboli di legendre a, factor_i)^#di_volte_che_compare_fattore
  *
  * matrici:
  *  somma

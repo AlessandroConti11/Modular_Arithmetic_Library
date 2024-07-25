@@ -1,5 +1,4 @@
 #include <assert.h>
-#include <stdio.h>
 #include <stdlib.h>
 
 #include "../ModularArithmetic.h"
@@ -120,6 +119,7 @@ int isPrime(int n) {
 int isSquareNumber(int a, int n) {
     a = mod(a, n);
 
+    //Euler's criterion
     if (isPrime(n)) {
         return power(a, (int) ((n - 1) / 2), n) == 1 ? 1 : 0;
     }
@@ -141,8 +141,11 @@ int isSquareNumber(int a, int n) {
  * @return 1 if the number is a primitive root modulo n, 0 otherwise.
  */
 int isPrimitiveRoot(int a, int n) {
+    //The value of Euler function of n.
     int phi = EulerFunction(n);
+    //The number of factor.
     int factorPhiSize = 0;
+    //The list of factors of phi.
     int *factorsPhi = factorisation(phi, &factorPhiSize);
 
     for (int i = 0; i < factorPhiSize; ++i) {

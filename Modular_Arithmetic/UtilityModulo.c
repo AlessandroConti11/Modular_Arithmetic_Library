@@ -16,6 +16,7 @@
  * @return 1 if the number is a perfect quare, 0 otherwise.
  */
 int isPerfectSquare(int n) {
+    //The integer part of square root.
     int sq = (int) sqrt(n);
 
     return sq * sq == n;
@@ -184,15 +185,17 @@ int modularInverse(int n, int m) {
  * @details Fermat's factorisation method.
  *
  * @param n the number.
- * @return the two factorizes that make up the number.
+ * @return the two factors that make up the number.
  */
 int *realFermatFactorisation(int n) {
     assert(n % 2 != 0);
     n = n < 0 ? -n : n;
 
-    //The factors
+    //The factors.
     int *res = malloc(2 * sizeof(int));
+    //The first factor.
     int x = (int) ceil(sqrt(n));
+    //The second factor.
     int y = x * x - n;
 
     while (!isPerfectSquare(y)) {
@@ -213,13 +216,13 @@ int *realFermatFactorisation(int n) {
  *
  * @param n the number.
  * @param factors the number of factors.
- * @return the factorizes that make up the number.
+ * @return the factors that make up the number.
  */
 int *FermatFactorisation(int n, int *factors) {
     assert(n % 2 != 0);
     n = n < 0 ? -n : n;
 
-    //The factors
+    //The factors.
     int *res = malloc(2 * sizeof(int));
     //Temporal factors.
     int *tmpRes = NULL;
@@ -286,10 +289,12 @@ int *FermatFactorisation(int n, int *factors) {
  *
  * @param n the number.
  * @param factors the number of factors.
- * @return the factorizes that make up the number.
+ * @return the factors that make up the number.
  */
 int *factorisation(int n, int *factors) {
+    //The factors.
     int *res = NULL;
+    //Save if the number is even or odd.
     int isEven = 0;
 
     while (n % 2 == 0) {
@@ -318,7 +323,7 @@ int EulerFunction(int n) {
     //The number of factors.
     int factors = 0;
     //List of factors of n.
-    int *nFactors = FermatFactorisation(n, &factors);
+    int *nFactors = factorisation(n, &factors);
     //Euler function result.
     float res = n;
 
@@ -420,10 +425,12 @@ int nextPrimeNumber(int n) {
  * @return the list of primitive roots modulo n.
  */
 int *primitiveRoots(int n, int *primitiveRootsSize) {
+    //The list of primitive roots.
     int *primitiveRoots = malloc(n * sizeof(int));
+    //The number of primiteve roots.
     int primitiveRootSize = 0;
 
-    for (int i = 2; i < n; ++i) {
+    for (int i = 1; i < n; ++i) {
         if (isPrimitiveRoot(i, n)) {
             primitiveRoots[primitiveRootSize++] = i;
         }
@@ -432,4 +439,28 @@ int *primitiveRoots(int n, int *primitiveRootsSize) {
     *primitiveRootsSize = primitiveRootSize;
     realloc(primitiveRoots, (*primitiveRootsSize));
     return primitiveRoots;
+}
+
+/**
+ * Computes the list of quadratic residuals modulo n.
+ *
+ * @param n the modulo value.
+ * @param quadraticResidualSize the number of quadratic residuals modulo n.
+ * @return the list of quadratic residuals modulo n.
+ */
+int *quadraticResiduals(int n, int *quadraticResidualSize) {
+    //The quadratic residuals.
+    int *res = malloc(n * sizeof(int));
+    //The quadratic residuals size.
+    int resSize = 0;
+
+    for (int i = 0; i < n; ++i) {
+        if (isSquareNumber(i, n)) {
+            res[resSize++] = i;
+        }
+    }
+
+    *quadraticResidualSize = resSize;
+    res = realloc(res, resSize * sizeof(int));
+    return res;
 }
