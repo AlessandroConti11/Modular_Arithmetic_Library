@@ -46,6 +46,7 @@ int isDivisor(int n, int m) {
  * @if a^(n - 1) (mod n) == 1 --> n is Fermat's Pseudoprime
  * @else n is NOT prime
  * @endif
+ * @warning a and n must be coprime.
  *
  * @param a the first number.
  * @param n the second number.
@@ -109,7 +110,7 @@ int isPrime(int n) {
 
 /**
  * Checks if a number admits the square root in modulus n.
- * @details a is a quadratic residue modulo n
+ * @details a is a quadratic residue modulo n.
  * @details if: exist x st x^2 = a (mod n).
  *
  * @param a the number whose square root we want to know if it is possible to calculate.

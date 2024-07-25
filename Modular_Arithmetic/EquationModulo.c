@@ -11,6 +11,7 @@
  * @example x = a1 (mod m1)
  * @example ...
  * @example x = ai (mod mi)
+ * @warning all mi value must be coprime.
  *
  * @param numberOfEquation the number of equations of the linear system.
  * @param ... the equation values - ai, mi.
@@ -71,6 +72,7 @@ int chineseRemainderTheorem(int numberOfEquation, ...) {
  * Computes the solution of a linear diophantine equation.
  * @details ax + by = c
  * @details all value are integer.
+ * @warning gcd between a and b must be a divisor of c.
  *
  * @param a the first parameter of the diophantine equation.
  * @param x the value of the first unknown to be computed.

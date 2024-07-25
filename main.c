@@ -60,9 +60,8 @@ int main() {
     // }
     // printf("\n");
 
-    // printf("TSa %d\n", TonelliShanksAlgorithm(5,41));
-    // x = isSquareNumber(9, 42);
-    // printf("x = %d\n", x);
+    // factor = TonelliShanksAlgorithm(5, 41);
+    // printf("%d, %d\n", factor[0], factor[1]);
 
     // printf("QR: ");
     // factor = quadraticResiduals(13, &n);
@@ -78,8 +77,11 @@ int main() {
     // }
     // printf("\n");
 
-    printf("%d\n", power(3, 5, 17));
-    printf("%d\n", discreteLogarithm(3, 5, 17));
+    // printf("%d\n", power(3, 5, 17));
+    // printf("%d\n", discreteLogarithm(3, 5, 17));
+
+    printf("%d\n", LegendreSymbol(3, 5));
+    printf("%d\n", JacobiSymbol(3, 3));
 
     free(factor);
     return 0;

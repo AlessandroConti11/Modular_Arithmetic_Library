@@ -68,6 +68,7 @@ int product(int a, int b, int m) {
 /**
  * Computes the division modulo m.
  * @details res = a / b (mod m).
+ * @warning b and m must be coprime.
  *
  * @param a the dividend.
  * @param b the divisor.
@@ -91,7 +92,7 @@ int division(int a, int b, int m) {
     int x;
     //The second number of Bézout's identity.
     int y;
-    //The gcd between n and m.
+    //The gcd between b and m.
     int gcd = extendedGCD(b, m, &x, &y);
     //the inverse exists iff gcd(b, m) == 1
     assert(gcd == 1);
@@ -134,10 +135,10 @@ int power(int a, int exp, int m) {
 /**
  * Computes the square roots modulo p of a number.
  * @details Tonelli-Shanks algorithm
- * @warning work iff the modulo value is a prime number.
+ * @warning p must be a prime number.
  *
  * @param a the number whose square root is to be calculated.
- * @param p the modulo value - must be a prime number.
+ * @param p the modulo value.
  * @return the square roots modulo p of the number.
  */
 int *TonelliShanksAlgorithm(int a, int p) {
@@ -157,7 +158,7 @@ int *TonelliShanksAlgorithm(int a, int p) {
     //The s number st n-1 = q*2^s.
     int s = 0;
     //The non-residual quadratic.
-    int z = -50;
+    int z = 0;
     //The c number st initialize as z^q and is updated as b^2.
     int c = 0;
     //The r number st initialize as a^((q+1)/2) and is updated as r*b.
@@ -189,7 +190,7 @@ int *TonelliShanksAlgorithm(int a, int p) {
 
     //find a non-residual quadratic number
     for (int j = 2; j < p; ++j) {
-        if (!isSquareNumber(j, p)) {
+        if (LegendreSymbol(j, p) == -1) {
             z = j;
             break;
         }
@@ -242,6 +243,7 @@ int *TonelliShanksAlgorithm(int a, int p) {
 
 /**
  * Computes the square roots modulo n of a number.
+ * @warning a must be a quadratic residue modulo n.
  *
  * @param a the number whose square root is to be calculated.
  * @param n the modulo value.
@@ -386,6 +388,7 @@ int *squareRoot(int a, int n, int *numberOfSquareRoots) {
  * Computes the discrete logarithm modulo n of a number.
  * @details Baby-Step Giant-Step algorithm.
  * @details b = a^x (mod n) where x = Log_(a) (b).
+ * @warning a must be a primitive root modulo n.
  *
  * @param a the logarithm base.
  * @param b the number.

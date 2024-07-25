@@ -24,6 +24,7 @@ int isPerfectSquare(int n) {
 
 /**
  * Checks if a number is in a list.
+ * @warning list must be not NULL.
  *
  * @param list the list to check.
  * @param listSize the list size.
@@ -45,7 +46,7 @@ int isListed(int *list, int listSize, int value, int *position) {
     }
 
     if (position != NULL) {
-        *position = NULL;
+        *position = -1;
     }
     return 0;
 }
@@ -95,9 +96,9 @@ int extendedGCD(int n, int m, int *x, int *y) {
     //Temporal variable used for compute the second number of Bézout's identity.
     int yRefactor = 1;
     //Quotient between n and m.
-    int q;
+    int q = 0;
     //Temporal variable used in the switch procedure.
-    int temp;
+    int temp = 0;
 
     *x = 1;
     *y = 0;
@@ -168,14 +169,13 @@ int modularReduction(int n, int m) {
 /**
  * Computes the modular inversion.
  * @details n (mod m) --> k (mod m) s.t. k == 1/n (mod m).
+ * @warning n and m must be coprime.
  *
  * @param n the number to be calculated the inverse.
  * @param m the modulo value.
  * @return the modular inverse.
  */
 int modularInverse(int n, int m) {
-    assert(areCoPrime(n, m) == 1);
-
     //the first number of Bézout's identity - the modular inverse.
     int x;
     //the second number of Bézout's identity.
@@ -183,7 +183,7 @@ int modularInverse(int n, int m) {
     //the gcd between n and m.
     int gcd = extendedGCD(n, m, &x, &y);
     assert(gcd == 1);
-    
+
     return x;
 }
 
@@ -191,6 +191,7 @@ int modularInverse(int n, int m) {
 /**
  * Factorizes a number by splitting it into two of its dividends.
  * @details Fermat's factorisation method.
+ * @warning n must be an odd number.
  *
  * @param n the number.
  * @return the two factors that make up the number.
@@ -226,6 +227,7 @@ int *realFermatFactorisation(int n) {
 /**
  * Factorizes a number by splitting it into all of its dividends.
  * @details Fermat's factorization method.
+ * @warning n must be an odd number.
  *
  * @param n the number.
  * @param factors the number of factors.
@@ -485,5 +487,73 @@ int *quadraticResiduals(int n, int *quadraticResidualSize) {
 
     *quadraticResidualSize = resSize;
     res = realloc(res, resSize * sizeof(int));
+    return res;
+}
+
+
+/**
+ * Computes the Legendre symbol.
+ * @warning p must be an odd prime number.
+ *
+ * @param a the number.
+ * @param p the odd prime number.
+ * @return 1 if a is a quadratic residue modulo p, -1 if a is a quadratic non-residue modulo p, 0 if a is a divisor of p.
+ */
+int LegendreSymbol(int a, int p) {
+    assert(p % 2 != 0);
+    assert(isPrime(p));
+
+    a = mod(a, p);
+
+    //a|p - a is a divisor of p
+    if (areCongruent(a, 0, p)) {
+        return 0;
+    }
+
+    //a is a quadratic residue modulo p
+    if (isSquareNumber(a, p)) {
+        return 1;
+    }
+
+    //a is a quadratic non-residue modulo p
+    return -1;
+}
+
+/**
+ * Computes the Jacobi symbol.
+ * @details Jacobi symbol is a generalization of the Legendre symbol.
+ * @warning n must be an odd number.
+ *
+ * @param a the number.
+ * @param n the odd number.
+ * @return 1 if for some integer x: a==x^2 (mod n), -1 if there is no such x, 0 if a is a divisior of p.
+ */
+int JacobiSymbol(int a, int n) {
+    assert(n % 2 != 0);
+
+    a = mod(a, n);
+
+    //Temporary n.
+    int nTmp = n;
+    //The number of factors.
+    int factorSize = 0;
+    //The factors that make up n.
+    int *factors = factorisation(n, &factorSize);
+    //The Jacobi symbol.
+    int res = 1;
+
+    for (int i = 0; i < factorSize; ++i) {
+        do {
+            //productory(LegendreSymbol(a, factor_i)^(factor_exponent))
+            res *= LegendreSymbol(a, factors[i]);
+            if (res == 0) {
+                free(factors);
+                return 0;
+            }
+            nTmp /= factors[i];
+        } while (nTmp % factors[i] == 0);
+    }
+
+    free(factors);
     return res;
 }

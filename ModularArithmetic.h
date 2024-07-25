@@ -44,6 +44,7 @@ int product(int a, int b, int m);
 /**
  * Computes the division modulo m.
  * @details res = a / b (mod m).
+ * @warning b and m must be coprime.
  *
  * @param a the dividend.
  * @param b the divisor.
@@ -65,18 +66,19 @@ int division(int a, int b, int m);
 int power(int a, int exp, int m);
 
 /**
- * Computes the square root modulo p of a number.
+ * Computes the square roots modulo p of a number.
  * @details Tonelli-Shanks algorithm
- * @warning work iff the modulo value is a prime number.
+ * @warning p must be a prime number.
  *
  * @param a the number whose square root is to be calculated.
- * @param p the modulo value - must be a prime number.
+ * @param p the modulo value.
  * @return the square roots modulo p of the number.
  */
 int *TonelliShanksAlgorithm(int a, int p);
 
 /**
  * Computes the square roots modulo n of a number.
+ * @warning a must be a quadratic residue modulo n.
  *
  * @param a the number whose square root is to be calculated.
  * @param n the modulo value.
@@ -89,6 +91,7 @@ int *squareRoot(int a, int n, int *numberOfSquareRoots);
  * Computes the discrete logarithm modulo n of a number.
  * @details Baby-Step Giant-Step algorithm.
  * @details b = a^x (mod n) where x = Log_(a) (b).
+ * @warning a must be a primitive root modulo n.
  *
  * @param a the logarithm base.
  * @param b the number.
@@ -112,6 +115,7 @@ int discreteLogarithm(int a, int b, int n);
  * @example x = a1 (mod m1)
  * @example ...
  * @example x = ai (mod mi)
+ * @warning all mi value must be coprime.
  *
  * @param numberOfEquation the number of equations of the linear system.
  * @param ... the equation values - ai, mi.
@@ -123,6 +127,7 @@ int chineseRemainderTheorem(int numberOfEquation, ...);
  * Computes the solution of a linear diophantine equation.
  * @details ax + by = c
  * @details all value are integer.
+ * @warning gcd between a and b must be a divisor of c.
  *
  * @param a the first parameter of the diophantine equation.
  * @param x the value of the first unknown to be computed.
@@ -177,6 +182,7 @@ int isDivisor(int n, int m);
  * @if a^(n - 1) (mod n) == 1 --> n is Fermat's Pseudoprime
  * @else n is NOT prime
  * @endif
+ * @warning a and n must be coprime.
  *
  * @param a the first number.
  * @param n the second number.
@@ -195,7 +201,7 @@ int isPrime(int n);
 
 /**
  * Checks if a number admits the square root in modulus n.
- * @details a is a quadratic residue modulo n
+ * @details a is a quadratic residue modulo n.
  * @details if: exist x st x^2 = a (mod n).
  *
  * @param a the number whose square root we want to know if it is possible to calculate.
@@ -235,6 +241,7 @@ int isPerfectSquare(int n);
 
 /**
  * Checks if a number is in a list.
+ * @warning list must be not NULL.
  *
  * @param list the list to check.
  * @param listSize the list size.
@@ -302,6 +309,7 @@ int modularReduction(int n, int m);
 /**
  * Computes the modular inversion.
  * @details n (mod m) --> k (mod m) s.t. k == 1/n (mod m).
+ * @warning n and m must be coprime.
  *
  * @param n the number to be calculated the inverse.
  * @param m the modulo value.
@@ -313,6 +321,7 @@ int modularInverse(int n, int m);
 /**
  * Factorizes a number by splitting it into two of its dividends.
  * @details Fermat's factorisation method.
+ * @warning n must be an odd number.
  *
  * @param n the number.
  * @return the two factors that make up the number.
@@ -322,6 +331,7 @@ int *realFermatFactorisation(int n);
 /**
  * Factorizes a number by splitting it into all of its dividends.
  * @details Fermat's factorization method.
+ * @warning n must be an odd number.
  *
  * @param n the number.
  * @param factors the number of factors.
@@ -396,18 +406,33 @@ int *primitiveRoots(int n, int *primitiveRootsSize);
 int *quadraticResiduals(int n, int *quadraticResidualSize);
 
 
+/**
+ * Computes the Legendre symbol.
+ * @warning p must be an odd prime number.
+ *
+ * @param a the number.
+ * @param p the odd prime number.
+ * @return 1 if a is a quadratic residue modulo p, -1 if a is a quadratic non-residue modulo p, 0 if a is a divisor of p.
+ */
+int LegendreSymbol(int a, int p);
+
+/**
+ * Computes the Jacobi symbol.
+ * @details Jacobi symbol is a generalization of the Legendre symbol.
+ * @warning n must be an odd number.
+ *
+ * @param a the number.
+ * @param n the odd number.
+ * @return 1 if for some integer x: a==x^2 (mod n), -1 if there is no such x, 0 if a is a divisior of p.
+ */
+int JacobiSymbol(int a, int n);
+
+
 //******************************************************************************************************************//
 
 
 /*
  * residui di gauss
- * simbolo di legendre a, n
- *  0 se a|p
- *  1 a residuo quadratico
- *  -1 a non-residuo quadratico
- * simbolo di Jacobi
- *  fattori di n
- *  productory (simboli di legendre a, factor_i)^#di_volte_che_compare_fattore
  *
  * matrici:
  *  somma
