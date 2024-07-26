@@ -202,7 +202,7 @@ int isFermatPseudoPrime(int a, int n);
 int isPrime(int n);
 
 /**
- * Checks if a number admits the square root in modulus n.
+ * Checks if a number admits the square root modulo n.
  * @details a is a quadratic residue modulo n.
  * @details if: exist x st x^2 = a (mod n).
  *
@@ -448,7 +448,7 @@ void printMatrixModulo(matrix *a, int n);
 
 
 /**
- * Checks if the matrix has all integer elements.
+ * Checks if a matrix has all integer elements.
  *
  * @param a the matrix - M: k x m.
  * @return 1 if the matrix has all integer elements, 0 otherwise.
@@ -465,7 +465,7 @@ int isIntegerMatrix(matrix *a);
 void modularMatrix(matrix *a, matrix *modMatrix, int n);
 
 /**
- * Matrix inversion - cofactor matrix method.
+ * Matrix inversion modulo n - cofactor matrix method.
  * @warning a must have all integer elements.
  *
  * @param a the matrix - M: n x n.

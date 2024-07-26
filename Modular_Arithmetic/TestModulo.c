@@ -109,7 +109,7 @@ int isPrime(int n) {
 }
 
 /**
- * Checks if a number admits the square root in modulus n.
+ * Checks if a number admits the square root modulo n.
  * @details a is a quadratic residue modulo n.
  * @details if: exist x st x^2 = a (mod n).
  *
