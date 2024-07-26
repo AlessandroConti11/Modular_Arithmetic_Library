@@ -466,6 +466,7 @@ void modularMatrix(matrix *a, matrix *modMatrix, int n);
 
 /**
  * Matrix inversion - cofactor matrix method.
+ * @warning a must have all integer elements.
  *
  * @param a the matrix - M: n x n.
  * @param inv the inverse of the matrix: [a]^-1 - M: n x n.
@@ -476,6 +477,7 @@ void inverseMatrixModulo(matrix *a, matrix *inv, int n);
 
 /**
  * Computes the sum of matrices modulo n.
+ * @warning a and b must have all integer elements.
  *
  * @param a the first matrix - M: k x m.
  * @param b the second matrix - M: k x m.
@@ -486,6 +488,7 @@ void sumMatrixModulo(matrix *a, matrix *b, matrix *res, int n);
 
 /**
  * Computes the difference of matrices modulo n.
+ * @warning a and b must have all integer elements.
  *
  * @param a the first matrix - M: k x m.
  * @param b the second matrix - M: k x m.
@@ -496,6 +499,7 @@ void subMatrixModulo(matrix *a, matrix *b, matrix *res, int n);
 
 /**
  * Computes the scalar product of matrix modulo n.
+ * @warning a must have all integer elements.
  *
  * @param scalar the scalar integer number.
  * @param a the first matrix - M: k x m.
@@ -506,6 +510,7 @@ void scalarProductModulo(int scalar, matrix *a, matrix *res, int n);
 
 /**
  * Computes the product of matrices modulo n.
+ * @warning a and b must have all integer elements.
  *
  * @param a the first matrix - M: k x m.
  * @param b the second matrix - M: k x m.
@@ -516,6 +521,7 @@ void productMatrixModulo(matrix *a, matrix *b, matrix *res, int n);
 
 /**
  * Computes the power elevation of a matrix modulo n.
+ * @warning a must have all integer elements.
  *
  * @param a the first matrix - M: m x m.
  * @param k the exponent.
@@ -526,6 +532,7 @@ void powerMatrixModulo(matrix *a, int k, matrix *res, int n);
 
 /**
  * Computes the Kronecker product of matrices modulo n.
+ * @warning a and b must have all integer elements.
  *
  * @param a the first matrix - M: k x m.
  * @param b the second matrix - M: p x q.
