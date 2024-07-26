@@ -20,7 +20,7 @@
 int chineseRemainderTheorem(int numberOfEquation, ...) {
     //The congruence values.
     int *a = malloc(numberOfEquation * sizeof(int));
-    //The modulo values.
+    //the module values.
     int *m = malloc(numberOfEquation * sizeof(int));
     //The result.
     int res = 0;

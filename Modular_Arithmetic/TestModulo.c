@@ -10,7 +10,7 @@
  *
  * @param a the first number.
  * @param b the second number.
- * @param m the modulo value.
+ * @param m the module value.
  * @return 1 if the 2 number are congruent, 0 otherwise.
  */
 int areCongruent(int a, int b, int m) {
@@ -114,7 +114,7 @@ int isPrime(int n) {
  * @details if: exist x st x^2 = a (mod n).
  *
  * @param a the number whose square root we want to know if it is possible to calculate.
- * @param n the modulo value.
+ * @param n the module value.
  * @return 1 if the number allows for the square root, 0 otherwise.
  */
 int isSquareNumber(int a, int n) {
@@ -138,7 +138,7 @@ int isSquareNumber(int a, int n) {
  * @details an integer whose powers modulo n are congruent with numbers coprime to n.
  *
  * @param a the number to check if it is primitive root modulo n.
- * @param n the modulo value.
+ * @param n the module value.
  * @return 1 if the number is a primitive root modulo n, 0 otherwise.
  */
 int isPrimitiveRoot(int a, int n) {

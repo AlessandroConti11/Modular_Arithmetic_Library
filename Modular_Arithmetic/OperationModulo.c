@@ -12,7 +12,7 @@
  *
  * @param a the first addend.
  * @param b the second addend.
- * @param m the modulo value.
+ * @param m the module value.
  * @return the sum modulo m.
  */
 int sum(int a, int b, int m) {
@@ -28,7 +28,7 @@ int sum(int a, int b, int m) {
  *
  * @param a the minuendo.
  * @param b the subtrahend.
- * @param m the modulo value.
+ * @param m the module value.
  * @return the difference modulo m.
  */
 int sub(int a, int b, int m) {
@@ -55,7 +55,7 @@ int sub(int a, int b, int m) {
  *
  * @param a the first factor.
  * @param b the second factor.
- * @param m the modulo value.
+ * @param m the module value.
  * @return the product modulo m.
  */
 int product(int a, int b, int m) {
@@ -72,7 +72,7 @@ int product(int a, int b, int m) {
  *
  * @param a the dividend.
  * @param b the divisor.
- * @param m the modulo value.
+ * @param m the module value.
  * @return the quotient.
  */
 int division(int a, int b, int m) {
@@ -107,7 +107,7 @@ int division(int a, int b, int m) {
  *
  * @param a the base.
  * @param exp the exponent.
- * @param m the modulo value.
+ * @param m the module value.
  * @return the power elevation modulo m.
  */
 int power(int a, int exp, int m) {
@@ -138,7 +138,7 @@ int power(int a, int exp, int m) {
  * @warning p must be a prime number.
  *
  * @param a the number whose square root is to be calculated.
- * @param p the modulo value.
+ * @param p the module value.
  * @return the square roots modulo p of the number.
  */
 int *TonelliShanksAlgorithm(int a, int p) {
@@ -151,7 +151,7 @@ int *TonelliShanksAlgorithm(int a, int p) {
     int *factor = factorisation(p - 1, &factorSize);
     assert(factorSize == 2);
     assert(factor[0] == 2 || factor[1] == 2);
-    //The modulo value.
+    //the module value.
     int nTmp = p;
     //The q number st n-1 = q*2^s.
     int q = 0;
@@ -246,7 +246,7 @@ int *TonelliShanksAlgorithm(int a, int p) {
  * @warning a must be a quadratic residue modulo n.
  *
  * @param a the number whose square root is to be calculated.
- * @param n the modulo value.
+ * @param n the module value.
  * @param numberOfSquareRoots the number of square roots.
  * @return the square roots modulo n of the number.
  */
@@ -392,7 +392,7 @@ int *squareRoot(int a, int n, int *numberOfSquareRoots) {
  *
  * @param a the logarithm base.
  * @param b the number.
- * @param n the modulo value.
+ * @param n the module value.
  * @return the discrete logarithm modulo n.
  */
 int discreteLogarithm(int a, int b, int n) {

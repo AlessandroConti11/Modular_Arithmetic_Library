@@ -2,6 +2,8 @@
 
 #define MODULARARITHMETIC_H
 
+#include "Modular_Arithmetic/Utility/Matrix.h"
+
 
 //*********************//
 //  MODULAR OPERATION  //
@@ -14,7 +16,7 @@
  *
  * @param a the first addend.
  * @param b the second addend.
- * @param m the modulo value.
+ * @param m the module value.
  * @return the sum modulo m.
  */
 int sum(int a, int b, int m);
@@ -25,7 +27,7 @@ int sum(int a, int b, int m);
  *
  * @param a the minuendo.
  * @param b the subtrahend.
- * @param m the modulo value.
+ * @param m the module value.
  * @return the difference modulo m.
  */
 int sub(int a, int b, int m);
@@ -36,7 +38,7 @@ int sub(int a, int b, int m);
  *
  * @param a the first factor.
  * @param b the second factor.
- * @param m the modulo value.
+ * @param m the module value.
  * @return the product modulo m.
  */
 int product(int a, int b, int m);
@@ -48,7 +50,7 @@ int product(int a, int b, int m);
  *
  * @param a the dividend.
  * @param b the divisor.
- * @param m the modulo value.
+ * @param m the module value.
  * @return the quotient.
  */
 int division(int a, int b, int m);
@@ -60,7 +62,7 @@ int division(int a, int b, int m);
  *
  * @param a the base.
  * @param exp the exponent.
- * @param m the modulo value.
+ * @param m the module value.
  * @return the power elevation modulo m.
  */
 int power(int a, int exp, int m);
@@ -71,7 +73,7 @@ int power(int a, int exp, int m);
  * @warning p must be a prime number.
  *
  * @param a the number whose square root is to be calculated.
- * @param p the modulo value.
+ * @param p the module value.
  * @return the square roots modulo p of the number.
  */
 int *TonelliShanksAlgorithm(int a, int p);
@@ -81,7 +83,7 @@ int *TonelliShanksAlgorithm(int a, int p);
  * @warning a must be a quadratic residue modulo n.
  *
  * @param a the number whose square root is to be calculated.
- * @param n the modulo value.
+ * @param n the module value.
  * @param numberOfSquareRoots the number of square roots.
  * @return the square roots modulo n of the number.
  */
@@ -95,7 +97,7 @@ int *squareRoot(int a, int n, int *numberOfSquareRoots);
  *
  * @param a the logarithm base.
  * @param b the number.
- * @param n the modulo value.
+ * @param n the module value.
  * @return the discrete logarithm modulo n.
  */
 int discreteLogarithm(int a, int b, int n);
@@ -152,7 +154,7 @@ void diophantineEquation(int a, int *x, int b, int *y, int c);
  *
  * @param a the first number.
  * @param b the second number.
- * @param m the modulo value.
+ * @param m the module value.
  * @return 1 if the 2 number are congruent, 0 otherwise.
  */
 int areCongruent(int a, int b, int m);
@@ -205,7 +207,7 @@ int isPrime(int n);
  * @details if: exist x st x^2 = a (mod n).
  *
  * @param a the number whose square root we want to know if it is possible to calculate.
- * @param n the modulo value.
+ * @param n the module value.
  * @return 1 if the number allows for the square root, 0 otherwise.
  */
 int isSquareNumber(int a, int n);
@@ -215,7 +217,7 @@ int isSquareNumber(int a, int n);
  * @details an integer whose powers modulo n are congruent with numbers coprime to n.
  *
  * @param a the number to check if it is primitive root modulo n.
- * @param n the modulo value.
+ * @param n the module value.
  * @return 1 if the number is a primitive root modulo n, 0 otherwise.
  */
 int isPrimitiveRoot(int a, int n);
@@ -290,7 +292,7 @@ int mod(int n, int m);
  * @details res == a (mod m).
  *
  * @param a the number.
- * @param m the modulo value.
+ * @param m the module value.
  * @return a number congruent with the one given.
  */
 int congruentNumber(int a, int m);
@@ -301,7 +303,7 @@ int congruentNumber(int a, int m);
  * @details (-n) (mod m) --> k (mod m) s.t. -n == k (mod m).
  *
  * @param n the number to transform.
- * @param m the modulo value.
+ * @param m the module value.
  * @return the modular reduction.
  */
 int modularReduction(int n, int m);
@@ -312,7 +314,7 @@ int modularReduction(int n, int m);
  * @warning n and m must be coprime.
  *
  * @param n the number to be calculated the inverse.
- * @param m the modulo value.
+ * @param m the module value.
  * @return the modular inverse.
  */
 int modularInverse(int n, int m);
@@ -390,7 +392,7 @@ int nextPrimeNumber(int n);
 /**
  * Computes the list of primitive roots modulo n.
  *
- * @param n the modulo value.
+ * @param n the module value.
  * @param primitiveRootsSize the number of primitive root modulo n.
  * @return the list of primitive roots modulo n.
  */
@@ -399,7 +401,7 @@ int *primitiveRoots(int n, int *primitiveRootsSize);
 /**
  * Computes the list of quadratic residuals modulo n.
  *
- * @param n the modulo value.
+ * @param n the module value.
  * @param quadraticResidualSize the number of quadratic residuals modulo n.
  * @return the list of quadratic residuals modulo n.
  */
@@ -431,15 +433,105 @@ int JacobiSymbol(int a, int n);
 //******************************************************************************************************************//
 
 
-/*
- * residui di gauss
+//*****************//
+//  MATRIX MODULO  //
+//*****************//
+
+
+/**
+ * Prints a matrix modulo n.
  *
- * matrici:
- *  somma
- *  differenza
- *  prodotto
- *  inverso
- *  determinante
+ * @param a the matrix to print - M: k x m.
+ * @param n the module value.
  */
+void printMatrixModulo(matrix *a, int n);
+
+
+/**
+ * Checks if the matrix has all integer elements.
+ *
+ * @param a the matrix - M: k x m.
+ * @return 1 if the matrix has all integer elements, 0 otherwise.
+ */
+int isIntegerMatrix(matrix *a);
+
+/**
+ * Matrix modulo n.
+ *
+ * @param a the matrix - M: k x m.
+ * @param modMatrix the matrix modulo n - M: k x m.
+ * @param n the module value.
+ */
+void modularMatrix(matrix *a, matrix *modMatrix, int n);
+
+/**
+ * Matrix inversion - cofactor matrix method.
+ *
+ * @param a the matrix - M: n x n.
+ * @param inv the inverse of the matrix: [a]^-1 - M: n x n.
+ * @param n the module value.
+ */
+void inverseMatrixModulo(matrix *a, matrix *inv, int n);
+
+
+/**
+ * Computes the sum of matrices modulo n.
+ *
+ * @param a the first matrix - M: k x m.
+ * @param b the second matrix - M: k x m.
+ * @param res the result: [a] + [b] - M: k x m.
+ * @param n the module value.
+ */
+void sumMatrixModulo(matrix *a, matrix *b, matrix *res, int n);
+
+/**
+ * Computes the difference of matrices modulo n.
+ *
+ * @param a the first matrix - M: k x m.
+ * @param b the second matrix - M: k x m.
+ * @param res the result: [a] - [b] - M: k x m.
+ * @param n the module value.
+ */
+void subMatrixModulo(matrix *a, matrix *b, matrix *res, int n);
+
+/**
+ * Computes the scalar product of matrix modulo n.
+ *
+ * @param scalar the scalar integer number.
+ * @param a the first matrix - M: k x m.
+ * @param res the result: scalar * [a] - M: k x m.
+ * @param n the module value.
+ */
+void scalarProductModulo(int scalar, matrix *a, matrix *res, int n);
+
+/**
+ * Computes the product of matrices modulo n.
+ *
+ * @param a the first matrix - M: k x m.
+ * @param b the second matrix - M: k x m.
+ * @param res the result: [a] x [b] - M: k x m.
+ * @param n the module value.
+ */
+void productMatrixModulo(matrix *a, matrix *b, matrix *res, int n);
+
+/**
+ * Computes the power elevation of a matrix modulo n.
+ *
+ * @param a the first matrix - M: m x m.
+ * @param k the exponent.
+ * @param res the result: [a]^k - M: m x m.
+ * @param n the module value.
+ */
+void powerMatrixModulo(matrix *a, int k, matrix *res, int n);
+
+/**
+ * Computes the Kronecker product of matrices modulo n.
+ *
+ * @param a the first matrix - M: k x m.
+ * @param b the second matrix - M: p x q.
+ * @param res the result: [a] (x) [b] - M: k*p x m*q.
+ * @param n the module value.
+ */
+void kroneckerProductMatrixModulo(matrix *a, matrix *b, matrix *res, int n);
 
 #endif

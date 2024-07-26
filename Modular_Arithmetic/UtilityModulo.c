@@ -141,7 +141,7 @@ int mod(int n, int m) {
  * @details res == a (mod m).
  *
  * @param a the number.
- * @param m the modulo value.
+ * @param m the module value.
  * @return a number congruent with the one given.
  */
 int congruentNumber(int a, int m) {
@@ -155,7 +155,7 @@ int congruentNumber(int a, int m) {
  * @details (-n) (mod m) --> k (mod m) s.t. -n == k (mod m).
  *
  * @param n the number to transform.
- * @param m the modulo value.
+ * @param m the module value.
  * @return the modular reduction.
  */
 int modularReduction(int n, int m) {
@@ -172,7 +172,7 @@ int modularReduction(int n, int m) {
  * @warning n and m must be coprime.
  *
  * @param n the number to be calculated the inverse.
- * @param m the modulo value.
+ * @param m the module value.
  * @return the modular inverse.
  */
 int modularInverse(int n, int m) {
@@ -445,7 +445,7 @@ int nextPrimeNumber(int n) {
 /**
  * Computes the list of primitive roots modulo n.
  *
- * @param n the modulo value.
+ * @param n the module value.
  * @param primitiveRootsSize the number of primitive root modulo n.
  * @return the list of primitive roots modulo n.
  */
@@ -469,7 +469,7 @@ int *primitiveRoots(int n, int *primitiveRootsSize) {
 /**
  * Computes the list of quadratic residuals modulo n.
  *
- * @param n the modulo value.
+ * @param n the module value.
  * @param quadraticResidualSize the number of quadratic residuals modulo n.
  * @return the list of quadratic residuals modulo n.
  */

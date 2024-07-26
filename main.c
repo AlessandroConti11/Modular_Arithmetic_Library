@@ -2,10 +2,12 @@
 #include <stdlib.h>
 
 #include "ModularArithmetic.h"
+#include "Modular_Arithmetic/Utility/Matrix.h"
 
 
 int main() {
     int n, *factor = FermatFactorisation(99, &n), x, y, res;
+    matrix *a = NULL;
     // for (int i = 0; i < n; ++i) {
     //     printf("%d ", factor[i]);
     // }
@@ -80,8 +82,13 @@ int main() {
     // printf("%d\n", power(3, 5, 17));
     // printf("%d\n", discreteLogarithm(3, 5, 17));
 
-    printf("%d\n", LegendreSymbol(3, 5));
-    printf("%d\n", JacobiSymbol(3, 3));
+    // printf("%d\n", LegendreSymbol(3, 5));
+    // printf("%d\n", JacobiSymbol(3, 3));
+
+    a = createMatrix(2, 2);
+    initializeMatrix(a, 1.0, 1.0,
+                        1.00005, 1.0);
+    printf("%d\n", isIntegerMatrix(a));
 
     free(factor);
     return 0;
