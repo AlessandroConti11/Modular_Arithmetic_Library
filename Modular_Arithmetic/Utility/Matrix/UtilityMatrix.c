@@ -23,9 +23,9 @@ void swapRowMatrix(matrix *a, int row1, int row2, matrix *swap) {
     }
     assert(swap->n >= a->n);
     assert(swap->m >= a->m);
-    
+
     //Temporary variable used for the swap procedure.
-    float tmp = 0;
+    double tmp = 0;
 
     copyMatrix(a, swap);
 
@@ -55,9 +55,9 @@ void swapColumnMatrix(matrix *a, int col1, int col2, matrix *swap) {
     }
     assert(swap->n >= a->n);
     assert(swap->m >= a->m);
-    
+
     //Temporary variable used for the swap procedure.
-    float tmp = 0;
+    double tmp = 0;
 
     copyMatrix(a, swap);
 
@@ -76,12 +76,12 @@ void swapColumnMatrix(matrix *a, int col1, int col2, matrix *swap) {
  * @param colPos the column containing the position with the maximum value.
  * @return the maximum value in the matrix.
  */
-float findMaxMatrix(matrix *a, int *rowPos, int *colPos) {
+double findMaxMatrix(matrix *a, int *rowPos, int *colPos) {
     //Initialize the maximum value.
-    float max = a->matrix[0][0];
+    double max = a->matrix[0][0];
     *rowPos = 0;
     *colPos = 0;
-    
+
     for (int i = 0; i < a->n; ++i) {
         for (int j = 0; j < a->m; ++j) {
             if (a->matrix[i][j] > max) {
@@ -102,12 +102,12 @@ float findMaxMatrix(matrix *a, int *rowPos, int *colPos) {
  * @param colPos the column containing the position with the minimum value.
  * @return the minimum value in the matrix.
  */
-float findMinMatrix(matrix *a, int *rowPos, int *colPos) {
+double findMinMatrix(matrix *a, int *rowPos, int *colPos) {
     //Initialize the maximum value.
-    float min = a->matrix[0][0];
+    double min = a->matrix[0][0];
     *rowPos = 0;
     *colPos = 0;
-    
+
     for (int i = 0; i < a->n; ++i) {
         for (int j = 0; j < a->m; ++j) {
             if (a->matrix[i][j] < min) {
@@ -127,12 +127,12 @@ float findMinMatrix(matrix *a, int *rowPos, int *colPos) {
  * @param numberOfElements the number of elements on the diagonal.
  * @return the list of elements on the diagonal of the matrix.
  */
-float *diagonalMatrix(matrix *a, int *numberOfElements) {
+double *diagonalMatrix(matrix *a, int *numberOfElements) {
     assert(a->n > 0);
     assert(a->m > 0);
 
     *numberOfElements = a->n < a->m ? a->n : a->m;
-    float* diagonalValues = malloc(*numberOfElements * sizeof(float));
+    double* diagonalValues = malloc(*numberOfElements * sizeof(double));
 
     for (int i = 0; i < *numberOfElements; ++i) {
         diagonalValues[i] = a->matrix[i][i];
@@ -149,14 +149,14 @@ float *diagonalMatrix(matrix *a, int *numberOfElements) {
  * @param pivotsNumber the number of pivots.
  * @return the list of pivots.
  */
-float *pivot(matrix *a, int *pivotsNumber) {
+double *pivot(matrix *a, int *pivotsNumber) {
     assert(a->n > 0);
     assert(a->m > 0);
 
     //The step matrix.
     matrix *step = createMatrix(a->n, a->m);
     //The pivot list.
-    float *pivots = malloc((a->n < a->m ? a->n : a->m) * sizeof(float));
+    double *pivots = malloc((a->n < a->m ? a->n : a->m) * sizeof(double));
     //The counter of pivots found.
     int pivotCounter = 0;
 
@@ -200,7 +200,7 @@ void luDecomposition(matrix *a, matrix *l, matrix *u) {
     assert(u->m == a->m);
 
     //Used to compute the elements of the matrix U.
-    float sum = 0;
+    double sum = 0;
 
     //initialize L and U matrix
     deleteMatrix(l);
@@ -228,7 +228,7 @@ void luDecomposition(matrix *a, matrix *l, matrix *u) {
                 for (int j = 0; j < i; ++j) {
                     sum += l->matrix[k][j] * u->matrix[j][i];
                 }
-                l->matrix[k][i] = (float) (a->matrix[k][i] - sum) / u->matrix[i][i];
+                l->matrix[k][i] = (double) (a->matrix[k][i] - sum) / u->matrix[i][i];
                 if (l->matrix[k][i] == -0) {
                     l->matrix[k][i] = 0;
                 }

@@ -11,7 +11,7 @@
      * @details m - number of column.
      */
     typedef struct Matrix {
-        float **matrix;
+        double **matrix;
         int n;
         int m;
     }matrix;
@@ -238,7 +238,7 @@
      * @param column the column of the matrix to be deleted.
      * @return the minor of the matrix.
      */
-    float minor(matrix *a, int row, int column);
+    double minor(matrix *a, int row, int column);
 
     /**
      * Computes the cofactor of a matrix.
@@ -248,15 +248,15 @@
      * @param column the column of the matrix to be deleted.
      * @return the cofactor of the matrix.
      */
-    float cofactor(matrix *a, int row, int column);
+    double cofactor(matrix *a, int row, int column);
 
     /**
-     * Computes the determinant of a matrix.
+     * Computes the determinant of the matrix.
      *
      * @param a the matrix n x n.
      * @return the determinant of the matrix.
      */
-    float determinantMatrix(matrix *a);
+    double determinantMatrix(matrix *a);
 
     /**
      * Computes the rank of a matrix - minor method.
@@ -286,13 +286,13 @@
     void subMatrix(matrix *a, matrix *b, matrix *res);
 
     /**
-     * Computes the scalar product of matrix.
+     * Computes the scalar product of a matrix.
      *
      * @param scalar the scalar number.
      * @param a the matrix - M: n x m.
      * @param res the result: scalar * [a] - M: n x m.
      */
-    void scalarProductMatrix(float scalar, matrix *a, matrix *res);
+    void scalarProductMatrix(double scalar, matrix *a, matrix *res);
 
     /**
      * Computes the product of matrices.
@@ -367,7 +367,7 @@
      * @param colPos the column containing the position with the maximum value.
      * @return the maximum value in the matrix.
      */
-    float findMaxMatrix(matrix *a, int *rowPos, int *colPos);
+    double findMaxMatrix(matrix *a, int *rowPos, int *colPos);
 
     /**
      * Finds the minimum value in a matrix.
@@ -377,7 +377,7 @@
      * @param colPos the column containing the position with the minimum value.
      * @return the minimum value in the matrix.
      */
-    float findMinMatrix(matrix *a, int *rowPos, int *colPos);
+    double findMinMatrix(matrix *a, int *rowPos, int *colPos);
 
     /**
      * Finds the elements on the diagonal of a matrix.
@@ -386,7 +386,7 @@
      * @param numberOfElements the number of elements on the diagonal.
      * @return the list of elements on the diagonal of the matrix.
      */
-    float *diagonalMatrix(matrix *a, int *numberOfElements);
+    double *diagonalMatrix(matrix *a, int *numberOfElements);
 
     /**
      * Finds the pivots in a matrix.
@@ -395,7 +395,7 @@
      * @param pivotsNumber the number of pivots.
      * @return the list of pivots.
      */
-    float *pivot(matrix *a, int *pivotsNumber);
+    double *pivot(matrix *a, int *pivotsNumber);
 
     /**
      * Decomposition of a matrix using Lower-Upper Decomposition - [A]=[L]*[U].

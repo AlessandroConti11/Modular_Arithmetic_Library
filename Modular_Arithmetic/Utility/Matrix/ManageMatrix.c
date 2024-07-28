@@ -22,10 +22,10 @@ matrix *createMatrix(int n, int m) {
     matrix *a = (matrix *) malloc(sizeof(matrix));
     assert(a != NULL);
 
-    a->matrix = (float **) malloc(n * sizeof(float *));
+    a->matrix = (double **) malloc(n * sizeof(double *));
     assert(a->matrix != NULL);
     for (int i = 0; i < n; ++i) {
-        a->matrix[i] = (float *) malloc(m * sizeof(float));
+        a->matrix[i] = (double *) malloc(m * sizeof(double));
         assert(a->matrix[i] != NULL);
     }
 
@@ -48,11 +48,11 @@ matrix *createIdentityMatrix(int n) {
     matrix *a = (matrix *) malloc(sizeof(matrix));
     assert(a != NULL);
 
-    a->matrix = (float **) malloc(n * sizeof(float *));
+    a->matrix = (double **) malloc(n * sizeof(double *));
     assert(a->matrix != NULL);
 
     for (int i = 0; i < n; ++i) {
-        a->matrix[i] = (float *) calloc(n, sizeof(float));
+        a->matrix[i] = (double *) calloc(n, sizeof(double));
         assert(a->matrix[i] != NULL);
 
         a->matrix[i][i] = 1;
@@ -78,11 +78,11 @@ matrix *createNullMatrix(int n, int m) {
     matrix *a = (matrix *) malloc(sizeof(matrix));
     assert(a != NULL);
 
-    a->matrix = (float **) malloc(n * sizeof(float *));
+    a->matrix = (double **) malloc(n * sizeof(double *));
     assert(a->matrix != NULL);
 
     for (int i = 0; i < n; ++i) {
-        a->matrix[i] = (float *) calloc(m, sizeof(float));
+        a->matrix[i] = (double *) calloc(m, sizeof(double));
         assert(a->matrix[i] != NULL);
     }
 
