@@ -135,6 +135,7 @@ int power(int a, int exp, int m) {
 /**
  * Computes the square roots modulo p of a number.
  * @details Tonelli-Shanks algorithm
+ * @details two different result (+res && -res)
  * @warning p must be a prime number.
  *
  * @param a the number whose square root is to be calculated.
@@ -385,37 +386,37 @@ int *squareRoot(int a, int n, int *numberOfSquareRoots) {
 }
 
 /**
- * Computes the discrete logarithm modulo n of a number.
+ * Computes the discrete logarithm modulo n of base number.
  * @details Baby-Step Giant-Step algorithm.
- * @details b = a^x (mod n) where x = Log_(a) (b).
- * @warning a must be a primitive root modulo n.
+ * @details b = base^x (mod n) where x = Log_(base) (b).
+ * @warning base must be base primitive root modulo n.
  *
- * @param a the logarithm base.
+ * @param base the logarithm base.
  * @param b the number.
  * @param n the module value.
  * @return the discrete logarithm modulo n.
  */
-int discreteLogarithm(int a, int b, int n) {
-    assert(isPrimitiveRoot(a, n));
+int discreteLogarithm(int base, int b, int n) {
+    assert(isPrimitiveRoot(base, n));
 
     //The square root of n rounded up.
     int N = ceil(sqrt(n));
-    //The first component to check - a^j (mod n) 0<=j<N.
+    //The first component to check - base^j (mod n) 0<=j<N.
     int *aj = malloc(N * sizeof(int));
-    //The value of a^(-N) (mod n).
+    //The value of base^(-N) (mod n).
     int aN = 0;
-    //The second component to check - b*a^(-Nk) (mod n) 0<=k<N.
+    //The second component to check - b*base^(-Nk) (mod n) 0<=k<N.
     int baNk = b;
     //The position in the first component.
     int ajPos = 0;
 
     //compute the first component
     for (int i = 0; i < N; ++i) {
-        aj[i] = power(a, i, n);
+        aj[i] = power(base, i, n);
     }
 
-    //a^(-N) (mod n)
-    aN = modularInverse(a, n);
+    //base^(-N) (mod n)
+    aN = modularInverse(base, n);
     aN = power(aN, N, n);
 
     for (int i = 0; i < N; ++i) {
@@ -425,6 +426,6 @@ int discreteLogarithm(int a, int b, int n) {
         baNk = product(baNk, aN, n);
     }
 
-    //this case cannot happen because a is a primitive root modulo n
+    //this case cannot happen because base is base primitive root modulo n
     return -1;
 }

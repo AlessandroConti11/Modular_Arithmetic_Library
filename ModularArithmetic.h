@@ -70,6 +70,7 @@ int power(int a, int exp, int m);
 /**
  * Computes the square roots modulo p of a number.
  * @details Tonelli-Shanks algorithm
+ * @details two different result (+res && -res)
  * @warning p must be a prime number.
  *
  * @param a the number whose square root is to be calculated.
@@ -90,17 +91,17 @@ int *TonelliShanksAlgorithm(int a, int p);
 int *squareRoot(int a, int n, int *numberOfSquareRoots);
 
 /**
- * Computes the discrete logarithm modulo n of a number.
+ * Computes the discrete logarithm modulo n of base number.
  * @details Baby-Step Giant-Step algorithm.
- * @details b = a^x (mod n) where x = Log_(a) (b).
- * @warning a must be a primitive root modulo n.
+ * @details b = base^x (mod n) where x = Log_(base) (b).
+ * @warning base must be base primitive root modulo n.
  *
- * @param a the logarithm base.
+ * @param base the logarithm base.
  * @param b the number.
  * @param n the module value.
  * @return the discrete logarithm modulo n.
  */
-int discreteLogarithm(int a, int b, int n);
+int discreteLogarithm(int base, int b, int n);
 
 
 //******************************************************************************************************************//
