@@ -261,8 +261,37 @@ void manageChoice(int *choice) {
             printf("%d^x = %d (mod %d) --> x = %d\n\n\n", x, y, module, discreteLogarithm(x, y, module));
             break;
         case 9:
-            printf("You chose to compute the solution of a system of modular linear equation\n\n");
-            //TODO penso di toglierlo
+            printf("You chose to compute the solution of a system of modular linear equation\n\n"
+                   "Insert the number of equation: ");
+            returnScanf = scanf("%d", &x);
+            assert(returnScanf > 0);
+
+            //The list of parameters.
+            int *parameter = malloc(x * sizeof(int));
+            //The list of modules.
+            int *modules = malloc(x * sizeof(int));
+
+            for (int i = 0; i < x; ++i) {
+                printf("Insert the %d-%s parameter: ", (i + 1),
+                       ((i + 1) == 1 ? "st" : ((i + 1) == 2 ? "nd" : ((i + 1) == 3 ? "rd" : "th"))));
+                returnScanf = scanf("%d", (parameter + i));
+                assert(returnScanf > 0);
+
+                printf("Insert the %d-%s module: ", (i + 1),
+                       ((i + 1) == 1 ? "st" : ((i + 1) == 2 ? "nd" : ((i + 1) == 3 ? "rd" : "th"))));
+                returnScanf = scanf("%d", (modules + i));
+                assert(returnScanf > 0);
+            }
+
+            y = chineseReminderTheorem(x, parameter, modules);
+
+            for (int i = 0; i < x; ++i) {
+                printf("x = %d (mod %d)\n", parameter[i], modules[i]);
+            }
+            printf("--> x = %d\n\n\n", y);
+
+            free(parameter);
+            free(modules);
             break;
         case 10:
             printf("You chose to compute the solution of a linear diophantine equation\n\n"

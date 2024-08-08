@@ -1,6 +1,6 @@
 #include <assert.h>
-#include <stdarg.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "../ModularArithmetic.h"
 
@@ -14,27 +14,11 @@
  * @warning all mi value must be coprime.
  *
  * @param numberOfEquation the number of equations of the linear system.
- * @param ... the equation values - ai, mi.
+ * @param a the parameters.
+ * @param m the module values.
  * @return the solution of the system of modular linear equations.
  */
-int chineseRemainderTheorem(int numberOfEquation, ...) {
-    //The congruence values.
-    int *a = malloc(numberOfEquation * sizeof(int));
-    //the module values.
-    int *m = malloc(numberOfEquation * sizeof(int));
-    //The result.
-    int res = 0;
-    //Equations value.
-    va_list elements;
-
-    //initialize a, m
-    va_start(elements, numberOfEquation);
-    for (int i = 0; i < numberOfEquation; ++i) {
-        a[i] = va_arg(elements, int);
-        m[i] = va_arg(elements, int );
-    }
-    va_end(elements);
-
+int chineseReminderTheorem(int numberOfEquation, int *a, int *m) {
     //check if all modulo values are coprime
     for (int i = 0; i < numberOfEquation; ++i) {
         for (int j = 0; j < numberOfEquation; ++j) {
@@ -50,6 +34,8 @@ int chineseRemainderTheorem(int numberOfEquation, ...) {
     int mi = 0;
     //mi inverse.
     int miInverse = 0;
+    //The result.
+    int res = 0;
 
     //compute the final modulo value
     for (int i = 0; i < numberOfEquation; ++i) {
@@ -63,8 +49,6 @@ int chineseRemainderTheorem(int numberOfEquation, ...) {
         res = (res + a[i] * mi * miInverse) % M;
     }
 
-    free(a);
-    free(m);
     return res;
 }
 

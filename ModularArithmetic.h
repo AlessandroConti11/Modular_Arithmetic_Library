@@ -121,10 +121,11 @@ int discreteLogarithm(int base, int b, int n);
  * @warning all mi value must be coprime.
  *
  * @param numberOfEquation the number of equations of the linear system.
- * @param ... the equation values - ai, mi.
+ * @param a the parameters.
+ * @param m the module values.
  * @return the solution of the system of modular linear equations.
  */
-int chineseRemainderTheorem(int numberOfEquation, ...);
+int chineseReminderTheorem(int numberOfEquation, int *a, int *m);
 
 /**
  * Computes the solution of a linear diophantine equation.
