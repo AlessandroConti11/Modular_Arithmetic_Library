@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <assert.h>
 #include <malloc.h>
 #include <math.h>
@@ -421,11 +420,13 @@ int discreteLogarithm(int base, int b, int n) {
 
     for (int i = 0; i < N; ++i) {
         if (isListed(aj, N, baNk, &ajPos)) {
+            free(aj);
             return ajPos + N * i;
         }
         baNk = product(baNk, aN, n);
     }
 
+    free(aj);
     //this case cannot happen because base is base primitive root modulo n
     return -1;
 }

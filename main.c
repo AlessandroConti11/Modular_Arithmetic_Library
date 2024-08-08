@@ -1,6 +1,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #include "ModularArithmetic.h"
 #include "Modular_Arithmetic/Utility/Matrix.h"
@@ -31,7 +32,7 @@ matrix *generateMatrixNxM(int *row, int *column) {
     for (int i = 0; i < *row; ++i) {
         for (int j = 0; j < *column; ++j) {
             printf("Insert the value for position (%d; %d): ", i, j);
-            returnScanf = scanf("%f", &matrix->matrix[i][j]);
+            returnScanf = scanf("%lf", &matrix->matrix[i][j]);
             assert(returnScanf > 0);
         }
     }
@@ -60,7 +61,7 @@ matrix *generateMatrixNxN(int *row) {
     for (int i = 0; i < *row; ++i) {
         for (int j = 0; j < *row; ++j) {
             printf("Insert the value for position (%d; %d): ", i, j);
-            returnScanf = scanf("%f", &matrix->matrix[i][j]);
+            returnScanf = scanf("%lf", &matrix->matrix[i][j]);
             assert(returnScanf > 0);
         }
     }
@@ -94,11 +95,11 @@ void printChoice() {
            "17. check if a number is a primitive root modulo n\n"
            "18. compute the gcd - greatest common divisor using the Euclid's algorithm\n"
            "19. compute the gcd - greatest common divisor using the Extended Euclid's algorithm\n"
-           "20. compute the modulus of 2 numbers\n"
+           "20. compute the module of 2 numbers\n"
            "21. compute a number congruent with the one given\n"
            "22. compute the modular reduction\n"
            "23. compute the modular inversion\n"
-           "24. factorize an odd number\n"
+           "24. factorize an odd number using the Fermat Factorization method\n"
            "25. factorize a number\n"
            "26. compute the Euler function\n"
            "27. compute the list of prime number up to the n-th\n"
@@ -111,8 +112,8 @@ void printChoice() {
            "34. check if a matrix has all integer elements\n"
            "35. compute matrix modulo n\n"
            "36. compute the matrix inversion modulo n\n"
-           "37. compute the sum of matrices modulo n\n"
-           "38. compute the difference of matricies modulo n\n"
+           "37. compute the sum of 2 matrices modulo n\n"
+           "38. compute the difference of 2 matrices modulo n\n"
            "39. compute the scalar product modulo n\n"
            "40. compute the product of matrices modulo n\n"
            "41. compute the power elevation of matrices modulo n\n"
@@ -130,14 +131,16 @@ void manageChoice(int *choice) {
     int x;
     //The second number.
     int y;
+    //The third number.
+    int x1;
+    //The fourth number.
+    int y1;
     //The module value.
     int module;
-    //The first unknown parameter.
-    int x1;
-    //The second unknown parameter.
-    int y1;
-    //The 2 square roots.
-    int *squareRoots = NULL;
+    //The list.
+    int *list = NULL;
+    //Matrices.
+    matrix *matrix1 = NULL, *matrix2 = NULL, *res = NULL;
     //Return scanf value.
     int returnScanf = 0;
 
@@ -221,9 +224,9 @@ void manageChoice(int *choice) {
             returnScanf = scanf("%d", &module);
             assert(returnScanf > 0);
 
-            squareRoots = TonelliShanksAlgorithm(x, module);
-            printf("sqrt(%d) (mod %d) = %d (mod %d) %d (mod %d)\n\n\n", x, module, squareRoots[0], module, squareRoots[1], module);
-            free(squareRoots);
+            list = TonelliShanksAlgorithm(x, module);
+            printf("sqrt(%d) (mod %d) = %d (mod %d) %d (mod %d)\n\n\n", x, module, list[0], module, list[1], module);
+            free(list);
             break;
         case 7:
             printf("You chose to compute the square roots modulo n\n\n"
@@ -235,12 +238,13 @@ void manageChoice(int *choice) {
             assert(returnScanf > 0);
 
             //The 2 square roots.
-            squareRoots = squareRoot(x, module, &y);
+            list = squareRoot(x, module, &y);
             printf("sqrt(%d) (mod %d) = ", x, module);
             for (int i = 0; i < y; ++i) {
-                printf("%d (mod %d) ", squareRoots[i], module);
+                printf("%d (mod %d) ", list[i], module);
             }
-            free(squareRoots);
+            free(list);
+            printf("\n\n\n");
             break;
         case 8:
             printf("You chose to compute the discrete logarithm modulo n\n\n"
@@ -258,7 +262,7 @@ void manageChoice(int *choice) {
             break;
         case 9:
             printf("You chose to compute the solution of a system of modular linear equation\n\n");
-            //TODO
+            //TODO penso di toglierlo
             break;
         case 10:
             printf("You chose to compute the solution of a linear diophantine equation\n\n"
@@ -273,7 +277,7 @@ void manageChoice(int *choice) {
             assert(returnScanf > 0);
 
             diophantineEquation(x, &x1, y, &y1, module);
-            printf("&dx + %dy = %d --> x = %d, y = %d\n\n\n", x, y, module, x1, y1);
+            printf("%dx + %dy = %d --> x = %d, y = %d\n\n\n", x, y, module, x1, y1);
             break;
         case 11:
             printf("You chose to check if 2 numbers are congruent modulo m\n\n"
@@ -287,7 +291,7 @@ void manageChoice(int *choice) {
             returnScanf = scanf("%d", &module);
             assert(returnScanf > 0);
 
-            printf("%d %d= %d (mod %d)\n\n\n", x, areCongruent(x, y, module) == 1 ? '=' : '!', y, module);
+            printf("%d %c= %d (mod %d)\n\n\n", x, areCongruent(x, y, module) == 1 ? '=' : '!', y, module);
             break;
         case 12:
             printf("You chose to check if 2 numbers are coprime\n\n"
@@ -336,7 +340,7 @@ void manageChoice(int *choice) {
             returnScanf = scanf("%d", &module);
             assert(returnScanf > 0);
 
-            printf("%d (mod %d ) %s\n\n\n", x, module, isSquareNumber(x, module) == 1 ? "admits the square root" : "does not admits the square root");
+            printf("%d (mod %d) %s\n\n\n", x, module, isSquareNumber(x, module) == 1 ? "admits the square root" : "does NOT admit the square root");
             break;
         case 17:
             printf("You chose to check if a number is a primitive root modulo n\n\n"
@@ -347,7 +351,7 @@ void manageChoice(int *choice) {
             returnScanf = scanf("%d", &module);
             assert(returnScanf > 0);
 
-            printf("%d (mod %d ) %s\n\n\n", x, module, isPrimitiveRoot(x, module) == 1 ? "is a primitive root" : "is not a primitive root");
+            printf("%d (mod %d) %s\n\n\n", x, module, isPrimitiveRoot(x, module) == 1 ? "is a primitive root" : "is not a primitive root");
             break;
         case 18:
             printf("You chose to compute the gcd\n\n"
@@ -370,58 +374,408 @@ void manageChoice(int *choice) {
             assert(returnScanf > 0);
 
             module = extendedGCD(x, y, &x1, &y1);
-            printf("the gcd(%d, %d) = %d\n\n\n", x, y, module); //TODO Bezout id
+            printf("The gcd(%d, %d) = %d --> %d * %d + %d * %d = %d\n\n\n", x, y, module, x, x1, y, y1, module);
             break;
         case 20:
+            printf("You chose to compute the module of 2 numbers\n\n"
+                   "Insert the first number: ");
+            returnScanf = scanf("%d", &x);
+            assert(returnScanf > 0);
+            printf("Insert the second number: ");
+            returnScanf = scanf("%d", &y);
+            assert(returnScanf > 0);
 
+            printf("%d (mod %d) = %d\n\n\n", x, y, mod(x, y));
             break;
         case 21:
+            printf("You chose to compute a number congruent with the one given\n\n"
+                   "Insert the number: ");
+            returnScanf = scanf("%d", &x);
+            assert(returnScanf > 0);
+            printf("Insert the modulo value: ");
+            returnScanf = scanf("%d", &y);
+            assert(returnScanf > 0);
+
+            printf("A number congruent with %d is %d\n\n\n", x, congruentNumber(x, y));
             break;
         case 22:
+            printf("You chose to compute the modular reduction of a number\n\n"
+                   "Insert the number: ");
+            returnScanf = scanf("%d", &x);
+            assert(returnScanf > 0);
+            printf("Insert the modulo value: ");
+            returnScanf = scanf("%d", &y);
+            assert(returnScanf > 0);
+
+            printf("%d = %d (mod %d)\n\n\n", x, modularReduction(x, y), y);
             break;
         case 23:
+            printf("You chose to compute the modular inversion of a number\n\n"
+                   "Insert the number: ");
+            returnScanf = scanf("%d", &x);
+            assert(returnScanf > 0);
+            printf("Insert the modulo value: ");
+            returnScanf = scanf("%d", &y);
+            assert(returnScanf > 0);
+
+            printf("1/%d = %d (mod %d)\n\n\n", x, modularInverse(x, y), y);
             break;
         case 24:
+            printf("You chose to factorize an odd number\n\n"
+                   "Insert the odd number: ");
+            returnScanf = scanf("%d", &x);
+            assert(returnScanf > 0);
+
+            list = FermatFactorisation(x, &y);
+            printf("The factors of %d %s: ", x, y == 1 ? "is" : "are");
+            for (int i = 0; i < y; ++i) {
+                printf("%d ", list[i]);
+            }
+            printf("\n\n\n");
+            free(list);
             break;
         case 25:
+            printf("You chose to factorize a number\n\n"
+                   "Insert the number: ");
+            returnScanf = scanf("%d", &x);
+            assert(returnScanf > 0);
+
+            list = factorisation(x, &y);
+            printf("The factors of %d %s: ", x, y == 1 ? "is" : "are");
+            for (int i = 0; i < y; ++i) {
+                printf("%d ", list[i]);
+            }
+            free(list);
+            printf("\n\n\n");
             break;
         case 26:
+            printf("You chose to compute the Euler function\n\n"
+                   "Insert the number: ");
+            returnScanf = scanf("%d", &x);
+            assert(returnScanf > 0);
+
+            printf("Euler_function(%d) = %d\n\n\n", x, EulerFunction(x));
             break;
         case 27:
+            printf("You chose to compute the list of prime number up to the n-th\n\n"
+                   "Insert the number: ");
+            returnScanf = scanf("%d", &x);
+            assert(returnScanf > 0);
+
+            list = primeNumberList(x, &y);
+            printf("The first %d prime number %s: ", x, x == 1 ? "is" : "are");
+            for (int i = 0; i < y; ++i) {
+                printf("%d ", list[i]);
+            }
+            printf("\n\n\n");
+            free(list);
             break;
         case 28:
+            printf("You chose to compute the n-th prime number\n\n"
+                   "Inset the number: ");
+            returnScanf = scanf("%d", &x);
+            assert(returnScanf > 0);
+
+            printf("The %d-%s prime number is %d\n\n\n", x,
+                   (x == 1 ? "st" : (x == 2 ? "nd" : (x == 3 ? "rd" : "th"))), nthPrimeNumber(x));
             break;
         case 29:
+            printf("You chose to compute the next prime number from the one given\n\n"
+                   "Insert the number: ");
+            returnScanf = scanf("%d", &x);
+            assert(returnScanf > 0);
+
+            printf("The next prime number from %d is %d\n\n\n", x, nextPrimeNumber(x));
             break;
         case 30:
+            printf("You chose to compute the list of primitive roots modulo n\n\n"
+                   "Insert the modulo value: ");
+            returnScanf = scanf("%d", &x);
+            assert(returnScanf > 0);
+
+            list = primitiveRoots(x, &y);
+            printf("The primitive roots modulo %d %s: ", x, x == 1 ? "is" : "are");
+            for (int i = 0; i < y; ++i) {
+                printf("%d ", list[i]);
+            }
+            printf("\n\n\n");
+            free(list);
             break;
         case 31:
+            printf("You chose to compute the list of quadratic residual modulo n\n\n"
+                   "Insert the modulo value: ");
+            returnScanf = scanf("%d", &x);
+            assert(returnScanf > 0);
+
+            list = quadraticResiduals(x, &y);
+            printf("The quadratic residual modulo %d %s: ", x, x == 1 ? "is" : "are");
+            for (int i = 0; i < y; ++i) {
+                printf("%d ", list[i]);
+            }
+            printf("\n\n\n");
+            free(list);
             break;
         case 32:
+            printf("You chose to compute the Legendre symbol"
+                   "Insert the number: ");
+            returnScanf = scanf("%d", &x);
+            assert(returnScanf > 0);
+            printf("Insert the odd prime number: ");
+            returnScanf = scanf("%d", &y);
+            assert(returnScanf > 0);
+
+            printf("The Legendre_symbol(%d, %d) = %d\n\n\n", x, y, LegendreSymbol(x, y));
             break;
         case 33:
+            printf("You chose to compute the Jacobi symbol"
+                   "Insert the number: ");
+            returnScanf = scanf("%d", &x);
+            assert(returnScanf > 0);
+            printf("Insert the odd number: ");
+            returnScanf = scanf("%d", &y);
+            assert(returnScanf > 0);
+
+            printf("The Jacobi_symbol(%d, %d) = %d\n\n\n", x, y, JacobiSymbol(x, y));
             break;
         case 34:
+            printf("You chose to check if a matrix has all integer elements\n\n"
+                   "Insert the matrix to check: \n");
+            matrix1 = generateMatrixNxM(&x, &y);
+            assert(matrix1 != NULL);
+
+            printf("The matrix:\n");
+            printMatrix(matrix1);
+
+            printf("The matrix insert %s all integer elements", isIntegerMatrix(matrix1) == 1 ? "has" : "has NOT");
+
+            deleteMatrix(matrix1);
+            printf("\n\n\n");
             break;
         case 35:
+            printf("You chose to compute the matrix modulo n\n\n"
+                   "Insert the matrix to compute the module: \n");
+            matrix1 = generateMatrixNxM(&x, &y);
+            assert(matrix1 != NULL);
+            printf("Insert the modulo value: ");
+            returnScanf = scanf("%d", &module);
+            assert(returnScanf > 0);
+
+            modularMatrix(matrix1, res, module);
+            printf("The matrix:\n");
+            printMatrix(matrix1);
+            printf("The matrix modulo %d:\n", module);
+            printMatrix(res);
+
+            deleteMatrix(matrix1);
+            deleteMatrix(res);
+            printf("\n\n\n");
             break;
         case 36:
+            printf("You chose to compute the inversion modulo n\n\n"
+                   "Insert the matrix to invert: \n");
+            matrix1 = generateMatrixNxN(&x);
+            assert(matrix1 != NULL);
+            printf("Insert the modulo value: ");
+            returnScanf = scanf("%d", &module);
+            assert(returnScanf > 0);
+
+            res = createMatrix(x, x);
+            assert(res != NULL);
+
+            inverseMatrixModulo(matrix1, res, module);
+            printf("The matrix:\n");
+            printMatrix(matrix1);
+            printf("The matrix inverse modulo %d:\n", module);
+            printMatrix(res);
+
+            deleteMatrix(matrix1);
+            deleteMatrix(res);
+            printf("\n\n\n");
             break;
         case 37:
+            printf("You chose to compute the sum of 2 matrices modulo n\n\n"
+                   "Insert the first matrix: \n");
+            matrix1 = generateMatrixNxM(&x, &y);
+            assert(matrix1 != NULL);
+
+            printf("Insert the second matrix: \n");
+            matrix2 = generateMatrixNxM(&x1, &y1);
+            assert(matrix2 != NULL);
+            assert(x == x1);
+            assert(y == y1);
+
+            printf("Insert the module value: ");
+            returnScanf = scanf("%d", &module);
+            assert(returnScanf > 0);
+
+            res = createMatrix(x, y);
+            assert(res != NULL);
+            sumMatrixModulo(matrix1, matrix2, res, module);
+
+            printMatrix(matrix1);
+            printf("+\n");
+            printMatrix(matrix2);
+            printf("(mod %d)\n"
+                   "=\n", module);
+            printMatrix(res);
+
+            deleteMatrix(matrix1);
+            deleteMatrix(matrix2);
+            deleteMatrix(res);
+            printf("\n\n\n");
             break;
         case 38:
+            printf("You chose to compute the difference of 2 matrices modulo n\n\n"
+                   "Insert the first matrix: \n");
+            matrix1 = generateMatrixNxM(&x, &y);
+            assert(matrix1 != NULL);
+
+            printf("Insert the second matrix: \n");
+            matrix2 = generateMatrixNxM(&x1, &y1);
+            assert(matrix2 != NULL);
+            assert(x == x1);
+            assert(y == y1);
+
+            printf("Insert the module value: ");
+            returnScanf = scanf("%d", &module);
+            assert(returnScanf > 0);
+
+            res = createMatrix(x, y);
+            assert(res != NULL);
+            subMatrixModulo(matrix1, matrix2, res, module);
+
+            printMatrix(matrix1);
+            printf("-\n");
+            printMatrix(matrix2);
+            printf("(mod %d) =\n", module);
+            printMatrix(res);
+
+            deleteMatrix(matrix1);
+            deleteMatrix(matrix2);
+            deleteMatrix(res);
+            printf("\n\n\n");
             break;
         case 39:
+            printf("You chose to compute the scalar product modulo n\n\n"
+                   "Insert the K value: ");
+            returnScanf = scanf("%d", &x1);
+            assert(returnScanf > 0);
+
+            printf("Insert the matrix: \n");
+            matrix1 = generateMatrixNxM(&x, &y);
+            assert(matrix1 != NULL);
+
+            printf("Insert the modulo value: ");
+            returnScanf = scanf("%d", &module);
+            assert(returnScanf > 0);
+
+            res = createMatrix(x, y);
+            assert(res != NULL);
+            scalarProductModulo(x1, matrix1, res, module);
+
+            printf("%d\n"
+                   "*\n", x1);
+            printMatrix(matrix1);
+            printf("(mod %d) =\n", module);
+            printMatrix(res);
+
+            deleteMatrix(matrix1);
+            deleteMatrix(res);
+            printf("\n\n\n");
             break;
         case 40:
+            printf("You chose to compute the product of 2 matrices modulo n\n\n"
+                   "Insert the first matrix: \n");
+            matrix1 = generateMatrixNxM(&x, &y);
+            assert(matrix1 != NULL);
+
+            printf("Insert the second matrix: \n");
+            matrix2 = generateMatrixNxM(&x1, &y1);
+            assert(matrix2 != NULL);
+            assert(y == x1);
+
+            printf("Insert the module value: ");
+            returnScanf = scanf("%d", &module);
+            assert(returnScanf > 0);
+
+            res = createMatrix(x, y1);
+            assert(res != NULL);
+            productMatrixModulo(matrix1, matrix2, res, module);
+
+            printMatrix(matrix1);
+            printf("*\n");
+            printMatrix(matrix2);
+            printf("(mod %d)\n"
+                   "=\n", module);
+            printMatrix(res);
+
+            deleteMatrix(matrix1);
+            deleteMatrix(matrix2);
+            deleteMatrix(res);
+            printf("\n\n\n");
             break;
         case 41:
+            printf("You chose to compute the power elevation modulo n\n\n"
+                   "Insert the matrix: \n");
+            matrix1 = generateMatrixNxN(&x);
+            assert(matrix1 != NULL);
+
+            printf("Insert the exponent: ");
+            returnScanf = scanf("%d", &y);
+            assert(returnScanf > 0);
+
+            printf("Insert the module value: ");
+            returnScanf = scanf("%d", &module);
+            assert(returnScanf > 0);
+
+            res = createMatrix(x, x);
+            assert(res != NULL);
+            printf("res\n");
+            printMatrix(res);
+            powerMatrixModulo(matrix1, y, res, module);
+
+            printMatrix(matrix1);
+            printf("^%d\n"
+                   "(mod %d)\n"
+                   "=\n", y, module);
+            printMatrix(res);
+
+            deleteMatrix(matrix1);
+            deleteMatrix(res);
+            printf("\n\n\n");
             break;
         case 42:
+            printf("You chose to compute the Kronecker product of 2 matrices modulo n\n\n"
+                   "Insert the first matrix: \n");
+            matrix1 = generateMatrixNxM(&x, &y);
+            assert(matrix1 != NULL);
+
+            printf("Insert the second matrix: \n");
+            matrix2 = generateMatrixNxM(&x1, &y1);
+            assert(matrix2 != NULL);
+
+            printf("Insert the module value: ");
+            returnScanf = scanf("%d", &module);
+            assert(returnScanf > 0);
+
+            res = createMatrix(x * x1, y * y1);
+            kroneckerProductMatrixModulo(matrix1, matrix2, res, module);
+
+            printMatrix(matrix1);
+            printf("(*)\n");
+            printMatrix(matrix2);
+            printf("(mod %d)\n"
+                   "=\n", module);
+            printMatrix(res);
+
+            deleteMatrix(matrix1);
+            deleteMatrix(matrix2);
+            deleteMatrix(res);
+            printf("\n\n\n");
             break;
         default:
             printf("Exit\n");
-            *choice = 39;
+            *choice = 43;
             printf("\n\n\n");
             break;
     }
@@ -429,6 +783,26 @@ void manageChoice(int *choice) {
 
 
 int main() {
+    //The user choice.
+    int choice = -1;
+    //Return scanf value.
+    int returScanf = 0;
+
+    do {
+        //print all the possible choice
+        printChoice();
+
+        //read the choice insert from the user
+        printf("Insert your choice: ");
+        returScanf = scanf("%d", &choice);
+        assert(returScanf > 0);
+
+        //manage the choice
+        manageChoice(&choice);
+
+        sleep(5);
+
+    } while (choice != 43);
 
     return 0;
 }

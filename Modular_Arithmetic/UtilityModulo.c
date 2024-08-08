@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <assert.h>
 #include <math.h>
 #include <stdlib.h>
@@ -235,10 +234,15 @@ int *realFermatFactorisation(int n) {
  */
 int *FermatFactorisation(int n, int *factors) {
     assert(n % 2 != 0);
+
     n = n < 0 ? -n : n;
+    (*factors) = 0;
+
     if (n == 1) {
+        //The factors.
         int *res = malloc(sizeof(int));
         res[0] = 1;
+        (*factors)++;
         return res;
     }
 
@@ -254,7 +258,6 @@ int *FermatFactorisation(int n, int *factors) {
     int reallocSize = stackSize;
 
     //initialize the stack
-    *factors = 0;
     tmpRes = realFermatFactorisation(n);
     stack[0] = tmpRes[0];
     stack[1] = tmpRes[1];
@@ -267,8 +270,9 @@ int *FermatFactorisation(int n, int *factors) {
     do {
         //the number analyzed is a prime number
         if (tmpRes[0] == 1) {
-            if (*factors % 2 == 0 ) {
+            if ((*factors) % 2 == 0 ) {
                 res = realloc(res, (*factors + 2) * sizeof(int));
+                assert(res != NULL);
             }
             //add it to the list of prime factors
             if (!isListed(res, *factors, stack[stackSize], NULL)) {
@@ -282,6 +286,7 @@ int *FermatFactorisation(int n, int *factors) {
             if (stackSize == (reallocSize - 1)) {
                 reallocSize += 2;
                 stack = realloc(stack, (reallocSize) * sizeof(int));
+                assert(stack != NULL);
             }
             //add the factors to the stack
             stack[stackSize++] = tmpRes[0];
@@ -301,6 +306,7 @@ int *FermatFactorisation(int n, int *factors) {
     free(tmpRes);
     free(stack);
     res = realloc(res, *factors * sizeof(int));
+    assert(res != NULL);
     return res;
 }
 
@@ -313,7 +319,7 @@ int *FermatFactorisation(int n, int *factors) {
  */
 int *factorisation(int n, int *factors) {
     //The factors.
-    int *res = malloc(sizeof(int));
+    int *res = NULL;
     //Save if the number is even or odd.
     int isEven = 0;
 
@@ -325,11 +331,15 @@ int *factorisation(int n, int *factors) {
     }
 
     if (n != 1) {
-        free(res);
         res = FermatFactorisation(n, factors);
     }
 
     if (isEven) {
+        if (res == NULL) {
+            res = malloc(sizeof(int));
+        }
+        res = realloc(res, ((*factors) + 1) * sizeof(int));
+        assert(res != NULL);
         res[(*factors)++] = 2;
     }
 
@@ -350,7 +360,7 @@ int EulerFunction(int n) {
     //List of factors of n.
     int *nFactors = factorisation(n, &factors);
     //Euler function result.
-    float res = n;
+    float res = (float) n;
 
     for (int i = 0; i < factors; ++i) {
         if (nFactors[i] != 1) {
@@ -371,7 +381,7 @@ int EulerFunction(int n) {
  * @param primeSize the number of prime numbers found up to the n-th number.
  * @return the list of prime numbers up to the n-th.
  */
-int *EratosthenesSieve(int n, int *primeSize) {
+int *primeNumberList(int n, int *primeSize) {
     //The list of all prime numbers.
     int *primes = malloc((n + 1) * sizeof(int));
     //The index of the last prime number found.
@@ -418,7 +428,7 @@ int nthPrimeNumber(int n) {
     //The number of prime numbers found.
     int primeIndex;
     //The list of prime numbers up to the limit-th.
-    int *primes = EratosthenesSieve(upperBound, &primeIndex);
+    int *primes = primeNumberList(upperBound, &primeIndex);
     //The n-th prime number.
     int res = primes[n - 1];
 
@@ -452,17 +462,18 @@ int nextPrimeNumber(int n) {
 int *primitiveRoots(int n, int *primitiveRootsSize) {
     //The list of primitive roots.
     int *primitiveRoots = malloc(n * sizeof(int));
-    //The number of primiteve roots.
-    int primitiveRootSize = 0;
+    //The number of primitive roots.
+    int primitiveSize = 0;
 
     for (int i = 1; i < n; ++i) {
         if (isPrimitiveRoot(i, n)) {
-            primitiveRoots[primitiveRootSize++] = i;
+            primitiveRoots[primitiveSize++] = i;
         }
     }
 
-    *primitiveRootsSize = primitiveRootSize;
-    realloc(primitiveRoots, (*primitiveRootsSize));
+    (*primitiveRootsSize) = primitiveSize;
+    primitiveRoots = realloc(primitiveRoots, (*primitiveRootsSize) * sizeof(int));
+    assert(primitiveRoots != NULL);
     return primitiveRoots;
 }
 

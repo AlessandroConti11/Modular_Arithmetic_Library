@@ -370,7 +370,7 @@ int EulerFunction(int n);
  * @param primeSize the number of prime numbers found up to the n-th number.
  * @return the list of prime numbers up to the n-th.
  */
-int *EratosthenesSieve(int n, int *primeSize);
+int *primeNumberList(int n, int *primeSize);
 
 /**
  * Searches for the n-th prime number.

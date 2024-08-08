@@ -253,15 +253,14 @@ void powerMatrixModulo(matrix *a, int k, matrix *res, int n) {
 
     //Temporary matrix used for compute the product.
     matrix *tmp = createMatrix(a->n, a->m);
-    //Temporary matrix used if res is a.
+    //Temporary matrix.
     matrix *aTmp = createMatrix(a->n, a->m);
     copyMatrix(a, aTmp);
     assert(tmp->n == a->n);
     assert(tmp->m == a->m);
 
     //initialize the res matrix
-    deleteMatrix(res);
-    res = createIdentityMatrix(a->n);
+    copyMatrix(createIdentityMatrix(a->n), res);
     assert(res->n == a->n);
     assert(res->m == a->m);
 
