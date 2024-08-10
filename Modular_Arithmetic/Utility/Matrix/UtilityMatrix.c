@@ -23,7 +23,7 @@ void swapRowMatrix(matrix *a, int row1, int row2, matrix *swap) {
     }
     assert(swap->n >= a->n);
     assert(swap->m >= a->m);
-
+    
     //Temporary variable used for the swap procedure.
     double tmp = 0;
 
@@ -55,7 +55,7 @@ void swapColumnMatrix(matrix *a, int col1, int col2, matrix *swap) {
     }
     assert(swap->n >= a->n);
     assert(swap->m >= a->m);
-
+    
     //Temporary variable used for the swap procedure.
     double tmp = 0;
 
@@ -81,7 +81,7 @@ double findMaxMatrix(matrix *a, int *rowPos, int *colPos) {
     double max = a->matrix[0][0];
     *rowPos = 0;
     *colPos = 0;
-
+    
     for (int i = 0; i < a->n; ++i) {
         for (int j = 0; j < a->m; ++j) {
             if (a->matrix[i][j] > max) {
@@ -107,7 +107,7 @@ double findMinMatrix(matrix *a, int *rowPos, int *colPos) {
     double min = a->matrix[0][0];
     *rowPos = 0;
     *colPos = 0;
-
+    
     for (int i = 0; i < a->n; ++i) {
         for (int j = 0; j < a->m; ++j) {
             if (a->matrix[i][j] < min) {
@@ -203,10 +203,8 @@ void luDecomposition(matrix *a, matrix *l, matrix *u) {
     double sum = 0;
 
     //initialize L and U matrix
-    deleteMatrix(l);
-    l = createNullMatrix(a->n, a->m);
-    deleteMatrix(u);
-    u = createNullMatrix(a->n, a->m);
+    copyMatrix(createNullMatrix(a->n, a->m), l);
+    copyMatrix(createNullMatrix(a->n, a->m), u);
 
     for (int i = 0; i < a->n; ++i) {
         //compute U matrix

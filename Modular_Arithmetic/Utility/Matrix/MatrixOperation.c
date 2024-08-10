@@ -119,8 +119,8 @@ double determinantMatrix(matrix *a) {
     for (int i = 0; i < a->n; i++) {
         //compute the cofactor
         det += i % 2 == 0
-               ? a->matrix[0][i] * minor(a, 0, i)
-               : -a->matrix[0][i] * minor(a, 0, i);
+                   ? a->matrix[0][i] * minor(a, 0, i)
+                   : -a->matrix[0][i] * minor(a, 0, i);
     }
     return det;
 }
@@ -281,6 +281,7 @@ void productMatrix(matrix *a, matrix *b, matrix *res) {
     for (int i = 0; i < a->n; ++i) {
         for (int j = 0; j < b->m; ++j) {
             res->matrix[i][j] = 0;
+            tmp = 0;
             for (int k = 0; k < a->m; ++k) {
                 tmp += a->matrix[i][k] * b->matrix[k][j];
             }
@@ -311,8 +312,7 @@ void powerMatrix(matrix *a, int k, matrix *res) {
     assert(tmp->m == a->m);
 
     //initialize the res matrix
-    deleteMatrix(res);
-    res = createIdentityMatrix(a->n);
+    copyMatrix(createIdentityMatrix(a->n), res);
     assert(res->n == a->n);
     assert(res->m == a->m);
 
@@ -352,11 +352,11 @@ void directSumMatrix(matrix *a, matrix *b, matrix *res) {
             if (i < a->n && j < a->m) {
                 res->matrix[i][j] = a->matrix[i][j];
             }
-                //bottom right corner - second matrix
+            //bottom right corner - second matrix
             else if (i >= a->n && j >= a->m) {
                 res->matrix[i][j] = b->matrix[i - a->n][j - a->m];
             }
-                //other position - 0
+            //other position - 0
             else {
                 res->matrix[i][j] = 0;
             }

@@ -85,7 +85,7 @@ int isDiagonalMatrix(matrix *a) {
  * Checks if a matrix is anti-diagonal matrix.
  *
  * @param a the matrix - M: n x n.
- * @return 1 if the matrx is anti-diagonal, 0 otherwise.
+ * @return 1 if the matrix is anti-diagonal, 0 otherwise.
  */
 int isAntidiagonalMatrix(matrix *a) {
     assert(a->n > 0);
@@ -331,6 +331,7 @@ void transposingMatrix(matrix *a, matrix *trans) {
 
 /**
  * Matrix inversion - cofactor matrix method.
+ * @warning the matrix a must be invertible
  *
  * @param a the matrix - M: n x n.
  * @param inv the inverse of the matrix: [a]^-1 - M: n x n.

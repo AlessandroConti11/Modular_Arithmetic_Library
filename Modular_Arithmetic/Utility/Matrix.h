@@ -61,9 +61,10 @@
 
     /**
      * Copies a matrix.
+     * @warning the dimensions of matrix b must be greater than or equal to those of a
      *
      * @param a the matrix to be copied - M: n x m.
-     * @param b the copied matrix - M: p x q with p>=n && q>=m.
+     * @param b the copied matrix - M: p x q.
      */
     void copyMatrix(matrix *a, matrix *b);
 
@@ -199,6 +200,7 @@
 
     /**
      * Matrix inversion - cofactor matrix method.
+     * @warning the matrix a must be invertible
      *
      * @param a the matrix - M: n x n.
      * @param inv the inverse of the matrix: [a]^-1 - M: n x n.
