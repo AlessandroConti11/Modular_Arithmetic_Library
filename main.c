@@ -811,6 +811,11 @@ void manageChoice(int *choice) {
 }
 
 
+/**
+ * Program Main.
+ *
+ * @return 0 if the program finished execution successfully.
+ */
 int main() {
     //The user choice.
     int choice = -1;

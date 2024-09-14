@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "../Matrix.h"
@@ -10,7 +11,7 @@
  * @param a the matrix - M: n x m.
  * @param row1 the first row to be swapped.
  * @param row2 the second row to be swapped.
- * @param swap the swapped matrix.
+ * @param swap the swapped matrix - M: n x m.
  */
 void swapRowMatrix(matrix *a, int row1, int row2, matrix *swap) {
     assert(a->n > 0);
@@ -23,7 +24,7 @@ void swapRowMatrix(matrix *a, int row1, int row2, matrix *swap) {
     }
     assert(swap->n >= a->n);
     assert(swap->m >= a->m);
-    
+
     //Temporary variable used for the swap procedure.
     double tmp = 0;
 
@@ -42,7 +43,7 @@ void swapRowMatrix(matrix *a, int row1, int row2, matrix *swap) {
  * @param a the matrix - M: n x m.
  * @param col1 the first column to be swapped.
  * @param col2 the second column to be swapped.
- * @param swap the swapped matrix.
+ * @param swap the swapped matrix - M: n x m.
  */
 void swapColumnMatrix(matrix *a, int col1, int col2, matrix *swap) {
     assert(a->n > 0);
@@ -55,7 +56,7 @@ void swapColumnMatrix(matrix *a, int col1, int col2, matrix *swap) {
     }
     assert(swap->n >= a->n);
     assert(swap->m >= a->m);
-    
+
     //Temporary variable used for the swap procedure.
     double tmp = 0;
 
@@ -81,7 +82,7 @@ double findMaxMatrix(matrix *a, int *rowPos, int *colPos) {
     double max = a->matrix[0][0];
     *rowPos = 0;
     *colPos = 0;
-    
+
     for (int i = 0; i < a->n; ++i) {
         for (int j = 0; j < a->m; ++j) {
             if (a->matrix[i][j] > max) {
@@ -107,7 +108,7 @@ double findMinMatrix(matrix *a, int *rowPos, int *colPos) {
     double min = a->matrix[0][0];
     *rowPos = 0;
     *colPos = 0;
-    
+
     for (int i = 0; i < a->n; ++i) {
         for (int j = 0; j < a->m; ++j) {
             if (a->matrix[i][j] < min) {

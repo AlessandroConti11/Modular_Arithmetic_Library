@@ -310,7 +310,7 @@ int isToeplitzMatrix(matrix *a) {
  * Matrix transposition.
  *
  * @param a the matrix - M: n x m.
- * @param trans the the transposed matrix: [a]^T - M: m x n.
+ * @param trans the the transposed matrix - M: m x n.
  */
 void transposingMatrix(matrix *a, matrix *trans) {
     assert(a->n > 0);
@@ -334,7 +334,7 @@ void transposingMatrix(matrix *a, matrix *trans) {
  * @warning the matrix a must be invertible
  *
  * @param a the matrix - M: n x n.
- * @param inv the inverse of the matrix: [a]^-1 - M: n x n.
+ * @param inv the inverse of the matrix - M: n x n.
  */
 void inverseMatrix(matrix *a, matrix *inv) {
     assert(a->n > 0);

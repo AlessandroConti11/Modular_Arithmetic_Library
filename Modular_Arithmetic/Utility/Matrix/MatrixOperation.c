@@ -119,8 +119,8 @@ double determinantMatrix(matrix *a) {
     for (int i = 0; i < a->n; i++) {
         //compute the cofactor
         det += i % 2 == 0
-                   ? a->matrix[0][i] * minor(a, 0, i)
-                   : -a->matrix[0][i] * minor(a, 0, i);
+               ? a->matrix[0][i] * minor(a, 0, i)
+               : -a->matrix[0][i] * minor(a, 0, i);
     }
     return det;
 }
@@ -180,7 +180,7 @@ int rankMatrix(matrix *a) {
  *
  * @param a the first matrix - M: n x m.
  * @param b the second matrix - M: n x m.
- * @param res the result: [a] + [b] - M: n x m.
+ * @param res the sum - M: n x m.
  */
 void sumMatrix(matrix *a, matrix *b, matrix *res) {
     assert(a->n > 0);
@@ -208,7 +208,7 @@ void sumMatrix(matrix *a, matrix *b, matrix *res) {
  *
  * @param a the first matrix - M: n x m.
  * @param b the second matrix - M: n x m.
- * @param res the result: [a] + [b] - M: n x m.
+ * @param res the difference - M: n x m.
  */
 void subMatrix(matrix *a, matrix *b, matrix *res) {
     assert(a->n > 0);
@@ -236,7 +236,7 @@ void subMatrix(matrix *a, matrix *b, matrix *res) {
  *
  * @param scalar the scalar number.
  * @param a the matrix - M: n x m.
- * @param res the result: scalar * [a] - M: n x m.
+ * @param res the scalar product - M: n x m.
  */
 void scalarProductMatrix(double scalar, matrix *a, matrix *res) {
     assert(a->n > 0);
@@ -260,7 +260,7 @@ void scalarProductMatrix(double scalar, matrix *a, matrix *res) {
  *
  * @param a the first matrix - M: n x p.
  * @param b the second matrix - M: p x m.
- * @param res the result: [a] x [b] - M: n x m.
+ * @param res the product - M: n x m.
  */
 void productMatrix(matrix *a, matrix *b, matrix *res) {
     assert(a->n > 0);
@@ -295,7 +295,7 @@ void productMatrix(matrix *a, matrix *b, matrix *res) {
  *
  * @param a the matrix - M: n x n.
  * @param k the exponent.
- * @param res the result: [a]^k - M: n x n.
+ * @param res the power elevation - M: n x n.
  */
 void powerMatrix(matrix *a, int k, matrix *res) {
     assert(a->n > 0);
@@ -332,7 +332,7 @@ void powerMatrix(matrix *a, int k, matrix *res) {
  *
  * @param a the first matrix - M: n x m.
  * @param b the second matrix - M: p x q.
- * @param res the result: [a] (+) [b] - M: n+p x m+q.
+ * @param res the direct sum - M: n+p x m+q.
  */
 void directSumMatrix(matrix *a, matrix *b, matrix *res) {
     assert(a->n > 0);
@@ -352,11 +352,11 @@ void directSumMatrix(matrix *a, matrix *b, matrix *res) {
             if (i < a->n && j < a->m) {
                 res->matrix[i][j] = a->matrix[i][j];
             }
-            //bottom right corner - second matrix
+                //bottom right corner - second matrix
             else if (i >= a->n && j >= a->m) {
                 res->matrix[i][j] = b->matrix[i - a->n][j - a->m];
             }
-            //other position - 0
+                //other position - 0
             else {
                 res->matrix[i][j] = 0;
             }
@@ -369,7 +369,7 @@ void directSumMatrix(matrix *a, matrix *b, matrix *res) {
  *
  * @param a the first matrix - M: n x m.
  * @param b the second matrix - M: p x q.
- * @param res the result: [a] (x) [b] - M: n*p x m*q.
+ * @param res the Kronecker product - M: n*p x m*q.
  */
 void kroneckerProductMatrix(matrix *a, matrix *b, matrix *res) {
     assert(a->n > 0);

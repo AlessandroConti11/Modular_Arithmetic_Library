@@ -65,14 +65,15 @@ matrix *createIdentityMatrix(int n) {
 }
 
 /**
- * Creates a null matrix - M: n x n.
+ * Creates a null matrix - M: n x m.
  *
  * @param n the number of row.
  * @param m the number of column.
- * @return the null matrix - M: n x n.
+ * @return the null matrix - M: n x m.
  */
 matrix *createNullMatrix(int n, int m) {
     assert(n > 0);
+    assert(m > 0);
 
     //The matrix to create.
     matrix *a = (matrix *) malloc(sizeof(matrix));

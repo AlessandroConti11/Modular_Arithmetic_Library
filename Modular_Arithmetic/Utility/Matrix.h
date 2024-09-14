@@ -17,7 +17,7 @@
     }matrix;
 
 
-//******************************************************************************************************************//
+    //******************************************************************************************************************//
 
 
     //*****************//
@@ -35,19 +35,19 @@
     matrix *createMatrix(int n, int m);
 
     /**
-     * Creates an identity matrix - M: n x n.
+     * Creates an identity matrix - M: n x m.
      *
      * @param n the matrix order.
-     * @return the identity matrix - M: n x n.
+     * @return the identity matrix - M: n x m.
      */
     matrix *createIdentityMatrix(int n);
 
     /**
-     * Creates a null matrix - M: n x n.
+     * Creates a null matrix - M: n x m.
      *
      * @param n the number of row.
      * @param m the number of column.
-     * @return the null matrix - M: n x n.
+     * @return the null matrix - M: n x m.
      */
     matrix *createNullMatrix(int n, int m);
 
@@ -85,7 +85,7 @@
     void printMatrix(matrix *a);
 
 
-//******************************************************************************************************************//
+    //******************************************************************************************************************//
 
 
     //***************//
@@ -194,7 +194,7 @@
      * Matrix transposition.
      *
      * @param a the matrix - M: n x m.
-     * @param trans the the transposed matrix: [a]^T - M: m x n.
+     * @param trans the the transposed matrix: - M: m x n.
      */
     void transposingMatrix(matrix *a, matrix *trans);
 
@@ -203,7 +203,7 @@
      * @warning the matrix a must be invertible
      *
      * @param a the matrix - M: n x n.
-     * @param inv the inverse of the matrix: [a]^-1 - M: n x n.
+     * @param inv the inverse of the matrix - M: n x n.
      */
     void inverseMatrix(matrix *a, matrix *inv);
 
@@ -224,7 +224,7 @@
     void absMatrix(matrix *a, matrix *abs);
 
 
-//******************************************************************************************************************//
+    //******************************************************************************************************************//
 
 
     //********************//
@@ -274,7 +274,7 @@
      *
      * @param a the first matrix - M: n x m.
      * @param b the second matrix - M: n x m.
-     * @param res the result: [a] + [b] - M: n x m.
+     * @param res the sum - M: n x m.
      */
     void sumMatrix(matrix *a, matrix *b, matrix *res);
 
@@ -283,7 +283,7 @@
      *
      * @param a the first matrix - M: n x m.
      * @param b the second matrix - M: n x m.
-     * @param res the result: [a] + [b] - M: n x m.
+     * @param res the difference - M: n x m.
      */
     void subMatrix(matrix *a, matrix *b, matrix *res);
 
@@ -292,7 +292,7 @@
      *
      * @param scalar the scalar number.
      * @param a the matrix - M: n x m.
-     * @param res the result: scalar * [a] - M: n x m.
+     * @param res the scalar product - M: n x m.
      */
     void scalarProductMatrix(double scalar, matrix *a, matrix *res);
 
@@ -301,7 +301,7 @@
      *
      * @param a the first matrix - M: n x p.
      * @param b the second matrix - M: p x m.
-     * @param res the result: [a] x [b] - M: n x m.
+     * @param res the product - M: n x m.
      */
     void productMatrix(matrix *a, matrix *b, matrix *res);
 
@@ -310,7 +310,7 @@
      *
      * @param a the matrix - M: n x n.
      * @param k the exponent.
-     * @param res the result: [a]^k - M: n x n.
+     * @param res the power elevation - M: n x n.
      */
     void powerMatrix(matrix *a, int k, matrix *res);
 
@@ -319,7 +319,7 @@
      *
      * @param a the first matrix - M: n x m.
      * @param b the second matrix - M: p x q.
-     * @param res the result: [a] (+) [b] - M: n+p x m+q.
+     * @param res the direct sum - M: n+p x m+q.
      */
     void directSumMatrix(matrix *a, matrix *b, matrix *res);
 
@@ -328,12 +328,12 @@
      *
      * @param a the first matrix - M: n x m.
      * @param b the second matrix - M: p x q.
-     * @param res the result: [a] (x) [b] - M: n*p x m*q.
+     * @param res the Kronecker product - M: n*p x m*q.
      */
     void kroneckerProductMatrix(matrix *a, matrix *b, matrix *res);
 
 
-//******************************************************************************************************************//
+    //******************************************************************************************************************//
 
 
     //***************************//
@@ -347,7 +347,7 @@
      * @param a the matrix - M: n x m.
      * @param row1 the first row to be swapped.
      * @param row2 the second row to be swapped.
-     * @param swap the swapped matrix.
+     * @param swap the swapped matrix - M: n x m.
      */
     void swapRowMatrix(matrix *a, int row1, int row2, matrix *swap);
 
@@ -357,7 +357,7 @@
      * @param a the matrix - M: n x m.
      * @param col1 the first column to be swapped.
      * @param col2 the second column to be swapped.
-     * @param swap the swapped matrix.
+     * @param swap the swapped matrix - M: n x m.
      */
     void swapColumnMatrix(matrix *a, int col1, int col2, matrix *swap);
 
