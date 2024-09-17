@@ -13,11 +13,11 @@
  * @details if n == x * x --> n is a perfect square
  *
  * @param n the number.
- * @return 1 if the number is a perfect quare, 0 otherwise.
+ * @return 1 if the number is a perfect square, 0 otherwise.
  */
-int isPerfectSquare(int n) {
+long long int isPerfectSquare(long long int n) {
     //The integer part of square root.
-    int sq = (int) sqrt(n);
+    long long int sq = (long long int) sqrt(n);
 
     return sq * sq == n;
 }
@@ -32,11 +32,11 @@ int isPerfectSquare(int n) {
  * @param position the location where the searched value is - NOT necessary.
  * @return 1 if the value was found, 0 otherwise.
  */
-int isListed(int *list, int listSize, int value, int *position) {
+long long int isListed(long long int *list, long long int listSize, long long int value, long long int *position) {
     assert(list != NULL);
     assert(listSize >= 0);
     
-    for (int i = 0; i < listSize; ++i) {
+    for (long long int i = 0; i < listSize; ++i) {
         if (list[i] == value) {
             if (position != NULL) {
                 *position = i;
@@ -60,7 +60,7 @@ int isListed(int *list, int listSize, int value, int *position) {
  * @param m the second number.
  * @return the gcd between n and m.
  */
-int gcd(int n, int m) {
+long long int gcd(long long int n, long long int m) {
     if (n == 0) {
         return m;
     }
@@ -69,7 +69,7 @@ int gcd(int n, int m) {
     }
 
     //Temporal variable used to save the remainder of the division.
-    int tmp = 0;
+    long long int tmp = 0;
 
     do {
         tmp = n % m;
@@ -90,15 +90,15 @@ int gcd(int n, int m) {
  * @param y the second number of Bézout's identity.
  * @return the gcd between n and m.
  */
-int extendedGCD(int n, int m, int *x, int *y) {
+long long int extendedGCD(long long int n, long long int m, long long int *x, long long int *y) {
     //Temporal variable use for compute the first number of Bézout's identity.
-    int xTemp = 0;
+    long long int xTemp = 0;
     //Temporal variable used for compute the second number of Bézout's identity.
-    int yRefactor = 1;
+    long long int yRefactor = 1;
     //Quotient between n and m.
-    int q = 0;
+    long long int q = 0;
     //Temporal variable used in the switch procedure.
-    int temp = 0;
+    long long int temp = 0;
 
     *x = 1;
     *y = 0;
@@ -132,7 +132,7 @@ int extendedGCD(int n, int m, int *x, int *y) {
  * @param m the divisor.
  * @return the reminder of the division of n by m.
  */
-int mod(int n, int m) {
+long long int mod(long long int n, long long int m) {
     return n % m;
 }
 
@@ -144,7 +144,7 @@ int mod(int n, int m) {
  * @param m the module value.
  * @return a number congruent with the one given.
  */
-int congruentNumber(int a, int m) {
+long long int congruentNumber(long long int a, long long int m) {
     srand(time(NULL));
     return a + rand() * m;
 }
@@ -158,7 +158,7 @@ int congruentNumber(int a, int m) {
  * @param m the module value.
  * @return the modular reduction.
  */
-int modularReduction(int n, int m) {
+long long int modularReduction(long long int n, long long int m) {
     while (n < 0) {
         n += m;
     }
@@ -175,13 +175,13 @@ int modularReduction(int n, int m) {
  * @param m the module value.
  * @return the modular inverse.
  */
-int modularInverse(int n, int m) {
+long long int modularInverse(long long int n, long long int m) {
     //The first number of Bézout's identity - the modular inverse.
-    int x;
+    long long int x;
     //The second number of Bézout's identity.
-    int y;
+    long long int y;
     //The gcd between n and m.
-    int gcd = extendedGCD(n, m, &x, &y);
+    long long int gcd = extendedGCD(n, m, &x, &y);
     assert(gcd == 1 && "n must be coprime with m");
 
     return x;
@@ -196,29 +196,29 @@ int modularInverse(int n, int m) {
  * @param n the number.
  * @return the two factors that make up the number.
  */
-int *realFermatFactorisation(int n) {
+long long int *realFermatFactorisation(long long int n) {
     assert(n % 2 != 0 && "the number must be odd");
     n = n < 0 ? -n : n;
     if (n == 1) {
-        int *res = malloc(2 * sizeof(int));
+        long long int *res = malloc(2 * sizeof(long long int));
         res[0] = 1;
         res[1] = 1;
         return res;
     }
 
     //The factors.
-    int *res = malloc(2 * sizeof(int));
+    long long int *res = malloc(2 * sizeof(long long int));
     //The first factor.
-    int x = (int) ceil(sqrt(n));
+    long long int x = (long long int) ceil(sqrt(n));
     //The second factor.
-    int y = x * x - n;
+    long long int y = x * x - n;
 
     while (!isPerfectSquare(y)) {
         x++;
         y = x * x - n;
     }
 
-    y = (int) sqrt(y);
+    y = (long long int) sqrt(y);
     res[0] = x - y;
     res[1] = x + y;
 
@@ -234,7 +234,7 @@ int *realFermatFactorisation(int n) {
  * @param factors the number of factors.
  * @return the factors that make up the number.
  */
-int *FermatFactorisation(int n, int *factors) {
+long long int *FermatFactorisation(long long int n, long long int *factors) {
     assert(n % 2 != 0 && "the number must be odd");
 
     n = n < 0 ? -n : n;
@@ -242,22 +242,22 @@ int *FermatFactorisation(int n, int *factors) {
 
     if (n == 1) {
         //The factors.
-        int *res = malloc(sizeof(int));
+        long long int *res = malloc(sizeof(long long int));
         res[0] = 1;
         (*factors)++;
         return res;
     }
 
     //The factors.
-    int *res = malloc(2 * sizeof(int));
+    long long int *res = malloc(2 * sizeof(long long int));
     //Temporal factors.
-    int *tmpRes = NULL;
+    long long int *tmpRes = NULL;
     //The stack that contains all the factors not simplified yet.
-    int *stack = malloc(2 * sizeof(int));
+    long long int *stack = malloc(2 * sizeof(long long int));
     //The number of element in the stack.
-    int stackSize = 2;
+    long long int stackSize = 2;
     //The stack dimension.
-    int reallocSize = stackSize;
+    long long int reallocSize = stackSize;
 
     //initialize the stack
     tmpRes = realFermatFactorisation(n);
@@ -273,7 +273,7 @@ int *FermatFactorisation(int n, int *factors) {
         //the number analyzed is a prime number
         if (tmpRes[0] == 1) {
             if ((*factors) % 2 == 0 ) {
-                res = realloc(res, (*factors + 2) * sizeof(int));
+                res = realloc(res, (*factors + 2) * sizeof(long long int));
                 assert(res != NULL);
             }
             //add it to the list of prime factors
@@ -287,7 +287,7 @@ int *FermatFactorisation(int n, int *factors) {
         else {
             if (stackSize == (reallocSize - 1)) {
                 reallocSize += 2;
-                stack = realloc(stack, (reallocSize) * sizeof(int));
+                stack = realloc(stack, (reallocSize) * sizeof(long long int));
                 assert(stack != NULL);
             }
             //add the factors to the stack
@@ -307,7 +307,7 @@ int *FermatFactorisation(int n, int *factors) {
 
     free(tmpRes);
     free(stack);
-    res = realloc(res, *factors * sizeof(int));
+    res = realloc(res, *factors * sizeof(long long int));
     assert(res != NULL);
     return res;
 }
@@ -319,11 +319,11 @@ int *FermatFactorisation(int n, int *factors) {
  * @param factors the number of factors.
  * @return the factors that make up the number.
  */
-int *factorisation(int n, int *factors) {
+long long int *factorisation(long long int n, long long int *factors) {
     //The factors.
-    int *res = NULL;
+    long long int *res = NULL;
     //Save if the number is even or odd.
-    int isEven = 0;
+    long long int isEven = 0;
 
     (*factors) = 0;
 
@@ -332,16 +332,15 @@ int *factorisation(int n, int *factors) {
         n /= 2;
     }
 
-    printf("figa %d\n", n);
     if (n != 1) {
         res = FermatFactorisation(n, factors);
     }
 
     if (isEven) {
         if (res == NULL) {
-            res = malloc(sizeof(int));
+            res = malloc(sizeof(long long int));
         }
-        res = realloc(res, ((*factors) + 1) * sizeof(int));
+        res = realloc(res, ((*factors) + 1) * sizeof(long long int));
         assert(res != NULL);
         res[(*factors)++] = 2;
     }
@@ -357,22 +356,22 @@ int *factorisation(int n, int *factors) {
  * @param n the number.
  * @return the value of Euler's function.
  */
-int EulerFunction(int n) {
+long long int EulerFunction(long long int n) {
     //The number of factors.
-    int factors = 0;
+    long long int factors = 0;
     //List of factors of n.
-    int *nFactors = factorisation(n, &factors);
+    long long int *nFactors = factorisation(n, &factors);
     //Euler function result.
     float res = (float) n;
 
-    for (int i = 0; i < factors; ++i) {
+    for (long long int i = 0; i < factors; ++i) {
         if (nFactors[i] != 1) {
             res *= (1.0 - 1.0 / ((float) nFactors[i]));
         }
     }
 
     free(nFactors);
-    return (int) res;
+    return (long long int) res;
 }
 
 
@@ -384,36 +383,36 @@ int EulerFunction(int n) {
  * @param primeSize the number of prime numbers found up to the n-th number.
  * @return the list of prime numbers up to the n-th.
  */
-int *primeNumberList(int n, int *primeSize) {
+long long int *primeNumberList(long long int n, long long int *primeSize) {
     //The list of all prime numbers.
-    int *primes = malloc((n + 1) * sizeof(int));
+    long long int *primes = malloc((n + 1) * sizeof(long long int));
     //The index of the last prime number found.
-    int primeIndex = 0;
+    long long int primeIndex = 0;
     //The list of all number until n.
-    int *numbers = malloc((n + 1) * sizeof(int));
+    long long int *numbers = malloc((n + 1) * sizeof(long long int));
 
     //array initialization: assume that all numbers are primes
-    for (int i = 0; i < n + 1; ++i) {
+    for (long long int i = 0; i < n + 1; ++i) {
         numbers[i] = 1;
     }
     numbers[0] = 0;
     numbers[1] = 0;
 
-    for (int i = 2; (i * i) < ((n + 1) * (n + 1)); ++i) {
+    for (long long int i = 2; (i * i) < ((n + 1) * (n + 1)); ++i) {
         //check if i is prime
         if (numbers[i]) {
             //i is a prime number
             primes[primeIndex++] = i;
 
             //updates all multiples of i as non-prime
-            for (int j = (i * i); j < (n + 1); j += i) {
+            for (long long int j = (i * i); j < (n + 1); j += i) {
                 numbers[j] = 0;
             }
         }
     }
 
     free(numbers);
-    primes = realloc(primes, primeIndex * sizeof(int));
+    primes = realloc(primes, primeIndex * sizeof(long long int));
     *primeSize = primeIndex;
     return primes;
 }
@@ -425,15 +424,15 @@ int *primeNumberList(int n, int *primeSize) {
  * @param n the n-th prime number to be found.
  * @return the n-th prime number.
  */
-int nthPrimeNumber(int n) {
+long long int nthPrimeNumber(long long int n) {
     //Upper boundary within which the n-th prime number lies.
-    int upperBound = (n + 1) * (log(n + 1) + log(log(n + 1)));
+    long long int upperBound = (n + 1) * (log(n + 1) + log(log(n + 1)));
     //The number of prime numbers found.
-    int primeIndex;
+    long long int primeIndex;
     //The list of prime numbers up to the limit-th.
-    int *primes = primeNumberList(upperBound, &primeIndex);
+    long long int *primes = primeNumberList(upperBound, &primeIndex);
     //The n-th prime number.
-    int res = primes[n - 1];
+    long long int res = primes[n - 1];
 
     free(primes);
     return res;
@@ -445,7 +444,7 @@ int nthPrimeNumber(int n) {
  * @param n the number whose next prime number is to be found.
  * @return the prime number following the given number.
  */
-int nextPrimeNumber(int n) {
+long long int nextPrimeNumber(long long int n) {
     do {
         n++;
         if (areCoPrime(2, n) && (isFermatPseudoPrime(2, n) && isPrime(n))) {
@@ -462,20 +461,20 @@ int nextPrimeNumber(int n) {
  * @param primitiveRootsSize the number of primitive root modulo n.
  * @return the list of primitive roots modulo n.
  */
-int *primitiveRoots(int n, int *primitiveRootsSize) {
+long long int *primitiveRoots(long long int n, long long int *primitiveRootsSize) {
     //The list of primitive roots.
-    int *primitiveRoots = malloc(n * sizeof(int));
+    long long int *primitiveRoots = malloc(n * sizeof(long long int));
     //The number of primitive roots.
-    int primitiveSize = 0;
+    long long int primitiveSize = 0;
 
-    for (int i = 1; i < n; ++i) {
+    for (long long int i = 1; i < n; ++i) {
         if (isPrimitiveRoot(i, n)) {
             primitiveRoots[primitiveSize++] = i;
         }
     }
 
     (*primitiveRootsSize) = primitiveSize;
-    primitiveRoots = realloc(primitiveRoots, (*primitiveRootsSize) * sizeof(int));
+    primitiveRoots = realloc(primitiveRoots, (*primitiveRootsSize) * sizeof(long long int));
     assert(primitiveRoots != NULL);
     return primitiveRoots;
 }
@@ -487,20 +486,20 @@ int *primitiveRoots(int n, int *primitiveRootsSize) {
  * @param quadraticResidualSize the number of quadratic residuals modulo n.
  * @return the list of quadratic residuals modulo n.
  */
-int *quadraticResiduals(int n, int *quadraticResidualSize) {
+long long int *quadraticResiduals(long long int n, long long int *quadraticResidualSize) {
     //The quadratic residuals.
-    int *res = malloc(n * sizeof(int));
+    long long int *res = malloc(n * sizeof(long long int));
     //The quadratic residuals size.
-    int resSize = 0;
+    long long int resSize = 0;
 
-    for (int i = 0; i < n; ++i) {
+    for (long long int i = 0; i < n; ++i) {
         if (isSquareNumber(i, n)) {
             res[resSize++] = i;
         }
     }
 
     *quadraticResidualSize = resSize;
-    res = realloc(res, resSize * sizeof(int));
+    res = realloc(res, resSize * sizeof(long long int));
     return res;
 }
 
@@ -513,7 +512,7 @@ int *quadraticResiduals(int n, int *quadraticResidualSize) {
  * @param p the odd prime number.
  * @return 1 if a is a quadratic residue modulo p, -1 if a is a quadratic non-residue modulo p, 0 if a is a divisor of p.
  */
-int LegendreSymbol(int a, int p) {
+long long int LegendreSymbol(long long int a, long long int p) {
     assert(p % 2 != 0);
     assert(isPrime(p));
 
@@ -542,21 +541,21 @@ int LegendreSymbol(int a, int p) {
  * @param n the odd number.
  * @return 1 if for some integer x: a==x^2 (mod n), -1 if there is no such x, 0 if a is a divisior of p.
  */
-int JacobiSymbol(int a, int n) {
+long long int JacobiSymbol(long long int a, long long int n) {
     assert(n % 2 != 0 && "the number must be odd");
 
     a = mod(a, n);
 
     //Temporary n.
-    int nTmp = n;
+    long long int nTmp = n;
     //The number of factors.
-    int factorSize = 0;
+    long long int factorSize = 0;
     //The factors that make up n.
-    int *factors = factorisation(n, &factorSize);
+    long long int *factors = factorisation(n, &factorSize);
     //The Jacobi symbol.
-    int res = 1;
+    long long int res = 1;
 
-    for (int i = 0; i < factorSize; ++i) {
+    for (long long int i = 0; i < factorSize; ++i) {
         do {
             //producer(LegendreSymbol(a, factor_i)^(factor_exponent))
             res *= LegendreSymbol(a, factors[i]);

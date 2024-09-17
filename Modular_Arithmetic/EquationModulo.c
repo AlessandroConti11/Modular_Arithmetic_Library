@@ -18,10 +18,10 @@
  * @param m the module values.
  * @return the solution of the system of modular linear equations.
  */
-int chineseReminderTheorem(int numberOfEquation, int *a, int *m) {
+long long int chineseReminderTheorem(long long int numberOfEquation, long long int *a, long long int *m) {
     //check if all modulo values are coprime
-    for (int i = 0; i < numberOfEquation; ++i) {
-        for (int j = 0; j < numberOfEquation; ++j) {
+    for (long long int i = 0; i < numberOfEquation; ++i) {
+        for (long long int j = 0; j < numberOfEquation; ++j) {
             if (i != j) {
                 assert(areCoPrime(m[i], m[j]) && "all module value must be coprime");
             }
@@ -29,21 +29,21 @@ int chineseReminderTheorem(int numberOfEquation, int *a, int *m) {
     }
 
     //The final modulo value.
-    int M = 1;
+    long long int M = 1;
     //M / mi.
-    int mi = 0;
+    long long int mi = 0;
     //mi inverse.
-    int miInverse = 0;
+    long long int miInverse = 0;
     //The result.
-    int res = 0;
+    long long int res = 0;
 
     //compute the final modulo value
-    for (int i = 0; i < numberOfEquation; ++i) {
+    for (long long int i = 0; i < numberOfEquation; ++i) {
         M *= m[i];
     }
 
     //compute the mi values.
-    for (int i = 0; i < numberOfEquation; ++i) {
+    for (long long int i = 0; i < numberOfEquation; ++i) {
         mi = M / m[i];
         miInverse = modularInverse(mi, m[i]);
         res = (res + a[i] * mi * miInverse) % M;
@@ -64,11 +64,11 @@ int chineseReminderTheorem(int numberOfEquation, int *a, int *m) {
  * @param y the value of the second unknown to be calculated
  * @param c the third parameter of the diophantine equation.
  */
-void diophantineEquation(int a, int *x, int b, int *y, int c) {
+void diophantineEquation(long long int a, long long int *x, long long int b, long long int *y, long long int c) {
     assert(isDivisor(gcd(a, b), c));
 
     //The gcd between a and b.
-    int gcdAB = gcd(a, b);
+    long long int gcdAB = gcd(a, b);
 
     a = a / gcdAB;
     b = b / gcdAB;

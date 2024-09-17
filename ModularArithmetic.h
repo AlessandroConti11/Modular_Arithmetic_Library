@@ -19,7 +19,7 @@
  * @param m the module value.
  * @return the sum modulo m.
  */
-int sum(int a, int b, int m);
+long long int sum(long long int a, long long int b, long long int m);
 
 /**
  * Computes the difference modulo m.
@@ -30,7 +30,7 @@ int sum(int a, int b, int m);
  * @param m the module value.
  * @return the difference modulo m.
  */
-int sub(int a, int b, int m);
+long long int sub(long long int a, long long int b, long long int m);
 
 /**
  * Computes the product modulo m.
@@ -41,7 +41,7 @@ int sub(int a, int b, int m);
  * @param m the module value.
  * @return the product modulo m.
  */
-int product(int a, int b, int m);
+long long int product(long long int a, long long int b, long long int m);
 
 /**
  * Computes the division modulo m.
@@ -53,7 +53,7 @@ int product(int a, int b, int m);
  * @param m the module value.
  * @return the quotient.
  */
-int division(int a, int b, int m);
+long long int division(long long int a, long long int b, long long int m);
 
 /**
  * Computes the power elevation modulo m.
@@ -65,7 +65,7 @@ int division(int a, int b, int m);
  * @param m the module value.
  * @return the power elevation modulo m.
  */
-int power(int a, int exp, int m);
+long long int power(long long int a, long long int exp, long long int m);
 
 /**
  * Computes the square roots modulo p of a number.
@@ -77,7 +77,7 @@ int power(int a, int exp, int m);
  * @param p the module value.
  * @return the square roots modulo p of the number.
  */
-int *TonelliShanksAlgorithm(int a, int p);
+long long int *TonelliShanksAlgorithm(long long int a, long long int p);
 
 /**
  * Computes the square roots modulo n of a number.
@@ -88,7 +88,7 @@ int *TonelliShanksAlgorithm(int a, int p);
  * @param numberOfSquareRoots the number of square roots.
  * @return the square roots modulo n of the number.
  */
-int *squareRoot(int a, int n, int *numberOfSquareRoots);
+long long int *squareRoot(long long int a, long long int n, long long int *numberOfSquareRoots);
 
 /**
  * Computes the discrete logarithm modulo n of base number.
@@ -101,7 +101,7 @@ int *squareRoot(int a, int n, int *numberOfSquareRoots);
  * @param n the module value.
  * @return the discrete logarithm modulo n.
  */
-int discreteLogarithm(int base, int b, int n);
+long long int discreteLogarithm(long long int base, long long int b, long long int n);
 
 
 //******************************************************************************************************************//
@@ -125,7 +125,7 @@ int discreteLogarithm(int base, int b, int n);
  * @param m the module values.
  * @return the solution of the system of modular linear equations.
  */
-int chineseReminderTheorem(int numberOfEquation, int *a, int *m);
+long long int chineseReminderTheorem(long long int numberOfEquation, long long int *a, long long int *m);
 
 /**
  * Computes the solution of a linear diophantine equation.
@@ -139,7 +139,7 @@ int chineseReminderTheorem(int numberOfEquation, int *a, int *m);
  * @param y the value of the second unknown to be calculated
  * @param c the third parameter of the diophantine equation.
  */
-void diophantineEquation(int a, int *x, int b, int *y, int c);
+void diophantineEquation(long long int a, long long int *x, long long int b, long long int *y, long long int c);
 
 
 //******************************************************************************************************************//
@@ -159,7 +159,7 @@ void diophantineEquation(int a, int *x, int b, int *y, int c);
  * @param m the module value.
  * @return 1 if the 2 number are congruent, 0 otherwise.
  */
-int areCongruent(int a, int b, int m);
+long long int areCongruent(long long int a, long long int b, long long int m);
 
 /**
  * Checks if two numbers are coprime
@@ -169,7 +169,7 @@ int areCongruent(int a, int b, int m);
  * @param n the second number.
  * @return 1 if the 2 number are coprime, 0 otherwise.
  */
-int areCoPrime(int a, int n);
+long long int areCoPrime(long long int a, long long int n);
 
 /**
  * Checks if the first number is a divisor of the second number.
@@ -178,7 +178,7 @@ int areCoPrime(int a, int n);
  * @param m the second number.
  * @return 1 if the first number is a divisor of the second number, 0 otherwise.
  */
-int isDivisor(int n, int m);
+long long int isDivisor(long long int n, long long int m);
 
 /**
  * Checks if a number is Fermat's Pseuodoprime to a.
@@ -192,7 +192,7 @@ int isDivisor(int n, int m);
  * @param n the second number.
  * @returns 1 if the number is Fermat's Pseuodprime to a, 0 otherwise.
  */
-int isFermatPseudoPrime(int a, int n);
+long long int isFermatPseudoPrime(long long int a, long long int n);
 
 /**
  * Checks if a number is a prime number.
@@ -201,7 +201,7 @@ int isFermatPseudoPrime(int a, int n);
  * @param n the number whose primality is to be tested.
  * @return 1 if the number is prime, 0 otherwise.
  */
-int isPrime(int n);
+long long int isPrime(long long int n);
 
 /**
  * Checks if a number admits the square root modulo n.
@@ -212,7 +212,7 @@ int isPrime(int n);
  * @param n the module value.
  * @return 1 if the number allows for the square root, 0 otherwise.
  */
-int isSquareNumber(int a, int n);
+long long int isSquareNumber(long long int a, long long int n);
 
 /**
  * Checks is a number is a primitive root modulo n.
@@ -222,7 +222,7 @@ int isSquareNumber(int a, int n);
  * @param n the module value.
  * @return 1 if the number is a primitive root modulo n, 0 otherwise.
  */
-int isPrimitiveRoot(int a, int n);
+long long int isPrimitiveRoot(long long int a, long long int n);
 
 
 //******************************************************************************************************************//
@@ -239,9 +239,9 @@ int isPrimitiveRoot(int a, int n);
  * @details if n == x * x --> n is a perfect square
  *
  * @param n the number.
- * @return 1 if the number is a perfect quare, 0 otherwise.
+ * @return 1 if the number is a perfect square, 0 otherwise.
  */
-int isPerfectSquare(int n);
+long long int isPerfectSquare(long long int n);
 
 /**
  * Checks if a number is in a list.
@@ -253,7 +253,7 @@ int isPerfectSquare(int n);
  * @param position the location where the searched value is - NOT necessary.
  * @return 1 if the value was found, 0 otherwise.
  */
-int isListed(int *list, int listSize, int value, int *position);
+long long int isListed(long long int *list, long long int listSize, long long int value, long long int *position);
 
 
 /**
@@ -264,7 +264,7 @@ int isListed(int *list, int listSize, int value, int *position);
  * @param m the second number.
  * @return the gcd between n and m.
  */
-int gcd(int n, int m);
+long long int gcd(long long int n, long long int m);
 
 /**
  * Computes the Greatest Common Divisor.
@@ -276,7 +276,7 @@ int gcd(int n, int m);
  * @param y the second number of Bézout's identity.
  * @return the gcd between n and m.
  */
-int extendedGCD(int n, int m, int *x, int *y);
+long long int extendedGCD(long long int n, long long int m, long long int *x, long long int *y);
 
 
 /**
@@ -287,7 +287,7 @@ int extendedGCD(int n, int m, int *x, int *y);
  * @param m the divisor.
  * @return the reminder of the division of n by m.
  */
-int mod(int n, int m);
+long long int mod(long long int n, long long int m);
 
 /**
  * Computes a number congruent with the one given.
@@ -297,7 +297,7 @@ int mod(int n, int m);
  * @param m the module value.
  * @return a number congruent with the one given.
  */
-int congruentNumber(int a, int m);
+long long int congruentNumber(long long int a, long long int m);
 
 
 /**
@@ -308,7 +308,7 @@ int congruentNumber(int a, int m);
  * @param m the module value.
  * @return the modular reduction.
  */
-int modularReduction(int n, int m);
+long long int modularReduction(long long int n, long long int m);
 
 /**
  * Computes the modular inversion.
@@ -319,7 +319,7 @@ int modularReduction(int n, int m);
  * @param m the module value.
  * @return the modular inverse.
  */
-int modularInverse(int n, int m);
+long long int modularInverse(long long int n, long long int m);
 
 
 /**
@@ -330,7 +330,7 @@ int modularInverse(int n, int m);
  * @param n the number.
  * @return the two factors that make up the number.
  */
-int *realFermatFactorisation(int n);
+long long int *realFermatFactorisation(long long int n);
 
 /**
  * Factorizes a number by splitting it into all of its dividends.
@@ -341,7 +341,7 @@ int *realFermatFactorisation(int n);
  * @param factors the number of factors.
  * @return the factors that make up the number.
  */
-int *FermatFactorisation(int n, int *factors);
+long long int *FermatFactorisation(long long int n, long long int *factors);
 
 /**
  * Factorizes a number by splitting it into all of its dividends.
@@ -350,7 +350,7 @@ int *FermatFactorisation(int n, int *factors);
  * @param factors the number of factors.
  * @return the factors that make up the number.
  */
-int *factorisation(int n, int *factors);
+long long int *factorisation(long long int n, long long int *factors);
 
 
 /**
@@ -360,7 +360,7 @@ int *factorisation(int n, int *factors);
  * @param n the number.
  * @return the value of Euler's function.
  */
-int EulerFunction(int n);
+long long int EulerFunction(long long int n);
 
 
 /**
@@ -371,7 +371,7 @@ int EulerFunction(int n);
  * @param primeSize the number of prime numbers found up to the n-th number.
  * @return the list of prime numbers up to the n-th.
  */
-int *primeNumberList(int n, int *primeSize);
+long long int *primeNumberList(long long int n, long long int *primeSize);
 
 /**
  * Searches for the n-th prime number.
@@ -380,7 +380,7 @@ int *primeNumberList(int n, int *primeSize);
  * @param n the n-th prime number to be found.
  * @return the n-th prime number.
  */
-int nthPrimeNumber(int n);
+long long int nthPrimeNumber(long long int n);
 
 /**
  * Founds the prime number following a given number.
@@ -388,7 +388,7 @@ int nthPrimeNumber(int n);
  * @param n the number whose next prime number is to be found.
  * @return the prime number following the given number.
  */
-int nextPrimeNumber(int n);
+long long int nextPrimeNumber(long long int n);
 
 
 /**
@@ -398,7 +398,7 @@ int nextPrimeNumber(int n);
  * @param primitiveRootsSize the number of primitive root modulo n.
  * @return the list of primitive roots modulo n.
  */
-int *primitiveRoots(int n, int *primitiveRootsSize);
+long long int *primitiveRoots(long long int n, long long int *primitiveRootsSize);
 
 /**
  * Computes the list of quadratic residuals modulo n.
@@ -407,7 +407,7 @@ int *primitiveRoots(int n, int *primitiveRootsSize);
  * @param quadraticResidualSize the number of quadratic residuals modulo n.
  * @return the list of quadratic residuals modulo n.
  */
-int *quadraticResiduals(int n, int *quadraticResidualSize);
+long long int *quadraticResiduals(long long int n, long long int *quadraticResidualSize);
 
 
 /**
@@ -418,7 +418,7 @@ int *quadraticResiduals(int n, int *quadraticResidualSize);
  * @param p the odd prime number.
  * @return 1 if a is a quadratic residue modulo p, -1 if a is a quadratic non-residue modulo p, 0 if a is a divisor of p.
  */
-int LegendreSymbol(int a, int p);
+long long int LegendreSymbol(long long int a, long long int p);
 
 /**
  * Computes the Jacobi symbol.
@@ -429,7 +429,7 @@ int LegendreSymbol(int a, int p);
  * @param n the odd number.
  * @return 1 if for some integer x: a==x^2 (mod n), -1 if there is no such x, 0 if a is a divisior of p.
  */
-int JacobiSymbol(int a, int n);
+long long int JacobiSymbol(long long int a, long long int n);
 
 
 //******************************************************************************************************************//
@@ -446,7 +446,7 @@ int JacobiSymbol(int a, int n);
  * @param a the matrix to print - M: k x m.
  * @param n the module value.
  */
-void printMatrixModulo(matrix *a, int n);
+void printMatrixModulo(matrix *a, long long int n);
 
 
 /**
@@ -455,7 +455,7 @@ void printMatrixModulo(matrix *a, int n);
  * @param a the matrix - M: k x m.
  * @return 1 if the matrix has all integer elements, 0 otherwise.
  */
-int isIntegerMatrix(matrix *a);
+long long int isIntegerMatrix(matrix *a);
 
 /**
  * Matrix modulo n.
@@ -464,7 +464,7 @@ int isIntegerMatrix(matrix *a);
  * @param modMatrix the matrix modulo n - M: k x m.
  * @param n the module value.
  */
-void modularMatrix(matrix *a, matrix *modMatrix, int n);
+void modularMatrix(matrix *a, matrix *modMatrix, long long int n);
 
 /**
  * Matrix inversion modulo n - cofactor matrix method.
@@ -474,7 +474,7 @@ void modularMatrix(matrix *a, matrix *modMatrix, int n);
  * @param inv the inverse of the matrix: [a]^-1 - M: n x n.
  * @param n the module value.
  */
-void inverseMatrixModulo(matrix *a, matrix *inv, int n);
+void inverseMatrixModulo(matrix *a, matrix *inv, long long int n);
 
 
 /**
@@ -486,7 +486,7 @@ void inverseMatrixModulo(matrix *a, matrix *inv, int n);
  * @param res the result: [a] + [b] - M: k x m.
  * @param n the module value.
  */
-void sumMatrixModulo(matrix *a, matrix *b, matrix *res, int n);
+void sumMatrixModulo(matrix *a, matrix *b, matrix *res, long long int n);
 
 /**
  * Computes the difference of matrices modulo n.
@@ -497,7 +497,7 @@ void sumMatrixModulo(matrix *a, matrix *b, matrix *res, int n);
  * @param res the result: [a] - [b] - M: k x m.
  * @param n the module value.
  */
-void subMatrixModulo(matrix *a, matrix *b, matrix *res, int n);
+void subMatrixModulo(matrix *a, matrix *b, matrix *res, long long int n);
 
 /**
  * Computes the scalar product of matrix modulo n.
@@ -508,7 +508,7 @@ void subMatrixModulo(matrix *a, matrix *b, matrix *res, int n);
  * @param res the result: scalar * [a] - M: k x m.
  * @param n the module value.
  */
-void scalarProductModulo(int scalar, matrix *a, matrix *res, int n);
+void scalarProductModulo(long long int scalar, matrix *a, matrix *res, long long int n);
 
 /**
  * Computes the product of matrices modulo n.
@@ -519,7 +519,7 @@ void scalarProductModulo(int scalar, matrix *a, matrix *res, int n);
  * @param res the result: [a] x [b] - M: k x m.
  * @param n the module value.
  */
-void productMatrixModulo(matrix *a, matrix *b, matrix *res, int n);
+void productMatrixModulo(matrix *a, matrix *b, matrix *res, long long int n);
 
 /**
  * Computes the power elevation of a matrix modulo n.
@@ -530,7 +530,7 @@ void productMatrixModulo(matrix *a, matrix *b, matrix *res, int n);
  * @param res the result: [a]^k - M: m x m.
  * @param n the module value.
  */
-void powerMatrixModulo(matrix *a, int k, matrix *res, int n);
+void powerMatrixModulo(matrix *a, long long int k, matrix *res, long long int n);
 
 /**
  * Computes the Kronecker product of matrices modulo n.
@@ -541,6 +541,6 @@ void powerMatrixModulo(matrix *a, int k, matrix *res, int n);
  * @param res the result: [a] (x) [b] - M: k*p x m*q.
  * @param n the module value.
  */
-void kroneckerProductMatrixModulo(matrix *a, matrix *b, matrix *res, int n);
+void kroneckerProductMatrixModulo(matrix *a, matrix *b, matrix *res, long long int n);
 
 #endif
