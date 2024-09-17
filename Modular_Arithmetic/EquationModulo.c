@@ -23,7 +23,7 @@ int chineseReminderTheorem(int numberOfEquation, int *a, int *m) {
     for (int i = 0; i < numberOfEquation; ++i) {
         for (int j = 0; j < numberOfEquation; ++j) {
             if (i != j) {
-                assert(areCoPrime(m[i], m[j]));
+                assert(areCoPrime(m[i], m[j]) && "all module value must be coprime");
             }
         }
     }

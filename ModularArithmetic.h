@@ -25,7 +25,7 @@ int sum(int a, int b, int m);
  * Computes the difference modulo m.
  * @details res = a - b (mod m).
  *
- * @param a the minuendo.
+ * @param a the minuend.
  * @param b the subtrahend.
  * @param m the module value.
  * @return the difference modulo m.

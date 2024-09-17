@@ -15,8 +15,8 @@
  * @return the sum modulo m.
  */
 int sum(int a, int b, int m) {
-    a = mod(a, m);
-    b = mod(b, m);
+    a = a < 0 ? modularReduction(mod(a, m), m) : mod(a, m);
+    b = b < 0 ? modularReduction(mod(b, m), m) : mod(b, m);
 
     return (a + b) % m;
 }
@@ -25,23 +25,14 @@ int sum(int a, int b, int m) {
  * Computes the difference modulo m.
  * @details res = a - b (mod m).
  *
- * @param a the minuendo.
+ * @param a the minuend.
  * @param b the subtrahend.
  * @param m the module value.
  * @return the difference modulo m.
  */
 int sub(int a, int b, int m) {
-    a = mod(a, m);
-    b = mod(b, m);
-
-    if (a < 0) {
-        a = modularReduction(a, m);
-        assert(a >= 0);
-    }
-    if (b < 0) {
-        b = modularReduction(b, m);
-        assert(b >= 0);
-    }
+    a = a < 0 ? modularReduction(mod(a, m), m) : mod(a, m);
+    b = b < 0 ? modularReduction(mod(b, m), m) : mod(b, m);
 
     b = modularReduction(-b, m);
 
@@ -58,8 +49,8 @@ int sub(int a, int b, int m) {
  * @return the product modulo m.
  */
 int product(int a, int b, int m) {
-    a = mod(a, m);
-    b = mod(b, m);
+    a = a < 0 ? modularReduction(mod(a, m), m) : mod(a, m);
+    b = b < 0 ? modularReduction(mod(b, m), m) : mod(b, m);
 
     return a * b % m;
 }
@@ -75,17 +66,8 @@ int product(int a, int b, int m) {
  * @return the quotient.
  */
 int division(int a, int b, int m) {
-    a = mod(a, m);
-    b = mod(b, m);
-
-    if (a < 0) {
-        a = modularReduction(a, m);
-        assert(a >= 0);
-    }
-    if (b < 0) {
-        b = modularReduction(b, m);
-        assert(b >= 0);
-    }
+    a = a < 0 ? modularReduction(mod(a, m), m) : mod(a, m);
+    b = b < 0 ? modularReduction(mod(b, m), m) : mod(b, m);
 
     //The first number of Bézout's identity - the modular inverse.
     int x;
@@ -94,7 +76,7 @@ int division(int a, int b, int m) {
     //The gcd between b and m.
     int gcd = extendedGCD(b, m, &x, &y);
     //the inverse exists iff gcd(b, m) == 1
-    assert(gcd == 1);
+    assert(gcd == 1 && "b must be coprime with m");
 
     return product(a, x, m);
 }
@@ -110,7 +92,7 @@ int division(int a, int b, int m) {
  * @return the power elevation modulo m.
  */
 int power(int a, int exp, int m) {
-    a = mod(a, m);
+    a = a < 0 ? modularReduction(mod(a, m), m) : mod(a, m);
 
     //The result a^exp (mod m).
     int res = 1;
@@ -149,9 +131,8 @@ int *TonelliShanksAlgorithm(int a, int p) {
     int factorSize = 0;
     //The list of factors of n-1.
     int *factor = factorisation(p - 1, &factorSize);
-    assert(factorSize == 2);
     assert(factor[0] == 2 || factor[1] == 2);
-    //the module value.
+    //The module value.
     int nTmp = p;
     //The q number st n-1 = q*2^s.
     int q = 0;
@@ -251,7 +232,7 @@ int *TonelliShanksAlgorithm(int a, int p) {
  * @return the square roots modulo n of the number.
  */
 int *squareRoot(int a, int n, int *numberOfSquareRoots) {
-    assert(isSquareNumber(a, n));
+    assert(isSquareNumber(a, n) && "a must be a quadratic residue modulo n");
 
     //n is prime
     if (isPrime(n)) {
@@ -264,7 +245,7 @@ int *squareRoot(int a, int n, int *numberOfSquareRoots) {
         //n == 3 (mod 4)
         if (areCongruent(n, 3, 4)) {
             //The root square.
-            int r = power(a, ((n + 1) / 4), n);
+            int r = power(a, (int) ((n + 1) / 4), n);
             //The 2 square roots.
             int *res = malloc(2 * sizeof(int));
             res[0] = r;
@@ -374,7 +355,7 @@ int *squareRoot(int a, int n, int *numberOfSquareRoots) {
     for (int i = 0; i < n; ++i) {
         if (power(i, 2, n) == a) {
             result[resultSize++] = i;
-            result[resultSize++] =modularReduction(-i, n);
+            result[resultSize++] = modularReduction(-i, n);
             result = realloc(result, (resultSize + 2) * sizeof(int));
         }
     }

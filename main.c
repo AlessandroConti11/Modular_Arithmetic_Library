@@ -545,7 +545,7 @@ void manageChoice(int *choice) {
             free(list);
             break;
         case 32:
-            printf("You chose to compute the Legendre symbol"
+            printf("You chose to compute the Legendre symbol\n\n"
                    "Insert the number: ");
             returnScanf = scanf("%d", &x);
             assert(returnScanf > 0);
@@ -556,7 +556,7 @@ void manageChoice(int *choice) {
             printf("The Legendre_symbol(%d, %d) = %d\n\n\n", x, y, LegendreSymbol(x, y));
             break;
         case 33:
-            printf("You chose to compute the Jacobi symbol"
+            printf("You chose to compute the Jacobi symbol\n\n"
                    "Insert the number: ");
             returnScanf = scanf("%d", &x);
             assert(returnScanf > 0);
@@ -589,6 +589,8 @@ void manageChoice(int *choice) {
             returnScanf = scanf("%d", &module);
             assert(returnScanf > 0);
 
+            res = createMatrix(matrix1->n, matrix1->m);
+            assert(res != NULL);
             modularMatrix(matrix1, res, module);
             printf("The matrix:\n");
             printMatrix(matrix1);
@@ -611,6 +613,8 @@ void manageChoice(int *choice) {
             res = createMatrix(x, x);
             assert(res != NULL);
 
+            res = createMatrix(matrix1->n, matrix1->m);
+            assert(res != NULL);
             inverseMatrixModulo(matrix1, res, module);
             printf("The matrix:\n");
             printMatrix(matrix1);

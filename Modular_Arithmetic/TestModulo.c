@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "../ModularArithmetic.h"
 
@@ -37,7 +38,7 @@ int areCoPrime(int a, int n) {
  * @return 1 if the first number is a divisor of the second number, 0 otherwise.
  */
 int isDivisor(int n, int m) {
-    return (m % n == 0);
+    return m % n == 0;
 }
 
 /**
@@ -53,7 +54,7 @@ int isDivisor(int n, int m) {
  * @returns 1 if the number is Fermat's Pseuodprime to a, 0 otherwise.
  */
 int isFermatPseudoPrime(int a, int n) {
-    assert(areCoPrime(a, n) == 1);
+    assert(areCoPrime(a, n) == 1 && "a must be coprime with n");
 
     return power(a, n - 1, n) == 1;
 }
@@ -122,11 +123,11 @@ int isSquareNumber(int a, int n) {
 
     //Euler's criterion
     if (isPrime(n)) {
-        return power(a, (int) ((n - 1) / 2), n) == 1 ? 1 : 0;
+        return power(a, (int) ((n - 1) / 2), n) == 1;
     }
 
     for (int i = 0; i < (int) ((n - 1) / 2); ++i) {
-        if ((i * i) == a) {
+        if (product(i, i, n) == a) {
             return 1;
         }
     }

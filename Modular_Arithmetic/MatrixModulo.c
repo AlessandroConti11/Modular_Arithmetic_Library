@@ -45,6 +45,7 @@ int isIntegerMatrix(matrix *a) {
     return 1;
 }
 
+
 /**
  * Matrix modulo n.
  *
@@ -55,7 +56,9 @@ int isIntegerMatrix(matrix *a) {
 void modularMatrix(matrix *a, matrix *modMatrix, int n) {
     assert(a->n > 0);
     assert(a->m > 0);
+    assert(isIntegerMatrix(a) && "the matrix must have all element integer");
 
+    printf("ciao %d\n", modMatrix == NULL);
     if (modMatrix == NULL) {
         modMatrix = createMatrix(a->n, a->m);
     }
@@ -65,6 +68,7 @@ void modularMatrix(matrix *a, matrix *modMatrix, int n) {
     for (int i = 0; i < a->n; ++i) {
         for (int j = 0; j < a->m; ++j) {
             modMatrix->matrix[i][j] = mod((int) a->matrix[i][j], n);
+            modMatrix->matrix[i][j] = modMatrix->matrix[i][j] < 0 ? modularReduction((int) modMatrix->matrix[i][j], n) : modMatrix->matrix[i][j];
         }
     }
 }
@@ -78,10 +82,10 @@ void modularMatrix(matrix *a, matrix *modMatrix, int n) {
  * @param n the module value.
  */
 void inverseMatrixModulo(matrix *a, matrix *inv, int n) {
-    assert(isIntegerMatrix(a));
     assert(a->n > 0);
     assert(a->m > 0);
     assert(a->m == a->n);
+    assert(isIntegerMatrix(a) && "the matrix must have all element integer");
     assert(isInvertibleMatrix(a) == 1);
 
     if (inv == NULL) {
@@ -90,7 +94,7 @@ void inverseMatrixModulo(matrix *a, matrix *inv, int n) {
     assert(inv->n == a->n);
     assert(inv->m == a->m);
 
-    //Inverse of the determinant
+    //Inverse of the determinant.
     int invDet = modularInverse((int) determinantMatrix(a), n);
     //Temporary matrix.
     matrix *tmp = createMatrix(a->n, a->m);
@@ -98,6 +102,7 @@ void inverseMatrixModulo(matrix *a, matrix *inv, int n) {
     for (int i = 0; i < a->n; ++i) {
         for (int j = 0; j < a->n; ++j) {
             tmp->matrix[j][i] = product(invDet, (int) cofactor(a, i, j), n);
+            tmp->matrix[i][j] = tmp->matrix[i][j] < 0 ? modularReduction((int) tmp->matrix[i][j], n) : tmp->matrix[i][j];
         }
     }
 
@@ -116,14 +121,14 @@ void inverseMatrixModulo(matrix *a, matrix *inv, int n) {
  * @param n the module value.
  */
 void sumMatrixModulo(matrix *a, matrix *b, matrix *res, int n) {
-    assert(isIntegerMatrix(a));
-    assert(isIntegerMatrix(b));
     assert(a->n > 0);
     assert(a->m > 0);
     assert(b->n > 0);
     assert(b->m > 0);
     assert(b->n == a->n);
     assert(b->m == a->m);
+    assert(isIntegerMatrix(a) && "the matrix must have all element integer");
+    assert(isIntegerMatrix(b) && "the matrix must have all element integer");
 
     if (res == NULL) {
         res = createMatrix(a->n, a->m);
@@ -134,6 +139,7 @@ void sumMatrixModulo(matrix *a, matrix *b, matrix *res, int n) {
     for (int i = 0; i < a->n; ++i) {
         for (int j = 0; j < a->m; ++j) {
             res->matrix[i][j] = sum((int) a->matrix[i][j], (int) b->matrix[i][j], n);
+            res->matrix[i][j] = res->matrix[i][j] < 0 ? modularReduction((int) res->matrix[i][j], n) : res->matrix[i][j];
         }
     }
 }
@@ -148,14 +154,14 @@ void sumMatrixModulo(matrix *a, matrix *b, matrix *res, int n) {
  * @param n the module value.
  */
 void subMatrixModulo(matrix *a, matrix *b, matrix *res, int n) {
-    assert(isIntegerMatrix(a));
-    assert(isIntegerMatrix(b));
     assert(a->n > 0);
     assert(a->m > 0);
     assert(b->n > 0);
     assert(b->m > 0);
     assert(b->n == a->n);
     assert(b->m == a->m);
+    assert(isIntegerMatrix(a) && "the matrix must have all element integer");
+    assert(isIntegerMatrix(b) && "the matrix must have all element integer");
 
     if (res == NULL) {
         res = createMatrix(a->n, a->m);
@@ -166,6 +172,7 @@ void subMatrixModulo(matrix *a, matrix *b, matrix *res, int n) {
     for (int i = 0; i < a->n; ++i) {
         for (int j = 0; j < a->m; ++j) {
             res->matrix[i][j] = sum((int) a->matrix[i][j], modularReduction((int) b->matrix[i][j], n), n);
+            res->matrix[i][j] = res->matrix[i][j] < 0 ? modularReduction((int) res->matrix[i][j], n) : res->matrix[i][j];
         }
     }
 }
@@ -180,9 +187,9 @@ void subMatrixModulo(matrix *a, matrix *b, matrix *res, int n) {
  * @param n the module value.
  */
 void scalarProductModulo(int scalar, matrix *a, matrix *res, int n) {
-    assert(isIntegerMatrix(a));
     assert(a->n > 0);
     assert(a->m > 0);
+    assert(isIntegerMatrix(a) && "the matrix must have all element integer");
 
     if (res == NULL) {
         res = createMatrix(a->n, a->m);
@@ -193,6 +200,7 @@ void scalarProductModulo(int scalar, matrix *a, matrix *res, int n) {
     for (int i = 0; i < a->n; ++i) {
         for (int j = 0; j < a->m; ++j) {
             res->matrix[i][j] = product(scalar, (int) a->matrix[i][j], n);
+            res->matrix[i][j] = res->matrix[i][j] < 0 ? modularReduction((int) res->matrix[i][j], n) : res->matrix[i][j];
         }
     }
 }
@@ -207,13 +215,13 @@ void scalarProductModulo(int scalar, matrix *a, matrix *res, int n) {
  * @param n the module value.
  */
 void productMatrixModulo(matrix *a, matrix *b, matrix *res, int n) {
-    assert(isIntegerMatrix(a));
-    assert(isIntegerMatrix(b));
     assert(a->n > 0);
     assert(a->m > 0);
     assert(b->n > 0);
     assert(b->m > 0);
     assert(b->n == a->m);
+    assert(isIntegerMatrix(a) && "the matrix must have all element integer");
+    assert(isIntegerMatrix(b) && "the matrix must have all element integer");
 
     if (res == NULL) {
         res = createMatrix(a->n, b->m);
@@ -231,6 +239,7 @@ void productMatrixModulo(matrix *a, matrix *b, matrix *res, int n) {
                 tmp = sum(tmp, product((int) a->matrix[i][j], (int) b->matrix[i][j], n), n);
             }
             res->matrix[i][j] = tmp;
+            res->matrix[i][j] = res->matrix[i][j] < 0 ? modularReduction((int) res->matrix[i][j], n) : res->matrix[i][j];
         }
     }
 }
@@ -245,11 +254,11 @@ void productMatrixModulo(matrix *a, matrix *b, matrix *res, int n) {
  * @param n the module value.
  */
 void powerMatrixModulo(matrix *a, int k, matrix *res, int n) {
-    assert(isIntegerMatrix(a));
     assert(a->n > 0);
     assert(a->m > 0);
     assert(a->m == a->n);
     assert(k >= 0);
+    assert(isIntegerMatrix(a) && "the matrix must have all element integer");
 
     //Temporary matrix used for compute the product.
     matrix *tmp = createMatrix(a->n, a->m);
@@ -285,12 +294,12 @@ void powerMatrixModulo(matrix *a, int k, matrix *res, int n) {
  * @param n the module value,
  */
 void kroneckerProductMatrixModulo(matrix *a, matrix *b, matrix *res, int n) {
-    assert(isIntegerMatrix(a));
-    assert(isIntegerMatrix(b));
     assert(a->n > 0);
     assert(a->m > 0);
     assert(b->n > 0);
     assert(b->m > 0);
+    assert(isIntegerMatrix(a) && "the matrix must have all element integer");
+    assert(isIntegerMatrix(b) && "the matrix must have all element integer");
 
     if (res == NULL) {
         res = createMatrix(a->n * b->n, a->m * b->m);
@@ -301,6 +310,7 @@ void kroneckerProductMatrixModulo(matrix *a, matrix *b, matrix *res, int n) {
     for (int i = 0; i < a->n * b->n; ++i) {
         for (int j = 0; j < a->m * b->m; ++j) {
             res->matrix[i][j] = product((int) a->matrix[i / b->n][j / b->m], (int) b->matrix[i % b->n][j % b->m], n);
+            res->matrix[i][j] = res->matrix[i][j] < 0 ? modularReduction((int) res->matrix[i][j], n) : res->matrix[i][j];
         }
     }
 }

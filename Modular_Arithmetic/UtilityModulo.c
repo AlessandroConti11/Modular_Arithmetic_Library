@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdio.h>
 
 #include "../ModularArithmetic.h"
 
@@ -175,13 +176,13 @@ int modularReduction(int n, int m) {
  * @return the modular inverse.
  */
 int modularInverse(int n, int m) {
-    //the first number of Bézout's identity - the modular inverse.
+    //The first number of Bézout's identity - the modular inverse.
     int x;
-    //the second number of Bézout's identity.
+    //The second number of Bézout's identity.
     int y;
-    //the gcd between n and m.
+    //The gcd between n and m.
     int gcd = extendedGCD(n, m, &x, &y);
-    assert(gcd == 1);
+    assert(gcd == 1 && "n must be coprime with m");
 
     return x;
 }
@@ -196,11 +197,12 @@ int modularInverse(int n, int m) {
  * @return the two factors that make up the number.
  */
 int *realFermatFactorisation(int n) {
-    assert(n % 2 != 0);
+    assert(n % 2 != 0 && "the number must be odd");
     n = n < 0 ? -n : n;
     if (n == 1) {
-        int *res = malloc(sizeof(int));
+        int *res = malloc(2 * sizeof(int));
         res[0] = 1;
+        res[1] = 1;
         return res;
     }
 
@@ -233,7 +235,7 @@ int *realFermatFactorisation(int n) {
  * @return the factors that make up the number.
  */
 int *FermatFactorisation(int n, int *factors) {
-    assert(n % 2 != 0);
+    assert(n % 2 != 0 && "the number must be odd");
 
     n = n < 0 ? -n : n;
     (*factors) = 0;
@@ -330,6 +332,7 @@ int *factorisation(int n, int *factors) {
         n /= 2;
     }
 
+    printf("figa %d\n", n);
     if (n != 1) {
         res = FermatFactorisation(n, factors);
     }
@@ -444,10 +447,10 @@ int nthPrimeNumber(int n) {
  */
 int nextPrimeNumber(int n) {
     do {
+        n++;
         if (areCoPrime(2, n) && (isFermatPseudoPrime(2, n) && isPrime(n))) {
             return n;
         }
-        n++;
     }while(1);
 }
 
@@ -540,7 +543,7 @@ int LegendreSymbol(int a, int p) {
  * @return 1 if for some integer x: a==x^2 (mod n), -1 if there is no such x, 0 if a is a divisior of p.
  */
 int JacobiSymbol(int a, int n) {
-    assert(n % 2 != 0);
+    assert(n % 2 != 0 && "the number must be odd");
 
     a = mod(a, n);
 
@@ -555,7 +558,7 @@ int JacobiSymbol(int a, int n) {
 
     for (int i = 0; i < factorSize; ++i) {
         do {
-            //productory(LegendreSymbol(a, factor_i)^(factor_exponent))
+            //producer(LegendreSymbol(a, factor_i)^(factor_exponent))
             res *= LegendreSymbol(a, factors[i]);
             if (res == 0) {
                 free(factors);
