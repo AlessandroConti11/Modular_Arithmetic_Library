@@ -188,6 +188,11 @@ long long int modularInverse(long long int n, long long int m) {
 }
 
 
+int compare(const void* a, const void* b) {
+    return (*(int*)a - *(int*)b);
+}
+
+
 /**
  * Factorizes a number by splitting it into two of its dividends.
  * @details Fermat's factorisation method.
@@ -309,6 +314,7 @@ long long int *FermatFactorisation(long long int n, long long int *factors) {
     free(stack);
     res = realloc(res, *factors * sizeof(long long int));
     assert(res != NULL);
+    qsort(res, (*factors), sizeof(long long int), compare);
     return res;
 }
 
@@ -345,6 +351,7 @@ long long int *factorisation(long long int n, long long int *factors) {
         res[(*factors)++] = 2;
     }
 
+    qsort(res, (*factors), sizeof(long long int), compare);
     return res;
 }
 
