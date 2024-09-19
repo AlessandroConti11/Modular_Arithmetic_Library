@@ -189,7 +189,7 @@ long long int *TonelliShanksAlgorithm(long long int a, long long int p) {
             free(factor);
 
             //The 2 square roots.
-            long long int *res = malloc(2 * sizeof(int));
+            long long int *res = malloc(2 * sizeof(long long int));
             res[0] = 0;
             res[1] = 0;
             return res;
@@ -198,7 +198,7 @@ long long int *TonelliShanksAlgorithm(long long int a, long long int p) {
             free(factor);
 
             //The 2 square roots.
-            long long int *res = malloc(2 * sizeof(int));
+            long long int *res = malloc(2 * sizeof(long long int));
             res[0] = r;
             res[1] = modularReduction(-r, p);
             return res;
@@ -245,9 +245,9 @@ long long int *squareRoot(long long int a, long long int n, long long int *numbe
         //n == 3 (mod 4)
         if (areCongruent(n, 3, 4)) {
             //The root square.
-            long long int r = power(a, (int) ((n + 1) / 4), n);
+            long long int r = power(a, (long long int) ((n + 1) / 4), n);
             //The 2 square roots.
-            long long int *res = malloc(2 * sizeof(int));
+            long long int *res = malloc(2 * sizeof(long long int));
             res[0] = r;
             res[1] = modularReduction(-r, n);
 
@@ -264,7 +264,7 @@ long long int *squareRoot(long long int a, long long int n, long long int *numbe
                 //The root square.
                 long long int r = power(a, ((n + 3) / 8), n);
                 //The 2 square roots.
-                long long int *res = malloc(2 * sizeof(int));
+                long long int *res = malloc(2 * sizeof(long long int));
                 res[0] = r;
                 res[1] = modularReduction(-r, n);
 
@@ -276,7 +276,7 @@ long long int *squareRoot(long long int a, long long int n, long long int *numbe
                 long long int r = power((4 * a), ((n - 5) / 8), n);
                 r = product((2 * a), r, n);
                 //The 2 square roots.
-                long long int *res = malloc(2 * sizeof(int));
+                long long int *res = malloc(2 * sizeof(long long int));
                 res[0] = r;
                 res[1] = modularReduction(-r, n);
 
@@ -315,7 +315,7 @@ long long int *squareRoot(long long int a, long long int n, long long int *numbe
         //The second root square.
         long long int y = 0;
         //The 4 square roots.
-        long long int *res = malloc(4 * sizeof(int));
+        long long int *res = malloc(4 * sizeof(long long int));
 
         //find c & d
         diophantineEquation(factor[0], &c, factor[1], &d, 1);
@@ -350,13 +350,13 @@ long long int *squareRoot(long long int a, long long int n, long long int *numbe
     //The number of square roots.
     long long int resultSize = 0;
     //The square roots.
-    long long int *result = calloc(2, sizeof(int));
+    long long int *result = calloc(2, sizeof(long long int));
 
     for (long long int i = 0; i < n; ++i) {
         if (power(i, 2, n) == a) {
             result[resultSize++] = i;
             result[resultSize++] = modularReduction(-i, n);
-            result = realloc(result, (resultSize + 2) * sizeof(int));
+            result = realloc(result, (resultSize + 2) * sizeof(long long int));
         }
     }
 
@@ -382,7 +382,7 @@ long long int discreteLogarithm(long long int base, long long int b, long long i
     //The square root of n rounded up.
     long long int N = ceil(sqrt(n));
     //The first component to check - base^j (mod n) 0<=j<N.
-    long long int *aj = malloc(N * sizeof(int));
+    long long int *aj = malloc(N * sizeof(long long int));
     //The value of base^(-N) (mod n).
     long long int aN = 0;
     //The second component to check - b*base^(-Nk) (mod n) 0<=k<N.
