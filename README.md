@@ -15,9 +15,52 @@ The project aims to create a library that contains all useful functions for modu
 <br>
 <br>
 
-| **Operation** | **Function** | **Description** | **Order of the Matrices** | **Example of Mathematical Representation** |
-|---------------|--------------|-----------------|---------------------------|--------------------------------------------|
-|               |              |                 |                           |                                            |
+| **Operation**                                                                                | **Function** | **Description** | **Order of the Matrices** | **Example of Mathematical Representation** |
+|----------------------------------------------------------------------------------------------|--------------|-----------------|---------------------------|--------------------------------------------|
+| compute the sum modulo m                                                                     |              |                 |                           |                                            |
+| compute the difference modulo m                                                              |              |                 |                           |                                            |
+| compute the product modulo m                                                                 |              |                 |                           |                                            |
+| compute the division modulo m                                                                |              |                 |                           |                                            |
+| compute the power modulo m                                                                   |              |                 |                           |                                            |
+| compute the square root modulo a prime number                                                |              |                 |                           |                                            |
+| compute the square root modulo m                                                             |              |                 |                           |                                            |
+| compute the discrete logarithm modulo m                                                      |              |                 |                           |                                            |
+| compute the solution of a system of modular linear equation - Chinese Reminder Theorem       |              |                 |                           |                                            |
+| compute the solution of a linear diophantine equation                                        |              |                 |                           |                                            |
+| check if two numbers are congruent modulo m                                                  |              |                 |                           |                                            |
+| check if two numbers are coprime                                                             |              |                 |                           |                                            |
+| check if the first number is a divisor of the second number                                  |              |                 |                           |                                            |
+| check if a number is Fermat's Pseudoprime to a                                               |              |                 |                           |                                            |
+| check if a number is a prime number                                                          |              |                 |                           |                                            |
+| check if a number admits the square root modulo n                                            |              |                 |                           |                                            |
+| check if a number is a primitive root modulo n                                               |              |                 |                           |                                            |
+| check if a number is a perfect square                                                        |              |                 |                           |                                            |
+| compute the Greatest Common Divisor                                                          |              |                 |                           |                                            |
+| compute the modulus of two integer                                                           |              |                 |                           |                                            |
+| compute a number congruent with the one given                                                |              |                 |                           |                                            |
+| compute the modular reduction                                                                |              |                 |                           |                                            |
+| compute the modular inversion                                                                |              |                 |                           |                                            |
+| factorize a number by splitting it into two of its dividends - Fermat's Factorization Method |              |                 |                           |                                            |
+| factorize a number by splitting it into all of its dividends                                 |              |                 |                           |                                            |
+| compute the value of Euler Function for the given number                                     |              |                 |                           |                                            |
+| compute the list of prime numbers up to the n-th                                             |              |                 |                           |                                            |
+| search for the n-th prime number                                                             |              |                 |                           |                                            |
+| found the prime number following a given number                                              |              |                 |                           |                                            |
+| compute the list of primitive roots modulo n                                                 |              |                 |                           |                                            |
+| compute the list of quadratic residual modulo n                                              |              |                 |                           |                                            |
+| compute the Legendre Symbol                                                                  |              |                 |                           |                                            |
+| compute the Jacobi Symbol                                                                    |              |                 |                           |                                            |
+| print matrix modulo n                                                                        |              |                 |                           |                                            |
+| check if a matrix has all integer elements                                                   |              |                 |                           |                                            |
+| compute the matrix modulo n                                                                  |              |                 |                           |                                            |
+| compute the matrix inversion modulo n                                                        |              |                 |                           |                                            |
+| compute the sum of matrices modulo n                                                         |              |                 |                           |                                            |
+| compute the difference of matrices modulo n                                                  |              |                 |                           |                                            |
+| compute the scalar product of matrix modulo n                                                |              |                 |                           |                                            |
+| compute the product of matrices modulo n                                                     |              |                 |                           |                                            |
+| compute the power elevation of a matrix modulo n                                             |              |                 |                           |                                            |
+| compute the Kronecker product of matrices modulo n                                           |              |                 |                           |                                            |
+
 
 ## How to run
 
