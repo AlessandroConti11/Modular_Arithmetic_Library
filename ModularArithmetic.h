@@ -354,7 +354,7 @@
 
 
     /**
-     * Computes the value of the Euler function for the given number.
+     * Computes the value of the Euler function for a number.
      * @details φ(n).
      *
      * @param n the number.
