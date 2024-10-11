@@ -470,8 +470,8 @@
      * Matrix inversion modulo n - cofactor matrix method.
      * @warning a must have all integer elements.
      *
-     * @param a the matrix - M: n x n.
-     * @param inv the inverse of the matrix: [a]^-1 - M: n x n.
+     * @param a the matrix - M: k x n.
+     * @param inv the inverse of the matrix: [a]^-1 - M: k x n.
      * @param n the module value.
      */
     void inverseMatrixModulo(matrix *a, matrix *inv, long long int n);
@@ -514,8 +514,8 @@
      * Computes the product of matrices modulo n.
      * @warning a and b must have all integer elements.
      *
-     * @param a the first matrix - M: k x m.
-     * @param b the second matrix - M: k x m.
+     * @param a the first matrix - M: k x p.
+     * @param b the second matrix - M: p x m.
      * @param res the result: [a] x [b] - M: k x m.
      * @param n the module value.
      */

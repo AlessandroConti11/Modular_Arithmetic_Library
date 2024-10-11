@@ -209,8 +209,8 @@ void scalarProductModulo(long long int scalar, matrix *a, matrix *res, long long
  * Computes the product of matrices modulo n.
  * @warning a and b must have all integer elements.
  *
- * @param a the first matrix - M: k x m.
- * @param b the second matrix - M: k x m.
+ * @param a the first matrix - M: k x p.
+ * @param b the second matrix - M: p x m.
  * @param res the result: [a] x [b] - M: k x m.
  * @param n the module value.
  */
