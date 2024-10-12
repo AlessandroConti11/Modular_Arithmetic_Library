@@ -77,8 +77,8 @@ void modularMatrix(matrix *a, matrix *modMatrix, long long int n) {
  * Matrix inversion modulo n - cofactor matrix method.
  * @warning a must have all integer elements.
  *
- * @param a the matrix - M: n x n.
- * @param inv the inverse of the matrix: [a]^-1 - M: n x n.
+ * @param a the matrix - M: k x k.
+ * @param inv the inverse of the matrix: [a]^-1 - M: k x k.
  * @param n the module value.
  */
 void inverseMatrixModulo(matrix *a, matrix *inv, long long int n) {

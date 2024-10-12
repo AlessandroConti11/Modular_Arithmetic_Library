@@ -80,28 +80,28 @@
     long long int *TonelliShanksAlgorithm(long long int a, long long int p);
 
     /**
-     * Computes the square roots modulo n of a number.
-     * @warning a must be a quadratic residue modulo n.
+     * Computes the square roots modulo m of a number.
+     * @warning a must be a quadratic residue modulo m.
      *
      * @param a the number whose square root is to be calculated.
-     * @param n the module value.
+     * @param m the module value.
      * @param numberOfSquareRoots the number of square roots.
      * @return the square roots modulo n of the number.
      */
-    long long int *squareRoot(long long int a, long long int n, long long int *numberOfSquareRoots);
+    long long int *squareRoot(long long int a, long long int m, long long int *numberOfSquareRoots);
 
     /**
      * Computes the discrete logarithm modulo n of base number.
      * @details Baby-Step Giant-Step algorithm.
      * @details b = base^x (mod n) where x = Log_(base) (b).
-     * @warning base must be base primitive root modulo n.
+     * @warning base must be base primitive root modulo m.
      *
      * @param base the logarithm base.
      * @param b the number.
-     * @param n the module value.
+     * @param m the module value.
      * @return the discrete logarithm modulo n.
      */
-    long long int discreteLogarithm(long long int base, long long int b, long long int n);
+    long long int discreteLogarithm(long long int base, long long int b, long long int m);
 
 
     //******************************************************************************************************************//
@@ -470,8 +470,8 @@
      * Matrix inversion modulo n - cofactor matrix method.
      * @warning a must have all integer elements.
      *
-     * @param a the matrix - M: k x n.
-     * @param inv the inverse of the matrix: [a]^-1 - M: k x n.
+     * @param a the matrix - M: k x k.
+     * @param inv the inverse of the matrix: [a]^-1 - M: k x k.
      * @param n the module value.
      */
     void inverseMatrixModulo(matrix *a, matrix *inv, long long int n);

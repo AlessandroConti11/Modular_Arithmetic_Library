@@ -223,62 +223,62 @@ long long int *TonelliShanksAlgorithm(long long int a, long long int p) {
 }
 
 /**
- * Computes the square roots modulo n of a number.
- * @warning a must be a quadratic residue modulo n.
+ * Computes the square roots modulo m of a number.
+ * @warning a must be a quadratic residue modulo m.
  *
  * @param a the number whose square root is to be calculated.
- * @param n the module value.
+ * @param m the module value.
  * @param numberOfSquareRoots the number of square roots.
- * @return the square roots modulo n of the number.
+ * @return the square roots modulo m of the number.
  */
-long long int *squareRoot(long long int a, long long int n, long long int *numberOfSquareRoots) {
-    assert(isSquareNumber(a, n) && "a must be a quadratic residue modulo n");
+long long int *squareRoot(long long int a, long long int m, long long int *numberOfSquareRoots) {
+    assert(isSquareNumber(a, m) && "a must be a quadratic residue modulo m");
 
-    //n is prime
-    if (isPrime(n)) {
-        //n == 1 (mod 4)
-        if (areCongruent(n, 1, 4)) {
+    //m is prime
+    if (isPrime(m)) {
+        //m == 1 (mod 4)
+        if (areCongruent(m, 1, 4)) {
             *numberOfSquareRoots = 2;
-            return TonelliShanksAlgorithm(a, n);
+            return TonelliShanksAlgorithm(a, m);
         }
 
-        //n == 3 (mod 4)
-        if (areCongruent(n, 3, 4)) {
+        //m == 3 (mod 4)
+        if (areCongruent(m, 3, 4)) {
             //The root square.
-            long long int r = power(a, (long long int) ((n + 1) / 4), n);
+            long long int r = power(a, (long long int) ((m + 1) / 4), m);
             //The 2 square roots.
             long long int *res = malloc(2 * sizeof(long long int));
             res[0] = r;
-            res[1] = modularReduction(-r, n);
+            res[1] = modularReduction(-r, m);
 
             *numberOfSquareRoots = 2;
             return res;
         }
 
-        //n == 5 (mod 8)
-        if (areCongruent(n, 5, 8)) {
+        //m == 5 (mod 8)
+        if (areCongruent(m, 5, 8)) {
             //The d value.
-            long long int d = power(a, ((n - 1) / 4), n);
+            long long int d = power(a, ((m - 1) / 4), m);
 
             if (d == 1) {
                 //The root square.
-                long long int r = power(a, ((n + 3) / 8), n);
+                long long int r = power(a, ((m + 3) / 8), m);
                 //The 2 square roots.
                 long long int *res = malloc(2 * sizeof(long long int));
                 res[0] = r;
-                res[1] = modularReduction(-r, n);
+                res[1] = modularReduction(-r, m);
 
                 *numberOfSquareRoots = 2;
                 return res;
             }
-            if (d == (n - 1)) {
+            if (d == (m - 1)) {
                 //The root square.
-                long long int r = power((4 * a), ((n - 5) / 8), n);
-                r = product((2 * a), r, n);
+                long long int r = power((4 * a), ((m - 5) / 8), m);
+                r = product((2 * a), r, m);
                 //The 2 square roots.
                 long long int *res = malloc(2 * sizeof(long long int));
                 res[0] = r;
-                res[1] = modularReduction(-r, n);
+                res[1] = modularReduction(-r, m);
 
                 *numberOfSquareRoots = 2;
                 return res;
@@ -289,15 +289,15 @@ long long int *squareRoot(long long int a, long long int n, long long int *numbe
         }
     }
 
-    //n is NOT prime
+    //m is NOT prime
 
     //The number of factors.
     long long int factorSize = 0;
     //The factors that make up the number.
-    long long int *factor = factorisation(n, &factorSize);
+    long long int *factor = factorisation(m, &factorSize);
 
-    //n = p*q
-    if (factorSize == 2 && (factor[0] * factor[1]) == n) {
+    //m = p*q
+    if (factorSize == 2 && (factor[0] * factor[1]) == m) {
         //The number of square roots.
         long long int squareRootPSize = 0;
         //The square roots of a (mod p).
@@ -322,21 +322,21 @@ long long int *squareRoot(long long int a, long long int n, long long int *numbe
 
         //compute the root square
         //r*d*q
-        d = product(squareRootP[0], d, n);
-        d = product(d, factor[1], n);
+        d = product(squareRootP[0], d, m);
+        d = product(d, factor[1], m);
         //s*c*p
-        c = product(squareRootQ[0], c, n);
-        c = product(c, factor[0], n);
+        c = product(squareRootQ[0], c, m);
+        c = product(c, factor[0], m);
         //x = rdq + scp
-        x = sum(d, c, n);
+        x = sum(d, c, m);
         //y = rdq - scp
-        y = sub(d, c, n);
+        y = sub(d, c, m);
 
         //save all solution
         res[0] = x;
-        res[1] = modularReduction(-x, n);
+        res[1] = modularReduction(-x, m);
         res[2] = y;
-        res[3] = modularReduction(-y, n);
+        res[3] = modularReduction(-y, m);
 
         *numberOfSquareRoots = 4;
         free(factor);
@@ -345,17 +345,17 @@ long long int *squareRoot(long long int a, long long int n, long long int *numbe
         return res;
     }
 
-    //n has more than 2 factors
+    //m has more than 2 factors
 
     //The number of square roots.
     long long int resultSize = 0;
     //The square roots.
     long long int *result = calloc(2, sizeof(long long int));
 
-    for (long long int i = 0; i < n; ++i) {
-        if (power(i, 2, n) == a) {
+    for (long long int i = 0; i < m; ++i) {
+        if (power(i, 2, m) == a) {
             result[resultSize++] = i;
-            result[resultSize++] = modularReduction(-i, n);
+            result[resultSize++] = modularReduction(-i, m);
             result = realloc(result, (resultSize + 2) * sizeof(long long int));
         }
     }
@@ -366,48 +366,48 @@ long long int *squareRoot(long long int a, long long int n, long long int *numbe
 }
 
 /**
- * Computes the discrete logarithm modulo n of base number.
+ * Computes the discrete logarithm modulo m of base number.
  * @details Baby-Step Giant-Step algorithm.
- * @details b = base^x (mod n) where x = Log_(base) (b).
- * @warning base must be base primitive root modulo n.
+ * @details b = base^x (mod m) where x = Log_(base) (b).
+ * @warning base must be base primitive root modulo m.
  *
  * @param base the logarithm base.
  * @param b the number.
- * @param n the module value.
- * @return the discrete logarithm modulo n.
+ * @param m the module value.
+ * @return the discrete logarithm modulo m.
  */
-long long int discreteLogarithm(long long int base, long long int b, long long int n) {
-    assert(isPrimitiveRoot(base, n));
+long long int discreteLogarithm(long long int base, long long int b, long long int m) {
+    assert(isPrimitiveRoot(base, m));
 
-    //The square root of n rounded up.
-    long long int N = ceil(sqrt(n));
-    //The first component to check - base^j (mod n) 0<=j<N.
+    //The square root of m rounded up.
+    long long int N = ceil(sqrt(m));
+    //The first component to check - base^j (mod m) 0<=j<N.
     long long int *aj = malloc(N * sizeof(long long int));
-    //The value of base^(-N) (mod n).
+    //The value of base^(-N) (mod m).
     long long int aN = 0;
-    //The second component to check - b*base^(-Nk) (mod n) 0<=k<N.
+    //The second component to check - b*base^(-Nk) (mod m) 0<=k<N.
     long long int baNk = b;
     //The position in the first component.
     long long int ajPos = 0;
 
     //compute the first component
     for (long long int i = 0; i < N; ++i) {
-        aj[i] = power(base, i, n);
+        aj[i] = power(base, i, m);
     }
 
-    //base^(-N) (mod n)
-    aN = modularInverse(base, n);
-    aN = power(aN, N, n);
+    //base^(-N) (mod m)
+    aN = modularInverse(base, m);
+    aN = power(aN, N, m);
 
     for (long long int i = 0; i < N; ++i) {
         if (isListed(aj, N, baNk, &ajPos)) {
             free(aj);
             return ajPos + N * i;
         }
-        baNk = product(baNk, aN, n);
+        baNk = product(baNk, aN, m);
     }
 
     free(aj);
-    //this case cannot happen because base is base primitive root modulo n
+    //this case cannot happen because base is base primitive root modulo m
     return -1;
 }
