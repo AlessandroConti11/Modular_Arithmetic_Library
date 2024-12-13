@@ -94,7 +94,7 @@ long long int extendedGCD(long long int n, long long int m, long long int *x, lo
     //Temporal variable use for compute the first number of Bézout's identity.
     long long int xTemp = 0;
     //Temporal variable used for compute the second number of Bézout's identity.
-    long long int yRefactor = 1;
+    long long int yTemp = 1;
     //Quotient between n and m.
     long long int q = 0;
     //Temporal variable used in the switch procedure.
@@ -114,9 +114,9 @@ long long int extendedGCD(long long int n, long long int m, long long int *x, lo
         *x = xTemp;
         xTemp = temp;
 
-        temp = (*y) - q * yRefactor;
-        *y = yRefactor;
-        yRefactor = temp;
+        temp = (*y) - q * yTemp;
+        *y = yTemp;
+        yTemp = temp;
     }
 
     return n;
